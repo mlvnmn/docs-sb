@@ -1736,8 +1736,65 @@ button {
     display: none;
   }
 
+  .nav-menu.mobile-open {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    padding: 1.2rem 1.5rem 1.8rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    border-top: 1px solid #e2e8f0;
+    z-index: 999;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .nav-menu.mobile-open .nav-item {
+    width: 100%;
+    margin-bottom: 0.3rem;
+  }
+
+  .nav-menu.mobile-open .nav-link {
+    width: 100%;
+    padding: 0.65rem 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1e293b;
+    border-bottom: 1px solid #f1f5f9;
+    justify-content: space-between;
+  }
+
+  .nav-menu.mobile-open .dropdown-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    padding: 0.4rem 0 0.4rem 0.8rem;
+    border-left: 3px solid #2563eb;
+    background: #f8fafc;
+    margin: 0.4rem 0;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .nav-menu.mobile-open .dropdown-item {
+    font-size: 0.85rem;
+    padding: 0.45rem 0.6rem;
+    color: #334155;
+  }
+
   .mobile-toggle {
     display: flex;
+  }
+
+  .mobile-toggle.active i::before {
+    content: "\f00d";
   }
 
   .hero-section {
@@ -1767,11 +1824,39 @@ button {
     height: 240px;
   }
 
+  .features-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1.2rem 1rem;
+    border-radius: 20px;
+  }
+
+  .feature-extra {
+    grid-column: 1 / -1;
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid #e2e8f0;
+    padding-left: 0;
+    padding-top: 0.8rem;
+    margin-top: 0.4rem;
+    align-items: center;
+    text-align: center;
+  }
+
   .gazette-section {
     width: calc(100% - 1.25rem);
     border-radius: 24px;
     padding: 2rem 1.25rem;
     margin: 1.8rem auto;
+  }
+
+  .gazette-nav {
+    display: flex;
+    gap: 0.35rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.4rem;
   }
 
   .masthead-title {
@@ -1901,6 +1986,11 @@ button {
 
   .life-title {
     font-size: 1.8rem;
+  }
+
+  .features-bar {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
   }
 
   .gazette-nav {
