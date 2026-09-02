@@ -1614,9 +1614,29 @@ button {
 }
 
 /* ==================== RESPONSIVE MEDIA QUERIES ==================== */
+
+/* Desktop & Large Screen Refinements (1200px and below) */
+@media (max-width: 1200px) {
+  .life-section,
+  .gazette-section,
+  .site-footer {
+    width: calc(100% - 2.5rem);
+  }
+
+  .features-bar {
+    padding: 1rem 1.5rem;
+  }
+}
+
+/* Tablet Landscape & Medium Devices (1024px and below) */
 @media (max-width: 1024px) {
+  .hero-section {
+    min-height: auto;
+    padding: 4rem 1.5rem;
+  }
+
   .hero-title {
-    font-size: 3rem;
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
   }
 
   .life-grid {
@@ -1630,12 +1650,27 @@ button {
 
   .features-bar {
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1.25rem;
     border-radius: 24px;
+    padding: 1.2rem 1.5rem;
   }
 
   .feature-divider {
     display: none;
+  }
+
+  .feature-extra {
+    border-left: none;
+    border-top: 1px solid #e2e8f0;
+    padding-left: 0;
+    padding-top: 1rem;
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .quote-text {
+    max-width: 100%;
   }
 
   .gazette-grid {
@@ -1651,18 +1686,26 @@ button {
 
   .people-grid {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
 
   .footer-header-row {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   .footer-columns-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 2rem;
   }
 }
 
+/* Tablet Portrait & Mobile Devices (768px and below) */
 @media (max-width: 768px) {
+  .header-container {
+    padding: 0.8rem 1rem;
+  }
+
   .nav-menu {
     display: none;
   }
@@ -1671,24 +1714,69 @@ button {
     display: block;
   }
 
+  .hero-section {
+    padding: 3rem 1.25rem;
+  }
+
   .hero-title {
-    font-size: 2.4rem;
+    font-size: 2.3rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+  }
+
+  .life-section {
+    width: calc(100% - 1.5rem);
+    border-radius: 28px;
+    padding: 3rem 1.5rem 2.5rem;
+    margin: 2.5rem auto;
   }
 
   .life-title {
-    font-size: 2.4rem;
+    font-size: 2.3rem;
+  }
+
+  .lab-photo {
+    height: 260px;
+  }
+
+  .gazette-section {
+    width: calc(100% - 1.5rem);
+    border-radius: 28px;
+    padding: 2.5rem 1.5rem;
+    margin: 2rem auto;
   }
 
   .masthead-title {
-    font-size: 2.6rem;
+    font-size: 2.4rem;
+  }
+
+  .masthead-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .meta-divider {
+    display: none;
   }
 
   .news-main-card {
     grid-template-columns: 1fr;
   }
 
+  .news-main-img {
+    height: 220px;
+  }
+
+  .people-section {
+    padding: 3rem 1rem 1rem;
+  }
+
   .people-title {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
+    margin-bottom: 2.5rem;
   }
 
   .salimon-layout {
@@ -1700,7 +1788,99 @@ button {
     margin: 0 auto;
   }
 
+  .retro-star {
+    opacity: 0.4;
+  }
+
+  .site-footer {
+    width: calc(100% - 1.5rem);
+    border-radius: 28px;
+    padding: 2.5rem 1.5rem 1.8rem;
+    margin: 2rem auto 1rem;
+  }
+
   .footer-columns-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-bottom-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.6rem;
+  }
+}
+
+/* Small Mobile Phones (480px and below) */
+@media (max-width: 480px) {
+  .logo-text h1 {
+    font-size: 0.95rem;
+  }
+
+  .logo-sub {
+    font-size: 0.68rem;
+  }
+
+  .hero-tag {
+    font-size: 0.72rem;
+    padding: 0.35rem 0.8rem;
+  }
+
+  .hero-title {
+    font-size: 1.95rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-explore,
+  .btn-video {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-social-proof {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .life-title {
+    font-size: 1.95rem;
+  }
+
+  .gazette-nav {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .g-link {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.65rem;
+  }
+
+  .headline-main {
+    font-size: 1.45rem;
+  }
+
+  .people-title {
+    font-size: 1.7rem;
+  }
+
+  .brutalist-card {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .f-brand-header,
+  .f-college-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .social-links-row {
+    flex-wrap: wrap;
   }
 }
