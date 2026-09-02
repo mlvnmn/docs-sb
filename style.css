@@ -86,10 +86,10 @@ button {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.78);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.7);
   transition: var(--transition);
 }
 
@@ -314,41 +314,77 @@ button {
   flex-direction: column;
   justify-content: center;
   padding: 3.5rem 2rem;
-  background: #fafbfc;
+  background: transparent;
   overflow: hidden;
 }
 
-/* Ambient Radial Blobs */
+/* Global Ambient Radial Blobs */
+.ambient-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-height: 2600px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(95px);
   pointer-events: none;
-  z-index: 1;
+  opacity: 0.75;
 }
 
 .blob-pink {
-  width: 480px;
-  height: 480px;
-  background: radial-gradient(circle, rgba(244, 63, 94, 0.35) 0%, rgba(244, 63, 94, 0) 70%);
-  top: -100px;
-  left: 28%;
+  width: 580px;
+  height: 580px;
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.38) 0%, rgba(244, 63, 94, 0) 70%);
+  top: -80px;
+  left: 20%;
 }
 
 .blob-blue {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.35) 0%, rgba(59, 130, 246, 0) 70%);
-  top: -60px;
-  right: -80px;
+  width: 620px;
+  height: 620px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.38) 0%, rgba(59, 130, 246, 0) 70%);
+  top: -50px;
+  right: -100px;
 }
 
 .blob-green {
-  width: 420px;
-  height: 420px;
-  background: radial-gradient(circle, rgba(34, 197, 94, 0.28) 0%, rgba(34, 197, 94, 0) 70%);
-  bottom: -60px;
-  left: 38%;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.3) 0%, rgba(34, 197, 94, 0) 70%);
+  top: 450px;
+  left: 30%;
+}
+
+.blob-purple {
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.32) 0%, rgba(168, 85, 247, 0) 70%);
+  top: 1000px;
+  right: 5%;
+}
+
+.blob-yellow {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.3) 0%, rgba(251, 146, 60, 0) 70%);
+  top: 1500px;
+  left: 10%;
+}
+
+.blob-cyan {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, rgba(56, 189, 248, 0) 70%);
+  top: 1900px;
+  right: 15%;
 }
 
 .hero-container {
@@ -717,14 +753,18 @@ button {
 
 /* ==================== GAZETTE / NEWSPAPER SECTION ==================== */
 .gazette-section {
-  max-width: 1400px;
-  width: calc(100% - 3rem);
+  max-width: 1460px;
+  width: calc(100% - 2.5rem);
   margin: 3rem auto;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   padding: 4rem 3rem;
   border-radius: 40px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  position: relative;
+  z-index: 2;
 }
 
 .gazette-container {
