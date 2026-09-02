@@ -9,7 +9,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400&family=Press+Start+2P&family=Space+Grotesk:wght@500;700;900&family=UnifrakturMaguntia&family=Chivo+Mono:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Fredoka:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400&family=Press+Start+2P&family=Space+Grotesk:wght@500;700;900&family=UnifrakturMaguntia&family=Chivo+Mono:wght@700;900&display=swap" rel="stylesheet">
   
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -19,15 +19,6 @@
 </head>
 <body>
 
-  <!-- ==================== GLOBAL AMBIENT MESH BACKDROP ==================== -->
-  <div class="ambient-backdrop">
-    <div class="blob blob-pink"></div>
-    <div class="blob blob-blue"></div>
-    <div class="blob blob-green"></div>
-    <div class="blob blob-purple"></div>
-    <div class="blob blob-yellow"></div>
-    <div class="blob blob-cyan"></div>
-  </div>
 
   <!-- ==================== HEADER / NAVBAR ==================== -->
   <header class="site-header" id="siteHeader">
@@ -103,34 +94,66 @@
 
   <!-- ==================== HERO SECTION ==================== -->
   <section class="hero-section" id="hero">
-    <div class="hero-container">
-      <!-- Tag Pill -->
-      <div class="hero-tag">
-        <span class="tag-dot"></span>
-        <span>WELCOME TO CS DEPARTMENT</span>
+    <div class="hero-card">
+      <!-- The 4 Hero Blobs: Pink, Blue, Green, Yellow -->
+      <div class="hero-blob blob-pink hero-top-glow" aria-hidden="true"></div>
+      <div class="hero-blob blob-blue hero-right-blue" aria-hidden="true"></div>
+      <div class="hero-blob blob-green hero-bottom-green" aria-hidden="true"></div>
+      <div class="hero-blob blob-yellow hero-left-yellow" aria-hidden="true"></div>
+
+      <div class="hero-container">
+        <!-- Tag Pill -->
+        <div class="hero-tag">
+          <span class="hero-prompt">&gt;_</span>
+          <span>CODE. CREATE. CONQUER.</span>
+        </div>
+
+        <!-- Main Heading -->
+        <h1 class="hero-title">
+          Where <span class="highlight-text">Ideas<span class="highlight-line"></span></span><br>
+          Become Impact
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="hero-subtitle">
+          We empower curious minds to build the future through technology, creativity, and collaboration.
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="hero-cta-group">
+          <a href="#life" class="btn-explore">
+            Explore More <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <button class="btn-video" id="watchVideoBtn">
+            <span class="play-icon"><i class="fa-solid fa-play"></i></span>
+            <span>Watch Video</span>
+          </button>
+        </div>
+
+        <!-- Social Proof -->
+        <div class="hero-social-proof">
+          <div class="avatar-stack">
+            <img src="assets/images/salimon.jpg" alt="Student" class="avatar-img">
+            <img src="assets/images/stephanie.jpg" alt="Student" class="avatar-img">
+            <img src="assets/images/cs lab 1.jpg" alt="Student" class="avatar-img">
+            <div class="avatar-badge">1K+</div>
+          </div>
+          <div class="proof-text">
+            <span class="proof-stats">Students &bull; Innovators &bull; Dreamers</span>
+            <span class="proof-sub">One Department. <span class="color-blue">Infinite</span> Possibilities.</span>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <!-- Main Heading -->
-      <h1 class="hero-title">
-        Where <span class="highlight-text">Ideas<span class="highlight-line"></span></span><br>
-        Become Impact
-      </h1>
-
-      <!-- Subtitle -->
-      <p class="hero-subtitle">
-        We empower curious minds to build the future through technology, creativity, and collaboration.
-      </p>
-
-      <!-- Action Buttons -->
-      <div class="hero-cta-group">
-        <a href="#life" class="btn-explore">
-          Explore More <i class="fa-solid fa-arrow-right"></i>
-        </a>
-        <button class="btn-video" id="watchVideoBtn">
-          <span class="play-icon"><i class="fa-solid fa-play"></i></span>
-          <span>Watch Video</span>
-        </button>
-      </div>
+    <!-- Wave Transition Combining Hero and Life Section -->
+    <div class="hero-wave-bottom" aria-hidden="true">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <!-- Secondary Royal Blue Wave (Right) - Solid #213A8A -->
+        <path class="wave-accent" d="M 1040,88 C 1150,88 1230,55 1310,28 C 1355,14 1400,5 1440,0 L 1440,105 L 1040,105 Z" fill="#213A8A" />
+        <!-- Main Dark Navy Wave - Matching Life Section #101c56 -->
+        <path class="wave-main" d="M 0,26 C 45,26 80,62 135,84 C 165,88 195,88 230,88 L 1160,88 C 1220,88 1280,72 1335,58 C 1375,48 1410,44 1440,42 L 1440,105 L 0,105 Z" fill="#101c56" />
+      </svg>
     </div>
   </section>
 
@@ -147,13 +170,15 @@
           <a href="#gazette" class="btn-viewmore">View More</a>
         </div>
 
-        <!-- Right Lab Image Card -->
+        <!-- Right Lab Fan Carousel -->
         <div class="life-media">
-          <div class="media-frame">
-            <img src="assets/images/cs_lab.jpg" alt="Computer Science Lab at SB College" class="lab-photo">
-            <div class="media-badge">
-              <i class="fa-solid fa-network-wired"></i> High Performance Computing Lab
-            </div>
+          <div class="fan-carousel" id="fanCarousel">
+            <div class="fan-card" data-slot="0"><img src="assets/images/cs lab 1.jpg" alt="CS Lab" class="fan-img"></div>
+            <div class="fan-card" data-slot="1"><img src="assets/images/cs lab 2.jpg" alt="CS Lab" class="fan-img"></div>
+            <div class="fan-card" data-slot="2"><img src="assets/images/cs lab 3.jpg" alt="CS Lab" class="fan-img"></div>
+            <div class="fan-card" data-slot="3"><img src="assets/images/cs lab 4.jpg" alt="CS Lab" class="fan-img"></div>
+            <div class="fan-card" data-slot="4"><img src="assets/images/cs lab 5.jpg" alt="CS Lab" class="fan-img"></div>
+            <div class="fan-label" id="fanLabel">High Performance Computing Lab</div>
           </div>
         </div>
       </div>
@@ -411,9 +436,221 @@
         </a>
       </div>
     </div>
+  </section>
 
-    <!-- ==================== FOOTER SECTION ==================== -->
-    <footer class="site-footer" id="contact">
+  <!-- ==================== OUR PEOPLE BOTTOM WAVE TRANSITION ==================== -->
+  <div class="people-wave-bottom" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" class="people-wave-svg" preserveAspectRatio="none">
+      <path d="M0,0 L1440,0 L1440,36 C1360,25 1200,90 960,55 C640,-15 320,95 0,36 Z" fill="#3761cc"/>
+    </svg>
+  </div>
+
+  <!-- ==================== CONTACT SECTION ==================== -->
+  <section class="contact-section" id="contact">
+    <!-- Ambient background glow blobs -->
+    <div class="contact-blob blob-contact-left" aria-hidden="true"></div>
+    <div class="contact-blob blob-contact-right" aria-hidden="true"></div>
+
+    <div class="contact-container">
+      
+      <!-- Top Row: Title, Subtitle, Contact Info & Geometric Abstract Illustration -->
+      <div class="contact-header">
+        
+        <!-- Left: Text & Info -->
+        <div class="contact-header-left">
+          <h2 class="contact-title">TALK TO US!</h2>
+          <div class="contact-title-bar"></div>
+          <p class="contact-desc">
+            We're here to help! Reach out to us for any questions, collaborations, or general inquiries.
+          </p>
+
+          <div class="contact-connect-block">
+            <h3 class="connect-heading">Connect with us</h3>
+            <div class="contact-info-list">
+              <div class="contact-info-item">
+                <div class="info-badge">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <a href="tel:04844355555" class="info-link">0484 435 5555</a>
+              </div>
+
+              <div class="contact-info-item">
+                <div class="info-badge">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <a href="mailto:enquiry.cs@sbcollege.ac.in" class="info-link">enquiry.cs@sbcollege.ac.in</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Geometric Abstract Art -->
+        <div class="contact-header-right">
+          <div class="geometric-art" aria-hidden="true">
+            <svg viewBox="0 0 420 260" fill="none" xmlns="http://www.w3.org/2000/svg" class="geometric-svg">
+              <!-- Top Pink Pill -->
+              <rect x="15" y="15" width="115" height="52" rx="26" fill="#F46A9E"/>
+              
+              <!-- Spiral Concentric Arcs -->
+              <path d="M 155,42 C 155,30 165,20 175,20 C 188,20 195,30 195,42 C 195,58 180,68 165,68 C 145,68 135,52 135,36" stroke="#4B8BF5" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.6"/>
+              
+              <!-- Top Sky Blue Circle -->
+              <circle cx="230" cy="42" r="38" fill="#4B8BF5"/>
+              
+              <!-- Top-Right Dotted Grid -->
+              <g fill="#93C5FD" opacity="0.75">
+                <circle cx="320" cy="20" r="2.5"/><circle cx="335" cy="20" r="2.5"/><circle cx="350" cy="20" r="2.5"/><circle cx="365" cy="20" r="2.5"/>
+                <circle cx="320" cy="35" r="2.5"/><circle cx="335" cy="35" r="2.5"/><circle cx="350" cy="35" r="2.5"/><circle cx="365" cy="35" r="2.5"/>
+                <circle cx="320" cy="50" r="2.5"/><circle cx="335" cy="50" r="2.5"/><circle cx="350" cy="50" r="2.5"/><circle cx="365" cy="50" r="2.5"/>
+                <circle cx="320" cy="65" r="2.5"/><circle cx="335" cy="65" r="2.5"/><circle cx="350" cy="65" r="2.5"/><circle cx="365" cy="65" r="2.5"/>
+              </g>
+
+              <!-- Middle Yellow Rounded Square -->
+              <rect x="25" y="100" width="100" height="100" rx="20" fill="#F59E0B"/>
+
+              <!-- Middle Green Semicircle Arch -->
+              <path d="M 160,100 A 50,50 0 0,1 160,200 Z" fill="#22C55E"/>
+
+              <!-- Middle-Center Dotted Grid -->
+              <g fill="#93C5FD" opacity="0.75">
+                <circle cx="235" cy="115" r="2.5"/><circle cx="250" cy="115" r="2.5"/><circle cx="265" cy="115" r="2.5"/><circle cx="280" cy="115" r="2.5"/>
+                <circle cx="235" cy="130" r="2.5"/><circle cx="250" cy="130" r="2.5"/><circle cx="265" cy="130" r="2.5"/><circle cx="280" cy="130" r="2.5"/>
+                <circle cx="235" cy="145" r="2.5"/><circle cx="250" cy="145" r="2.5"/><circle cx="265" cy="145" r="2.5"/><circle cx="280" cy="145" r="2.5"/>
+              </g>
+
+              <!-- Middle-Right Golden Orange Arch -->
+              <path d="M 310,105 C 310,80 375,80 375,105 L 375,170 C 375,190 310,190 310,170 Z" fill="#F59E0B"/>
+
+              <!-- Bottom Concentric Ripple Wireframe Circles -->
+              <g stroke="#3B82F6" stroke-width="1.2" fill="none" opacity="0.45">
+                <circle cx="270" cy="225" r="12"/>
+                <circle cx="270" cy="225" r="22"/>
+                <circle cx="270" cy="225" r="32"/>
+                <circle cx="270" cy="225" r="42"/>
+                <circle cx="270" cy="225" r="52"/>
+              </g>
+
+              <!-- Bottom Pink Triangle -->
+              <polygon points="340,230 375,160 410,230" fill="#F43F5E"/>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Main Grid: Map & Address Card (Left) + Contact Form (Right) -->
+      <div class="contact-main-grid">
+
+        <!-- Left Column: Map & Address Card -->
+        <div class="contact-card-map">
+          <!-- Top: Map View -->
+          <div class="map-view-box">
+            <iframe 
+              src="https://maps.google.com/maps?q=St+Berchmans+College,+Changanassery,+Kerala&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+              class="google-map-iframe" 
+              loading="lazy" 
+              allowfullscreen="" 
+              title="St Berchmans College Location Map">
+            </iframe>
+          </div>
+
+          <!-- Bottom: Our Address Card -->
+          <div class="address-card-blue">
+            <!-- Decorative ripple rings overlay -->
+            <svg class="addr-ripple-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="160" cy="160" r="35" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+              <circle cx="160" cy="160" r="60" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+              <circle cx="160" cy="160" r="85" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+              <circle cx="160" cy="160" r="115" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+            </svg>
+
+            <div class="addr-content-wrap">
+              <div class="addr-header-row">
+                <div class="addr-icon-badge">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="addr-text-block">
+                  <h4 class="addr-heading">Our Address</h4>
+                  <p class="addr-lines">
+                    Department of Computer Science<br>
+                    St Berchmans College, Changanassery<br>
+                    Kottayam, Kerala - 686 101
+                  </p>
+                </div>
+              </div>
+
+              <div class="addr-action-row">
+                <a href="https://maps.google.com/?q=St+Berchmans+College,+Changanassery" target="_blank" rel="noopener noreferrer" class="view-map-link">
+                  View on Google Maps <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Contact Form -->
+        <div class="contact-form-card">
+          <h3 class="form-heading">Fill your details. We'll get in touch with you.</h3>
+
+          <form class="contact-form-box" id="contactForm">
+            
+            <!-- Name Input -->
+            <div class="form-group">
+              <label for="contactName" class="form-label">What is your name?<span class="form-req">*</span></label>
+              <input type="text" id="contactName" name="name" placeholder="Full Name" required class="form-input">
+            </div>
+
+            <!-- Email Input -->
+            <div class="form-group">
+              <label for="contactEmail" class="form-label">What's your email address?<span class="form-req">*</span></label>
+              <input type="email" id="contactEmail" name="email" placeholder="Email Address" required class="form-input">
+            </div>
+
+            <!-- Phone Number Input with Country Code -->
+            <div class="form-group">
+              <label for="contactPhone" class="form-label">What's your phone number?<span class="form-req">*</span></label>
+              <div class="phone-input-row">
+                <div class="country-pill">
+                  <span class="country-flag">🇮🇳</span>
+                  <span class="country-code">+91</span>
+                  <i class="fa-solid fa-chevron-down country-chevron"></i>
+                </div>
+                <input type="tel" id="contactPhone" name="phone" placeholder="Phone Number" required class="form-input phone-field">
+              </div>
+            </div>
+
+            <!-- Message Textarea -->
+            <div class="form-group">
+              <label for="contactMessage" class="form-label">What's your message?<span class="form-req">*</span></label>
+              <textarea id="contactMessage" name="message" rows="4" placeholder="Type your message here..." required class="form-textarea"></textarea>
+            </div>
+
+            <!-- Terms & Consent Checkbox -->
+            <div class="form-consent-group">
+              <input type="checkbox" id="contactConsent" required class="consent-checkbox">
+              <label for="contactConsent" class="consent-text">
+                By clicking submit, I agree to the <a href="#" class="policy-link">Terms &amp; Conditions</a> and <a href="#" class="policy-link">Privacy Policy</a> and give my consent to receive updates through SMS/Email.
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-submit-group">
+              <button type="submit" class="contact-submit-btn">
+                <span>Submit</span>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER SECTION ==================== -->
+  <footer class="site-footer" id="footer">
     <div class="footer-container">
       
       <!-- Top Institutional Row -->
@@ -531,13 +768,12 @@
           &copy; 2026 University of Technology — Dept. of CS & Engineering. All rights reserved.
         </p>
         <p class="credit-text">
-          Designed & developed by <a href="#" class="credit-gold">the Dept. Dev Team</a>
+          Designed and Developed by <a href="https://athlogix.in" target="_blank" rel="noopener noreferrer" class="credit-athlogix">Athlogix</a> &amp; <a href="#" class="credit-dept">Dept. Dev Team</a>
         </p>
       </div>
 
     </div>
   </footer>
-  </section>
 
   <!-- ==================== VIDEO MODAL ==================== -->
   <div class="modal-overlay" id="videoModal">
