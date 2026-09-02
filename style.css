@@ -561,19 +561,19 @@ button {
 /* ==================== LIFE @ CS DEPARTMENT ==================== */
 .life-section {
   position: relative;
-  max-width: 1400px;
-  width: calc(100% - 3rem);
+  max-width: 1560px;
+  width: calc(100% - 2rem);
   margin: 4rem auto 3.5rem;
   background-color: #101c56;
   color: #ffffff;
-  padding: 4.5rem 3rem 4rem;
+  padding: 4.5rem 3.5rem 4rem;
   border-radius: 40px;
   box-shadow: 0 20px 40px rgba(16, 28, 86, 0.15);
   overflow: hidden;
 }
 
 .life-container {
-  max-width: 1240px;
+  max-width: 1360px;
   margin: 0 auto;
 }
 
@@ -666,7 +666,7 @@ button {
 
 /* Floating Feature Badges Bar */
 .features-wrapper {
-  max-width: 1240px;
+  max-width: 1360px;
   margin: 3.5rem auto 0;
   position: relative;
   z-index: 10;
@@ -753,8 +753,8 @@ button {
 
 /* ==================== GAZETTE / NEWSPAPER SECTION ==================== */
 .gazette-section {
-  max-width: 1460px;
-  width: calc(100% - 2.5rem);
+  max-width: 1560px;
+  width: calc(100% - 2rem);
   margin: 3rem auto;
   background: rgba(255, 255, 255, 0.86);
   backdrop-filter: blur(20px);
@@ -768,7 +768,7 @@ button {
 }
 
 .gazette-container {
-  max-width: 1240px;
+  max-width: 1360px;
   margin: 0 auto;
 }
 
@@ -1309,20 +1309,20 @@ button {
 
 /* ==================== FOOTER ==================== */
 .site-footer {
-  max-width: 1460px;
+  max-width: 1560px;
   width: calc(100% - 2rem);
   margin: 2.5rem auto;
   background-color: #0b132b;
   color: #94a3b8;
   padding: 3rem 2.5rem 2.2rem;
-  border-radius: 32px;
+  border-radius: 36px;
   box-shadow: 0 20px 45px rgba(11, 19, 43, 0.3);
   position: relative;
   overflow: hidden;
 }
 
 .footer-container {
-  max-width: 1240px;
+  max-width: 1360px;
   margin: 0 auto;
 }
 
