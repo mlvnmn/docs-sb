@@ -85,16 +85,17 @@ button {
 /* ==================== SITE HEADER / NAVBAR ==================== */
 .site-header {
   position: fixed;
-  top: 0.6rem;
-  left: 0.6rem;
-  right: 0.6rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  border-radius: 24px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   transition: box-shadow 0.3s ease, background 0.3s ease;
 }
 
@@ -315,37 +316,38 @@ button {
 /* ==================== HERO SECTION ==================== */
 .hero-section {
   position: relative;
-  min-height: 100vh;
-  padding: 0.35rem 0.35rem 0 0.35rem;
+  height: 100vh;
+  padding: 0;
   background: linear-gradient(135deg, #5795E4 0%, #4663C3 100%);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .hero-card {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 0.35rem);
+  height: 100vh;
   background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 60%, #F1F4F8 100%);
-  border-radius: 24px 24px 0 0;
+  border-radius: 0;
   overflow: hidden;
   box-shadow: 0 20px 50px rgba(16, 28, 86, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  border-bottom: none;
-  padding: 7.5rem 3.5rem 6.5rem;
+  border: none;
+  padding: 4.4rem 0.8rem 0.8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 /* Wave Transition Combining Hero and Life Section - 4px bleed to eliminate hairline gap */
 .hero-wave-bottom {
   position: absolute;
-  bottom: -4px;
+  bottom: 3px;
   left: 0;
   width: 100%;
-  height: 100px;
+  height: 102px;
   pointer-events: none;
   z-index: 5;
   overflow: hidden;
@@ -424,10 +426,10 @@ button {
 .hero-blob.blob-yellow,
 .hero-left-yellow {
   position: absolute;
-  bottom: -45px;
-  left: -40px;
-  width: 480px;
-  height: 220px;
+  bottom: -80px;
+  left: -50px;
+  width: 520px;
+  height: 520px;
   border-radius: 50%;
   background: radial-gradient(
     ellipse 85% 75% at 35% 65%,
@@ -442,12 +444,227 @@ button {
 }
 
 .hero-container {
-  max-width: 1080px;
+  max-width: 1580px;
   margin: 0 auto;
   width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
   position: relative;
   z-index: 2;
   text-align: left;
+}
+
+/* ==================== HERO BANNER SLIDESHOW ==================== */
+.hero-slider-card {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 5.4rem);
+  max-height: 610px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(16, 28, 86, 0.25);
+  background: #0d1322;
+  color: #ffffff;
+}
+
+.hero-slides-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+  z-index: 1;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
+.hero-slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.hero-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.68) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  z-index: 1;
+}
+
+.hero-slide-content {
+  position: absolute;
+  top: 50%;
+  left: 8.5%;
+  transform: translateY(-50%);
+  z-index: 3;
+  max-width: 720px;
+  pointer-events: none;
+}
+
+.hero-slide-title {
+  font-family: 'Outfit', 'Montserrat', 'Segoe UI', sans-serif;
+  font-size: 3.8rem;
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  line-height: 1.06;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Right-side Counter & Control Dots Widget */
+.hero-controls-widget {
+  position: absolute;
+  right: 5%;
+  bottom: 165px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+  pointer-events: auto;
+}
+
+.hero-counter {
+  font-family: 'Outfit', 'Montserrat', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+.hero-counter .total-num {
+  font-size: 1.5rem;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.hero-dots-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hero-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-dot.active {
+  background: #ffffff;
+  transform: scale(1.15);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.hero-play-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.hero-play-btn:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* Bottom Navigation Progress Tabs Bar */
+.hero-tabs-bar {
+  position: absolute;
+  bottom: 25px;
+  left: 8.5%;
+  width: 76%;
+  max-width: 880px;
+  z-index: 4;
+  display: flex;
+  background: transparent;
+  padding: 0;
+  gap: 1.2rem;
+  pointer-events: auto;
+}
+
+.hero-tab-item {
+  flex: 1;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0;
+  outline: none;
+}
+
+.tab-progress-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.tab-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 2px;
+}
+
+.hero-tab-item.past .tab-progress-fill {
+  width: 100% !important;
+  transition: none !important;
+}
+
+.hero-tab-item.animating .tab-progress-fill {
+  width: 100% !important;
+  transition: width 5s linear !important;
+}
+
+.tab-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.3s ease;
+  white-space: nowrap;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.hero-tab-item.active .tab-label,
+.hero-tab-item:hover .tab-label {
+  color: #ffffff;
 }
 
 .hero-tag {

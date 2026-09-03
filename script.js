@@ -257,5 +257,111 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ── Hero Banner Slideshow ───────────────────────────────────────────
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  const heroDots = document.querySelectorAll('.hero-dot');
+  const heroTabs = document.querySelectorAll('.hero-tab-item');
+  const heroCounterNum = document.querySelector('#heroCounter .current-num');
+  const heroPlayBtn = document.getElementById('heroPlayBtn');
+  const heroPlayIcon = document.getElementById('heroPlayIcon');
+
+  if (heroSlides.length > 0) {
+    let currentSlide = 0;
+    const totalSlides = heroSlides.length;
+    const DURATION = 5000;
+    let slideTimer = null;
+    let isPlaying = true;
+
+    function updateCounter(index) {
+      if (heroCounterNum) {
+        heroCounterNum.textContent = String(index + 1).padStart(2, '0');
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(slideTimer);
+      if (isPlaying) {
+        slideTimer = setInterval(nextSlide, DURATION);
+      }
+    }
+
+    function setSlide(index) {
+      currentSlide = index;
+
+      // Update slides
+      heroSlides.forEach((slide, i) => {
+        if (i === index) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      // Update dots
+      heroDots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+
+      // Update tabs & progress fills
+      heroTabs.forEach((tab, i) => {
+        tab.classList.remove('active', 'past', 'animating');
+        if (i < index) {
+          tab.classList.add('past');
+        } else if (i === index) {
+          tab.classList.add('active');
+          if (isPlaying) {
+            // Trigger reflow to restart CSS transition
+            void tab.offsetWidth;
+            tab.classList.add('animating');
+          }
+        }
+      });
+
+      updateCounter(index);
+      resetTimer();
+    }
+
+    function nextSlide() {
+      const nextIndex = (currentSlide + 1) % totalSlides;
+      setSlide(nextIndex);
+    }
+
+    // Tab clicks
+    heroTabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        setSlide(i);
+      });
+    });
+
+    // Dot clicks
+    heroDots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        setSlide(i);
+      });
+    });
+
+    // Play/Pause toggle
+    if (heroPlayBtn && heroPlayIcon) {
+      heroPlayBtn.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+          heroPlayIcon.className = 'fa-solid fa-pause';
+          setSlide(currentSlide);
+        } else {
+          heroPlayIcon.className = 'fa-solid fa-play';
+          clearInterval(slideTimer);
+          heroTabs.forEach((tab) => tab.classList.remove('animating'));
+        }
+      });
+    }
+
+    // Initialize slide 0
+    setSlide(0);
+  }
+
 });
 

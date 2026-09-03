@@ -102,45 +102,91 @@
       <div class="hero-blob blob-yellow hero-left-yellow" aria-hidden="true"></div>
 
       <div class="hero-container">
-        <!-- Tag Pill -->
-        <div class="hero-tag">
-          <span class="hero-prompt">&gt;_</span>
-          <span>CODE. CREATE. CONQUER.</span>
-        </div>
+        <!-- Hero Slideshow Banner Card -->
+        <div class="hero-slider-card" id="heroSliderCard">
+          <!-- Slides Wrapper -->
+          <div class="hero-slides-wrapper">
+            <!-- Slide 1 -->
+            <div class="hero-slide active" data-index="0">
+              <img src="assets/hero banner/1 banner hero.webp" alt="Be the Change Be the Future" class="hero-slide-img">
+              <div class="hero-slide-overlay"></div>
+              <div class="hero-slide-content">
+                <h1 class="hero-slide-title">BE THE CHANGE<br>BE THE FUTURE</h1>
+              </div>
+            </div>
 
-        <!-- Main Heading -->
-        <h1 class="hero-title">
-          Where <span class="highlight-text">Ideas<span class="highlight-line"></span></span><br>
-          Become Impact
-        </h1>
+            <!-- Slide 2 -->
+            <div class="hero-slide" data-index="1">
+              <img src="assets/hero banner/2 banner hero.webp" alt="Apply for JET 2026" class="hero-slide-img">
+              <div class="hero-slide-overlay"></div>
+              <div class="hero-slide-content">
+                <h1 class="hero-slide-title">APPLY FOR JET<br>2026</h1>
+              </div>
+            </div>
 
-        <!-- Subtitle -->
-        <p class="hero-subtitle">
-          We empower curious minds to build the future through technology, creativity, and collaboration.
-        </p>
+            <!-- Slide 3 -->
+            <div class="hero-slide" data-index="2">
+              <img src="assets/hero banner/3 banner hero.webp" alt="Build Your Career" class="hero-slide-img">
+              <div class="hero-slide-overlay"></div>
+              <div class="hero-slide-content">
+                <h1 class="hero-slide-title">BUILD YOUR<br>CAREER</h1>
+              </div>
+            </div>
 
-        <!-- Action Buttons -->
-        <div class="hero-cta-group">
-          <a href="#life" class="btn-explore">
-            Explore More <i class="fa-solid fa-arrow-right"></i>
-          </a>
-          <button class="btn-video" id="watchVideoBtn">
-            <span class="play-icon"><i class="fa-solid fa-play"></i></span>
-            <span>Watch Video</span>
-          </button>
-        </div>
-
-        <!-- Social Proof -->
-        <div class="hero-social-proof">
-          <div class="avatar-stack">
-            <img src="assets/images/salimon.jpg" alt="Student" class="avatar-img">
-            <img src="assets/images/stephanie.jpg" alt="Student" class="avatar-img">
-            <img src="assets/images/cs lab 1.jpg" alt="Student" class="avatar-img">
-            <div class="avatar-badge">1K+</div>
+            <!-- Slide 4 -->
+            <div class="hero-slide" data-index="3">
+              <img src="assets/hero banner/4 banner hero.jpg" alt="Explore CS Department" class="hero-slide-img">
+              <div class="hero-slide-overlay"></div>
+              <div class="hero-slide-content">
+              </div>
+            </div>
           </div>
-          <div class="proof-text">
-            <span class="proof-stats">Students &bull; Innovators &bull; Dreamers</span>
-            <span class="proof-sub">One Department. <span class="color-blue">Infinite</span> Possibilities.</span>
+
+          <!-- Counter & Controls Widget (Right Side) -->
+          <div class="hero-controls-widget">
+            <div class="hero-counter" id="heroCounter">
+              <span class="current-num">01</span><span class="total-num">/04</span>
+            </div>
+            <div class="hero-dots-row">
+              <span class="hero-dot active" data-slide="0"></span>
+              <span class="hero-dot" data-slide="1"></span>
+              <span class="hero-dot" data-slide="2"></span>
+              <span class="hero-dot" data-slide="3"></span>
+              <button class="hero-play-btn" id="heroPlayBtn" aria-label="Pause / Play Slideshow">
+                <i class="fa-solid fa-pause" id="heroPlayIcon"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Bottom Navigation Progress Tabs Bar -->
+          <div class="hero-tabs-bar">
+            <button class="hero-tab-item active" data-slide="0">
+              <div class="tab-progress-track">
+                <div class="tab-progress-fill"></div>
+              </div>
+              <span class="tab-label">Find your Programmes</span>
+            </button>
+
+            <button class="hero-tab-item" data-slide="1">
+              <div class="tab-progress-track">
+                <div class="tab-progress-fill"></div>
+              </div>
+              <span class="tab-label">Start your Application</span>
+            </button>
+
+            <button class="hero-tab-item" data-slide="2">
+              <div class="tab-progress-track">
+                <div class="tab-progress-fill"></div>
+              </div>
+              <span class="tab-label">What's New</span>
+            </button>
+
+            <button class="hero-tab-item" data-slide="3">
+              <div class="tab-progress-track">
+                <div class="tab-progress-fill"></div>
+              </div>
+              <span class="tab-label">Explore JAIN</span>
+            </button>
           </div>
         </div>
       </div>
