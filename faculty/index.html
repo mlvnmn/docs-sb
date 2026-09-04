@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our People | Department of Computer Science | St Berchmans College Autonomous</title>
+  <meta name="description"
+    content="Our People and Faculty directory for the Department of Computer Science at St Berchmans College Autonomous. Discover our esteemed teaching faculty, research scholars, technical staff, and publications.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Fredoka:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400&family=Press+Start+2P&family=Space+Grotesk:wght@500;700;900&family=UnifrakturMaguntia&family=Chivo+Mono:wght@700;900&display=swap"
+    rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+  <!-- ==================== HEADER / NAVBAR ==================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-container">
+      <!-- Logo Branding -->
+      <a href="/" class="brand-logo">
+        <div class="logo-mark">
+          <img src="/assets/images/dept_logo.jpeg" alt="Department of Computer Science Logo" class="dept-logo-img">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Department of Computer Science</span>
+          <span class="brand-sub">
+            St Berchmans College
+            <span class="badge-autonomous">Autonomous</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="/" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="/faculty/" class="nav-link active">Faculty</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="/#life" class="nav-link">
+              Campus Life <i class="fa-solid fa-chevron-down nav-arrow"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="/#life" class="dropdown-item"><i class="fa-solid fa-desktop"></i> Advanced Labs</a>
+              <a href="/#gazette" class="dropdown-item"><i class="fa-solid fa-calendar-days"></i> Tech Events &amp; Hackathons</a>
+              <a href="/#life" class="dropdown-item"><i class="fa-solid fa-users"></i> Coding Clubs</a>
+              <a href="/#life" class="dropdown-item"><i class="fa-solid fa-trophy"></i> Student Achievements</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="/#about" class="nav-link">
+              About <i class="fa-solid fa-chevron-down nav-arrow"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="/#about" class="dropdown-item"><i class="fa-solid fa-circle-info"></i> Department Overview</a>
+              <a href="/#about" class="dropdown-item"><i class="fa-solid fa-bullseye"></i> Vision &amp; Mission</a>
+              <a href="/#about" class="dropdown-item"><i class="fa-solid fa-award"></i> NAAC &amp; Accreditations</a>
+              <a href="/#about" class="dropdown-item"><i class="fa-solid fa-briefcase"></i> Placements &amp; Career</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="header-actions">
+        <button class="search-btn" id="searchBtn" aria-label="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <a href="/#contact" class="btn-contact">Contact Us</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== OUR PEOPLE SECTION ==================== -->
+  <div class="people-wave-top" style="margin-top: 60px;">
+    <svg viewBox="0 0 1440 90" fill="none" xmlns="http://www.w3.org/2000/svg" class="people-wave-svg" preserveAspectRatio="none">
+      <path d="M0,36 C320,95 640,-15 960,55 C1200,90 1360,25 1440,36 L1440,90 L0,90 Z" fill="#3761cc"/>
+    </svg>
+  </div>
+
+  <section class="people-section" id="people" style="padding-top: 1rem;">
+    <!-- Starbursts and retro decorative elements -->
+    <div class="retro-star star-1">✦</div>
+    <div class="retro-star star-2">✧</div>
+    <div class="retro-star star-3">✦</div>
+    <div class="retro-star star-4">✦</div>
+
+    <div class="people-container">
+      <!-- Pixel Title -->
+      <h1 class="people-title" style="font-size: clamp(2.2rem, 5vw, 4rem); margin-bottom: 0.5rem;">OUR PEOPLE</h1>
+      <p style="text-align: center; color: #cbd5e1; font-size: 1.1rem; max-width: 720px; margin: 0 auto 2.5rem; font-weight: 500;">
+        Meet the dedicated educators, researchers, and technical experts guiding the next generation of computer scientists at St Berchmans College Autonomous.
+      </p>
+
+
+
+      <!-- People Cards Grid -->
+      <div class="people-grid" id="facultyGrid">
+
+        <!-- Member 1: Dr. Sajimon Abraham (Archetype A) -->
+        <div class="brutalist-card faculty-card card-archetype-a">
+          <div class="card-accent-triangle triangle-top-right" style="border-color: transparent #3b82f6 transparent transparent;"></div>
+          <div class="wireframe-globe globe-bottom-right"></div>
+          
+          <div class="person-photo-arch">
+            <div class="arch-backdrop" style="background: #3b82f6;"></div>
+            <img src="/assets/images/faculty/dr__sajimon_abraham.jpg" alt="Dr. Sajimon Abraham" class="person-img">
+          </div>
+
+          <div class="card-body-content" style="text-align: center;">
+            <span class="faculty-role-badge" style="background: #3b82f6; color: #fff;">DIRECTOR</span>
+            <h3 class="person-name">Dr. Sajimon Abraham</h3>
+            <p class="person-email"><i class="fa-solid fa-envelope"></i> sajimonabraham@mgu.ac.in</p>
+
+            <div class="star-rating">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 2: Dr. Smitha Krishnan (Archetype B) -->
+        <div class="brutalist-card faculty-card card-archetype-b">
+          <div class="card-accent-triangle triangle-left" style="border-color: transparent transparent transparent #ec4899;"></div>
+          <div class="wireframe-globe globe-top-right"></div>
+
+          <div class="landscape-layout">
+            <div class="landscape-photo-frame" style="border-color: #000; background: #ec4899;">
+              <img src="/assets/images/faculty/dr__smitha_krishnan.jpg" alt="Dr. Smitha Krishnan" class="landscape-img">
+            </div>
+
+            <div class="landscape-content">
+              <span class="faculty-role-badge" style="background: #ec4899; color: #fff;">ASSISTANT PROFESSOR & HEAD</span>
+              <h3 class="person-name">Dr. Smitha Krishnan</h3>
+              <p class="person-email"><i class="fa-solid fa-envelope"></i> Ksmitha21@rediffmail.com</p>
+
+              <div class="star-rating">
+                <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+              </div>
+
+              <div class="badge-tag-btn" style="background: #ec4899; color: #fff;">
+                <span>DR. SMITHA KRISHNAN</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 3: Ms. Bobby Joseph (Archetype C) -->
+        <div class="brutalist-card faculty-card card-archetype-c">
+          <div class="card-accent-triangle triangle-top-left" style="border-color: #10b981 transparent transparent transparent;"></div>
+          
+          <div class="banner-photo-box" style="background: #10b981;">
+            <img src="/assets/images/faculty/ms__bobby_joseph.jpg" alt="Ms. Bobby Joseph" class="banner-img">
+            <span class="banner-role-tag" style="background: #10b981; color: #fff;">ASSISTANT PROFESSOR</span>
+          </div>
+
+          <div class="banner-content" style="text-align: center; padding-top: 0.8rem;">
+            <h3 class="person-name">Ms. Bobby Joseph</h3>
+            <p class="person-email"><i class="fa-solid fa-envelope"></i> bobbyjoseph4u@gmail.Com</p>
+
+            <div class="star-rating">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 4: Ms. Dhanya C Nair (Archetype D) -->
+        <div class="brutalist-card faculty-card card-archetype-d">
+          <div class="wireframe-globe globe-top-left"></div>
+          <div class="card-accent-triangle triangle-bottom-right" style="border-color: transparent transparent #f59e0b transparent;"></div>
+
+          <div class="avatar-center-header" style="text-align: center;">
+            <span class="faculty-role-badge" style="background: #f59e0b; color: #fff; margin-bottom: 0.8rem;">ASSISTANT PROFESSOR</span>
+            
+            <div class="circle-avatar-box" style="border-color: #000;">
+              <img src="/assets/images/faculty/ms__dhanya_c_nair.jpg" alt="Ms. Dhanya C Nair" class="circle-img">
+            </div>
+
+            <h3 class="person-name" style="margin-top: 0.6rem;">Ms. Dhanya C Nair</h3>
+            <p class="person-email"><i class="fa-solid fa-envelope"></i> dhanyacn@sbcollege.ac.in</p>
+
+            <div class="star-rating">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 5: Ms. RINI ELIZABETH JACOB (Archetype A) -->
+        <div class="brutalist-card faculty-card card-archetype-a">
+          <div class="card-accent-triangle triangle-top-right" style="border-color: transparent #8b5cf6 transparent transparent;"></div>
+          <div class="wireframe-globe globe-bottom-right"></div>
+          
+          <div class="person-photo-arch">
+            <div class="arch-backdrop" style="background: #8b5cf6;"></div>
+            <img src="/assets/images/faculty/ms__rini_elizabeth_jacob.jpg" alt="Ms. RINI ELIZABETH JACOB" class="person-img">
+          </div>
+
+          <div class="card-body-content" style="text-align: center;">
+            <span class="faculty-role-badge" style="background: #8b5cf6; color: #fff;">ASSISTANT PROFESSOR</span>
+            <h3 class="person-name">Ms. RINI ELIZABETH JACOB</h3>
+            <p class="person-email"><i class="fa-solid fa-envelope"></i> riniarun84@gmail.com</p>
+
+            <div class="star-rating">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 6: Ms. REENU PAUL (Archetype B) -->
+        <div class="brutalist-card faculty-card card-archetype-b">
+          <div class="card-accent-triangle triangle-left" style="border-color: transparent transparent transparent #06b6d4;"></div>
+          <div class="wireframe-globe globe-top-right"></div>
+
+          <div class="landscape-layout">
+            <div class="landscape-photo-frame" style="border-color: #000; background: #06b6d4;">
+              <img src="/assets/images/faculty/ms__reenu_paul.jpg" alt="Ms. REENU PAUL" class="landscape-img">
+            </div>
+
+            <div class="landscape-content">
+              <span class="faculty-role-badge" style="background: #06b6d4; color: #fff;">ASSISTANT PROFESSOR</span>
+              <h3 class="person-name">Ms. REENU PAUL</h3>
+              <p class="person-email"><i class="fa-solid fa-envelope"></i> reenupaul@sbcollege.ac.in</p>
+
+              <div class="star-rating">
+                <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+              </div>
+
+              <div class="badge-tag-btn" style="background: #06b6d4; color: #fff;">
+                <span>MS. REENU PAUL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 7: Mr. Sachin Varghese Biju (Archetype C) -->
+        <div class="brutalist-card faculty-card card-archetype-c">
+          <div class="card-accent-triangle triangle-top-left" style="border-color: #f97316 transparent transparent transparent;"></div>
+          
+          <div class="banner-photo-box" style="background: #f97316;">
+            <img src="/assets/images/faculty/mr__sachin_varghese_biju.jpg" alt="Mr. Sachin Varghese Biju" class="banner-img">
+            <span class="banner-role-tag" style="background: #f97316; color: #fff;">ASSISTANT PROFESSOR</span>
+          </div>
+
+          <div class="banner-content" style="text-align: center; padding-top: 0.8rem;">
+            <h3 class="person-name">Mr. Sachin Varghese Biju</h3>
+            <p class="person-email"><i class="fa-solid fa-envelope"></i> sachinbiju746@gmail.com</p>
+
+            <div class="star-rating">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 8: Ms. Divya S. (Archetype D) -->
+        <div class="brutalist-card faculty-card card-archetype-d">
+          <div class="wireframe-globe globe-top-left"></div>
+          <div class="card-accent-triangle triangle-bottom-right" style="border-color: transparent transparent #6366f1 transparent;"></div>
+
+          <div class="avatar-center-header" style="text-align: center;">
+            <span class="faculty-role-badge" style="background: #6366f1; color: #fff; margin-bottom: 0.8rem;">ASSISTANT PROFESSOR</span>
+            
+            <div class="circle-avatar-box" style="border-color: #000;">
+              <img src="/assets/images/faculty/ms__divya_s.jpg" alt="Ms. Divya S." class="circle-img">
+            </div>
+
+            <h3 class="person-name" style="margin-top: 0.6rem;">Ms. Divya S.</h3>
+            <p class="person-email"><i class="fa-solid fa-envelope"></i> divyapradeep@sbcollege.ac.in</p>
+
+            <div class="star-rating">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 9: Ms. Blessy Paul (Archetype A) -->
+        <div class="brutalist-card faculty-card card-archetype-a">
+          <div class="card-accent-triangle triangle-top-right" style="border-color: transparent #3b82f6 transparent transparent;"></div>
+          <div class="wireframe-globe globe-bottom-right"></div>
+          
+          <div class="person-photo-arch">
+            <div class="arch-backdrop" style="background: #3b82f6;"></div>
+            <img src="/assets/images/faculty/ms__blessy_paul.jpg" alt="Ms. Blessy Paul" class="person-img">
+          </div>
+
+          <div class="card-body-content" style="text-align: center;">
+            <span class="faculty-role-badge" style="background: #3b82f6; color: #fff;">ASSISTANT PROFESSOR</span>
+            <h3 class="person-name">Ms. Blessy Paul</h3>
+            <p class="person-email"><i class="fa-solid fa-envelope"></i> blessypaul@sbcollege.ac.in</p>
+
+            <div class="star-rating">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 10: Ms. ASWATHY MANOHARAN (Archetype B) -->
+        <div class="brutalist-card faculty-card card-archetype-b">
+          <div class="card-accent-triangle triangle-left" style="border-color: transparent transparent transparent #ec4899;"></div>
+          <div class="wireframe-globe globe-top-right"></div>
+
+          <div class="landscape-layout">
+            <div class="landscape-photo-frame" style="border-color: #000; background: #ec4899;">
+              <img src="/assets/images/faculty/ms__aswathy_manoharan.jpg" alt="Ms. ASWATHY MANOHARAN" class="landscape-img">
+            </div>
+
+            <div class="landscape-content">
+              <span class="faculty-role-badge" style="background: #ec4899; color: #fff;">ASSISTANT PROFESSOR</span>
+              <h3 class="person-name">Ms. ASWATHY MANOHARAN</h3>
+              <p class="person-email"><i class="fa-solid fa-envelope"></i> aswathymn@sbcollege.ac.in</p>
+
+              <div class="star-rating">
+                <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+              </div>
+
+              <div class="badge-tag-btn" style="background: #ec4899; color: #fff;">
+                <span>MS. ASWATHY MANOHARAN</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 11: Ms. Aswathy S Nair (Archetype C) -->
+        <div class="brutalist-card faculty-card card-archetype-c">
+          <div class="card-accent-triangle triangle-top-left" style="border-color: #10b981 transparent transparent transparent;"></div>
+          
+          <div class="banner-photo-box" style="background: #10b981;">
+            <img src="/assets/images/faculty/ms__aswathy_s_nair.jpg" alt="Ms. Aswathy S Nair" class="banner-img">
+            <span class="banner-role-tag" style="background: #10b981; color: #fff;">ASSISTANT PROFESSOR</span>
+          </div>
+
+          <div class="banner-content" style="text-align: center; padding-top: 0.8rem;">
+            <h3 class="person-name">Ms. Aswathy S Nair</h3>
+            <p class="person-email"><i class="fa-solid fa-envelope"></i> aswathys@sbcollege.ac.in</p>
+
+            <div class="star-rating">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 12: Mr. Sharon Shaji (Archetype D) -->
+        <div class="brutalist-card faculty-card card-archetype-d">
+          <div class="wireframe-globe globe-top-left"></div>
+          <div class="card-accent-triangle triangle-bottom-right" style="border-color: transparent transparent #f59e0b transparent;"></div>
+
+          <div class="avatar-center-header" style="text-align: center;">
+            <span class="faculty-role-badge" style="background: #f59e0b; color: #fff; margin-bottom: 0.8rem;">ASSISTANT PROFESSOR (CONTRACT)</span>
+            
+            <div class="circle-avatar-box" style="border-color: #000;">
+              <img src="/assets/images/faculty/mr__sharon_shaji.jpg" alt="Mr. Sharon Shaji" class="circle-img">
+            </div>
+
+            <h3 class="person-name" style="margin-top: 0.6rem;">Mr. Sharon Shaji</h3>
+            <p class="person-email"><i class="fa-solid fa-envelope"></i> sharon@sbcollege.ac.in</p>
+
+            <div class="star-rating">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 13: Mr. AGHIL K P (Archetype A) -->
+        <div class="brutalist-card faculty-card card-archetype-a">
+          <div class="card-accent-triangle triangle-top-right" style="border-color: transparent #8b5cf6 transparent transparent;"></div>
+          <div class="wireframe-globe globe-bottom-right"></div>
+          
+          <div class="person-photo-arch">
+            <div class="arch-backdrop" style="background: #8b5cf6;"></div>
+            <img src="/assets/images/faculty/mr__aghil_k_p.jpg" alt="Mr. AGHIL K P" class="person-img">
+          </div>
+
+          <div class="card-body-content" style="text-align: center;">
+            <span class="faculty-role-badge" style="background: #8b5cf6; color: #fff;">ASSISTANT PROFESSOR (CONTRACT)</span>
+            <h3 class="person-name">Mr. AGHIL K P</h3>
+            <p class="person-email"><i class="fa-solid fa-envelope"></i> akhilsajeevan21@gmail.com</p>
+
+            <div class="star-rating">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 14: Ms. Annu Bindhu Benoy (Archetype B) -->
+        <div class="brutalist-card faculty-card card-archetype-b">
+          <div class="card-accent-triangle triangle-left" style="border-color: transparent transparent transparent #06b6d4;"></div>
+          <div class="wireframe-globe globe-top-right"></div>
+
+          <div class="landscape-layout">
+            <div class="landscape-photo-frame" style="border-color: #000; background: #06b6d4;">
+              <img src="/assets/images/faculty/ms__annu_bindhu_benoy.jpg" alt="Ms. Annu Bindhu Benoy" class="landscape-img">
+            </div>
+
+            <div class="landscape-content">
+              <span class="faculty-role-badge" style="background: #06b6d4; color: #fff;">ASSISTANT PROFESSOR (CONTRACT)</span>
+              <h3 class="person-name">Ms. Annu Bindhu Benoy</h3>
+              <p class="person-email"><i class="fa-solid fa-envelope"></i> annubindhubinoy@gmail.com</p>
+
+              <div class="star-rating">
+                <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+              </div>
+
+              <div class="badge-tag-btn" style="background: #06b6d4; color: #fff;">
+                <span>MS. ANNU BINDHU BENOY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 15: Dr. P Vijayalakshmi (Archetype C) -->
+        <div class="brutalist-card faculty-card card-archetype-c">
+          <div class="card-accent-triangle triangle-top-left" style="border-color: #f97316 transparent transparent transparent;"></div>
+          
+          <div class="banner-photo-box" style="background: #f97316;">
+            <img src="/assets/images/faculty/dr__p_vijayalakshmi.jpg" alt="Dr. P Vijayalakshmi" class="banner-img">
+            <span class="banner-role-tag" style="background: #f97316; color: #fff;">ASSISTANT PROFESSOR (CONTRACT)</span>
+          </div>
+
+          <div class="banner-content" style="text-align: center; padding-top: 0.8rem;">
+            <h3 class="person-name">Dr. P Vijayalakshmi</h3>
+            <p class="person-email"><i class="fa-solid fa-envelope"></i> ponniahvijayalakshmi@sbcollege.ac.in</p>
+
+            <div class="star-rating">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 16: Ms. Snehamol Selvaraj (Archetype D) -->
+        <div class="brutalist-card faculty-card card-archetype-d">
+          <div class="wireframe-globe globe-top-left"></div>
+          <div class="card-accent-triangle triangle-bottom-right" style="border-color: transparent transparent #6366f1 transparent;"></div>
+
+          <div class="avatar-center-header" style="text-align: center;">
+            <span class="faculty-role-badge" style="background: #6366f1; color: #fff; margin-bottom: 0.8rem;">ASSISTANT PROFESSOR (CONTRACT)</span>
+            
+            <div class="circle-avatar-box" style="border-color: #000;">
+              <img src="/assets/images/faculty/ms__snehamol_selvaraj.jpg" alt="Ms. Snehamol Selvaraj" class="circle-img">
+            </div>
+
+            <h3 class="person-name" style="margin-top: 0.6rem;">Ms. Snehamol Selvaraj</h3>
+            <p class="person-email"><i class="fa-solid fa-envelope"></i> snehamolselvaraj@gmail.com</p>
+
+            <div class="star-rating">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 17: Ms. Greeshma Muraly (Archetype A) -->
+        <div class="brutalist-card faculty-card card-archetype-a">
+          <div class="card-accent-triangle triangle-top-right" style="border-color: transparent #3b82f6 transparent transparent;"></div>
+          <div class="wireframe-globe globe-bottom-right"></div>
+          
+          <div class="person-photo-arch">
+            <div class="arch-backdrop" style="background: #3b82f6;"></div>
+            <img src="/assets/images/faculty/ms__greeshma_muraly.jpg" alt="Ms. Greeshma Muraly" class="person-img">
+          </div>
+
+          <div class="card-body-content" style="text-align: center;">
+            <span class="faculty-role-badge" style="background: #3b82f6; color: #fff;">LAB INSTRUCTOR</span>
+            <h3 class="person-name">Ms. Greeshma Muraly</h3>
+            <p class="person-email"><i class="fa-solid fa-envelope"></i> greeshmamuraly@sbcollege.ac.in</p>
+
+            <div class="star-rating">
+              <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 18: Mr. Melbin Johnson (Archetype B) -->
+        <div class="brutalist-card faculty-card card-archetype-b">
+          <div class="card-accent-triangle triangle-left" style="border-color: transparent transparent transparent #ec4899;"></div>
+          <div class="wireframe-globe globe-top-right"></div>
+
+          <div class="landscape-layout">
+            <div class="landscape-photo-frame" style="border-color: #000; background: #ec4899;">
+              <img src="/assets/images/faculty/mr__melbin_johnson.jpg" alt="Mr. Melbin Johnson" class="landscape-img">
+            </div>
+
+            <div class="landscape-content">
+              <span class="faculty-role-badge" style="background: #ec4899; color: #fff;">LAB ASSISTANT</span>
+              <h3 class="person-name">Mr. Melbin Johnson</h3>
+              <p class="person-email"><i class="fa-solid fa-envelope"></i> melbin@sbcollege.ac.in</p>
+
+              <div class="star-rating">
+                <span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+              </div>
+
+              <div class="badge-tag-btn" style="background: #ec4899; color: #fff;">
+                <span>MR. MELBIN JOHNSON</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </section>
+
+  <!-- Clean Simple Footer Bar for Faculty Page -->
+  <footer style="background: #0f172a; color: #94a3b8; text-align: center; padding: 1.8rem 1rem; font-size: 0.88rem; border-top: 1px solid rgba(255,255,255,0.1);">
+    <p>&copy; 2026 Department of Computer Science, St Berchmans College Autonomous. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Filter JavaScript for Faculty Page -->
+  <script>
+    // Interactive Faculty Page Filtering & Search
+    function initFacultyPage() {
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      if (!window.location.hash) {
+        window.scrollTo(0, 0);
+      }
+
+      const filterBtns = document.querySelectorAll('.faculty-tab-btn');
+      const facultyCards = document.querySelectorAll('.faculty-card');
+      const searchInput = document.getElementById('facultySearch');
+
+      function filterFaculty() {
+        const activeTab = document.querySelector('.faculty-tab-btn.active');
+        const filterValue = activeTab ? activeTab.dataset.filter : 'all';
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+        facultyCards.forEach(card => {
+          const category = card.dataset.category;
+          const name = card.dataset.name ? card.dataset.name.toLowerCase() : '';
+          const cardText = card.textContent.toLowerCase();
+
+          const matchesCategory = filterValue === 'all' || category === filterValue;
+          const matchesSearch = query === '' || name.includes(query) || cardText.includes(query);
+
+          if (matchesCategory && matchesSearch) {
+            card.style.display = '';
+            card.style.opacity = '1';
+          } else {
+            card.style.display = 'none';
+            card.style.opacity = '0';
+          }
+        });
+      }
+
+      function handleHashChange() {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) {
+          const targetBtn = Array.from(filterBtns).find(btn => btn.dataset.filter === hash);
+          if (targetBtn) {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            targetBtn.classList.add('active');
+            filterFaculty();
+            const peopleSec = document.getElementById('people');
+            if (peopleSec) peopleSec.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          filterFaculty();
+        });
+      });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', filterFaculty);
+      }
+
+      filterFaculty();
+      handleHashChange();
+      window.addEventListener('hashchange', handleHashChange);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initFacultyPage);
+    } else {
+      initFacultyPage();
+    }
+  </script>
+
+  <!-- Main Application Script -->
+  <script type="module" src="/script.js"></script>
+</body>
+</html>

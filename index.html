@@ -43,16 +43,8 @@
           <li class="nav-item">
             <a href="#hero" class="nav-link active">Home</a>
           </li>
-          <li class="nav-item dropdown">
-            <a href="#about" class="nav-link">
-              Faculty <i class="fa-solid fa-chevron-down nav-arrow"></i>
-            </a>
-            <div class="dropdown-menu">
-              <a href="#people" class="dropdown-item"><i class="fa-solid fa-chalkboard-user"></i> Teaching Faculty</a>
-              <a href="#people" class="dropdown-item"><i class="fa-solid fa-flask-vial"></i> Research Scholars</a>
-              <a href="#people" class="dropdown-item"><i class="fa-solid fa-user-gear"></i> Technical Staff</a>
-              <a href="#people" class="dropdown-item"><i class="fa-solid fa-book-open"></i> Publications</a>
-            </div>
+          <li class="nav-item">
+            <a href="/faculty/" class="nav-link">Faculty</a>
           </li>
           <li class="nav-item dropdown">
             <a href="#life" class="nav-link">
@@ -217,15 +209,44 @@
           <a href="#gazette" class="btn-viewmore">View More</a>
         </div>
 
-        <!-- Right Lab Fan Carousel -->
+        <!-- Right Combined 3D Folder Card Stack (3 Lab Images) -->
         <div class="life-media">
-          <div class="fan-carousel" id="fanCarousel">
-            <div class="fan-card" data-slot="0"><img src="assets/images/cs lab 1.jpg" alt="CS Lab" class="fan-img"></div>
-            <div class="fan-card" data-slot="1"><img src="assets/images/cs lab 2.jpg" alt="CS Lab" class="fan-img"></div>
-            <div class="fan-card" data-slot="2"><img src="assets/images/cs lab 3.jpg" alt="CS Lab" class="fan-img"></div>
-            <div class="fan-card" data-slot="3"><img src="assets/images/cs lab 4.jpg" alt="CS Lab" class="fan-img"></div>
-            <div class="fan-card" data-slot="4"><img src="assets/images/cs lab 5.jpg" alt="CS Lab" class="fan-img"></div>
-            <div class="fan-label" id="fanLabel">High Performance Computing Lab</div>
+          <div class="folder-stack" id="folderStack">
+            <!-- 3 Lab Photo Cards Inside Folder -->
+            <div class="stack-card card-1" data-title="High Performance Computing Lab">
+              <img src="assets/images/cs lab 1.jpg" alt="High Performance Computing Lab" class="stack-img">
+              <div class="card-badge">
+                <span class="badge-title">High Performance Computing Lab</span>
+                <span class="badge-sub">Advanced Parallel Computing & GPU Cluster</span>
+              </div>
+            </div>
+
+            <div class="stack-card card-2" data-title="Software Engineering Lab">
+              <img src="assets/images/cs lab 2.jpg" alt="Software Engineering Lab" class="stack-img">
+              <div class="card-badge">
+                <span class="badge-title">Software Engineering Lab</span>
+                <span class="badge-sub">Full Stack & Systems Development</span>
+              </div>
+            </div>
+
+            <div class="stack-card card-3" data-title="AI & Data Science Lab">
+              <img src="assets/images/cs lab 3.jpg" alt="AI & Data Science Lab" class="stack-img">
+              <div class="card-badge">
+                <span class="badge-title">AI & Data Science Lab</span>
+                <span class="badge-sub">Machine Learning & Neural Networks</span>
+              </div>
+            </div>
+
+            <!-- Folder Backing Flap -->
+            <div class="folder-back"></div>
+
+            <!-- Folder Front Cover Lid -->
+            <div class="folder-front">
+              <div class="folder-label-content">
+                <i class="fa-solid fa-folder-open folder-icon"></i>
+                <span class="folder-text">CS DEPARTMENT LABS</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -270,8 +291,8 @@
         </div>
 
         <div class="feature-extra">
-          <p class="quote-text">“The best way to predict the future is to invent it”</p>
-          <span class="quote-author">- Alan Kay</span>
+          <p class="quote-text">“Taking risk is better than regretting later”</p>
+          <span class="quote-author">- Melvin</span>
         </div>
       </div>
     </div>
@@ -418,17 +439,17 @@
       <!-- People Cards Grid -->
       <div class="people-grid">
         
-        <!-- Card 1: Stephanie Hall -->
-        <div class="brutalist-card card-stephanie">
+        <!-- Card 1: Dr. Sajimon Abraham (Stephanie / Arch Style) -->
+        <div class="brutalist-card card-stephanie" style="text-align: center;">
           <div class="card-accent-triangle triangle-left"></div>
           <div class="wireframe-globe globe-bottom"></div>
           
           <div class="person-photo-arch">
-            <div class="arch-backdrop"></div>
-            <img src="assets/images/stephanie.jpg" alt="Stephanie Hall" class="person-img">
+            <div class="arch-backdrop" style="background: #ffe600;"></div>
+            <img src="assets/images/faculty/dr__sajimon_abraham.jpg" alt="Dr. Sajimon Abraham" class="person-img">
           </div>
 
-          <h4 class="person-name">Stephanie Hall</h4>
+          <h4 class="person-name">Dr. Sajimon Abraham</h4>
 
           <div class="star-rating">
             <span>✦</span>
@@ -439,23 +460,23 @@
           </div>
 
           <p class="person-quote">
-            This app has really helped me get back on track with my fitness routine.
+            Director &amp; Professor guiding research innovation and academic excellence in Computer Science.
           </p>
         </div>
 
-        <!-- Card 2: Salimon Abraham -->
+        <!-- Card 2: Dr. Smitha Krishnan (Salimon / Horizontal Style) -->
         <div class="brutalist-card card-salimon">
           <div class="wireframe-globe globe-top"></div>
           <div class="card-accent-triangle triangle-mid"></div>
 
           <div class="salimon-layout">
-            <div class="salimon-photo-frame">
-              <img src="assets/images/salimon.jpg" alt="Salimon Abraham" class="salimon-img">
+            <div class="salimon-photo-frame" style="border-color: #000; background: #ec4899;">
+              <img src="assets/images/faculty/dr__smitha_krishnan.jpg" alt="Dr. Smitha Krishnan" class="salimon-img">
             </div>
 
             <div class="salimon-content">
               <p class="salimon-quote">
-                Highly recommend this app to anyone looking to improve their health and fitness.
+                Leading curriculum design, advanced computing labs, and student empowerment in the CS department.
               </p>
 
               <div class="salimon-stars">
@@ -466,8 +487,8 @@
                 <span>✦</span>
               </div>
 
-              <div class="salimon-badge-btn">
-                <span>SALIMON ABRAHAM</span>
+              <div class="salimon-badge-btn" style="background: #ec4899; color: #fff;">
+                <span>DR. SMITHA KRISHNAN</span>
               </div>
             </div>
           </div>
@@ -477,7 +498,7 @@
 
       <!-- Retro Bottom Action -->
       <div class="people-view-all">
-        <a href="#about" class="pixel-link">
+        <a href="/faculty/" class="pixel-link">
           VIEW ALL -&gt;
           <div class="pixel-line"></div>
         </a>
@@ -491,6 +512,79 @@
       <path d="M0,0 L1440,0 L1440,36 C1360,25 1200,90 960,55 C640,-15 320,95 0,36 Z" fill="#3761cc"/>
     </svg>
   </div>
+
+  <!-- ==================== RECRUITMENT PARTNERS SECTION ==================== -->
+  <section class="recruitment-section" id="partners">
+    <!-- Dark Gradient Overlay -->
+    <div class="recruitment-overlay"></div>
+
+    <div class="recruitment-container">
+      <!-- Left Column: Title -->
+      <div class="recruitment-title-col">
+        <h2 class="recruitment-title">
+          <span class="title-highlight">TOP</span><br>
+          <span class="title-main">RECRUITMENT</span><br>
+          <span class="title-main">PARTNERS</span>
+        </h2>
+        <p class="recruitment-sub">
+          Leading global technology companies, research labs, and IT enterprises actively recruiting talent from our Department of Computer Science.
+        </p>
+      </div>
+
+      <!-- Right Column: Company Logos Grid -->
+      <div class="recruitment-grid-col">
+        <div class="company-logo-grid">
+          <!-- Row 1 -->
+          <div class="company-logo-card">
+            <img src="/assets/images/recruiters/tcs.png" alt="TCS - Tata Consultancy Services" class="company-logo-img">
+          </div>
+          <div class="company-logo-card">
+            <img src="/assets/images/recruiters/infosys.png" alt="Infosys" class="company-logo-img">
+          </div>
+          <div class="company-logo-card">
+            <img src="/assets/images/recruiters/amazon.png" alt="Amazon" class="company-logo-img">
+          </div>
+          <div class="company-logo-card">
+            <img src="/assets/images/recruiters/deloitte.png" alt="Deloitte" class="company-logo-img">
+          </div>
+          <div class="company-logo-card">
+            <img src="/assets/images/recruiters/cognizant.png" alt="Cognizant" class="company-logo-img">
+          </div>
+
+          <!-- Row 2 -->
+          <div class="company-logo-card">
+            <img src="/assets/images/recruiters/wipro.png" alt="Wipro" class="company-logo-img">
+          </div>
+          <div class="company-logo-card">
+            <img src="/assets/images/recruiters/zoho.png" alt="Zoho" class="company-logo-img">
+          </div>
+          <div class="company-logo-card">
+            <img src="/assets/images/recruiters/ust.png" alt="UST" class="company-logo-img">
+          </div>
+          <div class="company-logo-card">
+            <img src="/assets/images/recruiters/ey.png" alt="EY - Ernst &amp; Young" class="company-logo-img">
+          </div>
+          <div class="company-logo-card">
+            <img src="/assets/images/recruiters/federal_bank.png" alt="Federal Bank" class="company-logo-img">
+          </div>
+
+          <!-- Row 3 -->
+          <div class="company-logo-card">
+            <img src="/assets/images/recruiters/south_indian_bank.png" alt="South Indian Bank" class="company-logo-img">
+          </div>
+          <div class="company-logo-card">
+            <img src="/assets/images/recruiters/ict_academy.png" alt="ICT Academy Kerala" class="company-logo-img">
+          </div>
+          <div class="company-logo-card">
+            <img src="/assets/images/recruiters/genefithub.png" alt="Genefithub" class="company-logo-img">
+          </div>
+          <div class="company-logo-card company-more-badge">
+            <span>&amp; more</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ==================== CONTACT SECTION ==================== -->
   <section class="contact-section" id="contact">
@@ -866,6 +960,6 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

@@ -114,122 +114,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ── Fan Carousel ──────────────────────────────────────────────────────
-  const IMAGES = [
-    { src: 'assets/images/cs lab 1.jpg', label: 'High Performance Computing Lab' },
-    { src: 'assets/images/cs lab 2.jpg', label: 'Advanced Programming Lab' },
-    { src: 'assets/images/cs lab 3.jpg', label: 'AI & Research Lab' },
-    { src: 'assets/images/cs lab 4.jpg', label: 'Computer Networks Lab' },
-    { src: 'assets/images/cs lab 5.jpg', label: 'Software Engineering Lab' },
-  ];
+  // ── Combined 3D Folder Card Stack Interaction ────────────────
+  const stackCards = Array.from(document.querySelectorAll('.folder-stack .stack-card'));
+  if (stackCards.length > 0) {
+    stackCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (card.classList.contains('card-1')) return;
 
-  // Layout config for positions -2, -1, 0, +1, +2
-  const SLOTS = {
-  //  offset :  [translateX%,  scale,  rotate,  opacity,  zIndex,  brightness, border]
-     '-2': ['-130%', 0.70, '-10deg', 0,    1,  0.4, '3px solid rgba(255,255,255,0.3)'],
-     '-1': ['-62%',  0.84,  '-6deg', 0.75, 5,  0.7, '4px solid rgba(255,255,255,0.7)'],
-      '0': [  '0%',  1.00,   '0deg', 1.00, 10, 1.0, '5px solid rgba(255,255,255,0.95)'],
-      '1': [ '62%',  0.84,   '6deg', 0.75, 5,  0.7, '4px solid rgba(255,255,255,0.7)'],
-      '2': ['130%',  0.70,  '10deg', 0,    1,  0.4, '3px solid rgba(255,255,255,0.3)'],
-  };
+        const currentTop = document.querySelector('.folder-stack .stack-card.card-1');
+        if (!currentTop) return;
 
-  const cards  = Array.from(document.querySelectorAll('.fan-card'));
-  const label  = document.getElementById('fanLabel');
-  const total  = IMAGES.length;
-  let   center = 0;
-  let   timer  = null;
+        const cardClass = Array.from(card.classList).find(c => /^card-\d+$/.test(c));
+        const topClass = Array.from(currentTop.classList).find(c => /^card-\d+$/.test(c));
 
-  function mod(n) { return ((n % total) + total) % total; }
+        if (cardClass && topClass) {
+          card.classList.remove(cardClass);
+          card.classList.add(topClass);
 
-  function applyCard(card, imgIdx, offset) {
-    const img = card.querySelector('.fan-img');
-    img.src = IMAGES[imgIdx].src;
-
-    const cfg = SLOTS[String(offset)];
-    if (!cfg) {
-      // hidden (offset > 2 or < -2)
-      card.style.cssText = `
-        top:50%; left:50%;
-        width:40%; height:260px;
-        transform: translate(-50%,-50%) translateX(${offset < 0 ? '-150%' : '150%'}) scale(0.65) rotate(${offset < 0 ? '-14' : '14'}deg);
-        opacity:0; z-index:0; pointer-events:none;
-        box-shadow:none; border:none; filter:brightness(0.3);
-      `;
-      return;
-    }
-
-    const [tx, sc, rot, op, zi, br, border] = cfg;
-    const isCenter = offset === 0;
-    const w = isCenter ? '66%' : '38%';
-    const h = isCenter ? 320   : 255;
-
-    card.style.cssText = `
-      top:50%; left:50%;
-      width:${w}; height:${h}px;
-      transform: translate(-50%,-50%) translateX(${tx}) scale(${sc}) rotate(${rot});
-      opacity:${op};
-      z-index:${zi};
-      pointer-events:${op > 0 ? 'auto' : 'none'};
-      box-shadow: ${isCenter ? '0 28px 65px rgba(0,0,0,0.5)' : '0 10px 28px rgba(0,0,0,0.28)'};
-      border:${border};
-      filter:brightness(${br});
-      border-radius:18px;
-    `;
-  }
-
-  function render() {
-    // Show 5 positions: -2, -1, 0, +1, +2
-    // cards array maps directly to image slots 0..N-1, we rotate the view
-    cards.forEach((card, i) => {
-      const imgIdx = mod(center + i - 2);   // which image does this DOM card show?
-      const offset = i - 2;                  // its visual position: -2,-1,0,+1,+2
-      applyCard(card, imgIdx, offset);
-    });
-
-    if (label) label.textContent = IMAGES[center].label;
-  }
-
-  function go(dir) {
-    center = mod(center + dir);
-
-    // Fade label
-    if (label) {
-      label.style.opacity = '0';
-      setTimeout(() => {
-        label.textContent = IMAGES[center].label;
-        label.style.opacity = '1';
-      }, 180);
-    }
-
-    render();
-  }
-
-  function startTimer() {
-    clearInterval(timer);
-    timer = setInterval(() => go(1), 2800);
-  }
-
-  if (cards.length > 0) {
-    render();
-
-    // Clicking left card goes back, right card goes forward
-    cards.forEach((card, i) => {
-      card.addEventListener('click', () => {
-        const offset = i - 2;
-        if (offset === 0) return;          // center card — no action
-        clearInterval(timer);
-        go(offset < 0 ? -1 : 1);
-        startTimer();
+          currentTop.classList.remove(topClass);
+          currentTop.classList.add(cardClass);
+        }
       });
     });
-
-    const carousel = document.getElementById('fanCarousel');
-    if (carousel) {
-      carousel.addEventListener('mouseenter', () => clearInterval(timer));
-      carousel.addEventListener('mouseleave', startTimer);
-    }
-
-    startTimer();
   }
 
   // --- Contact Form Submission ---
