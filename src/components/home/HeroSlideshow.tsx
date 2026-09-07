@@ -1,8 +1,29 @@
+import { useEffect, useState } from 'react';
 import { heroSlides } from '../../data/heroSlides';
 import { useHeroSlideshow } from '../../hooks/useHeroSlideshow';
 
 export function HeroSlideshow() {
   const { currentSlide, isPlaying, goToSlide, togglePlay } = useHeroSlideshow(heroSlides.length);
+
+  // The progress-fill bar starts at width:0% and only animates to 100% (like a
+  // video scrubber) once the "animating" class is applied on a frame AFTER the
+  // 0% state has actually painted — adding it in the same render as the reset
+  // gives the browser no "before" state to transition from, so it would just
+  // snap straight to full. The double rAF forces that paint to happen first.
+  const [fillAnimating, setFillAnimating] = useState(false);
+
+  useEffect(() => {
+    setFillAnimating(false);
+    if (!isPlaying) return;
+    let raf2 = 0;
+    const raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => setFillAnimating(true));
+    });
+    return () => {
+      cancelAnimationFrame(raf1);
+      cancelAnimationFrame(raf2);
+    };
+  }, [currentSlide, isPlaying]);
 
   return (
     <div className="hero-slider-card" id="heroSliderCard">
@@ -49,12 +70,12 @@ export function HeroSlideshow() {
         {heroSlides.map((slide, i) => {
           let className = 'hero-tab-item';
           if (i < currentSlide) className += ' past';
-          else if (i === currentSlide) className += ` active${isPlaying ? ' animating' : ''}`;
+          else if (i === currentSlide) className += ` active${fillAnimating ? ' animating' : ''}`;
 
           return (
             <button className={className} data-slide={i} key={slide.image} onClick={() => goToSlide(i)}>
               <div className="tab-progress-track">
-                <div className="tab-progress-fill" key={`${i}-${currentSlide}-${isPlaying}`} />
+                <div className="tab-progress-fill" key={`${i}-${currentSlide}`} />
               </div>
               <span className="tab-label">{slide.tabLabel}</span>
             </button>

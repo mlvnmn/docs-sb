@@ -1,14 +1,7 @@
-export interface DropdownItem {
-  label: string;
-  href: string;
-  icon: string;
-}
-
 export interface NavItem {
   label: string;
   href: string;
   isRoute?: boolean;
-  dropdown?: DropdownItem[];
 }
 
 export interface HeroSlide {

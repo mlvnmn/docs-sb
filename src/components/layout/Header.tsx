@@ -58,24 +58,14 @@ export function Header({ onSearchOpen }: HeaderProps) {
         <nav className={`nav-menu${isMobileOpen ? ' mobile-open' : ''}`} id="navMenu">
           <ul className="nav-list">
             {navLinks.map((item) => (
-              <li className={`nav-item${item.dropdown ? ' dropdown' : ''}`} key={item.label}>
+              <li className="nav-item" key={item.label}>
                 <SmartLink
                   to={item.href}
                   className={`nav-link${isActive(item.label) ? ' active' : ''}`}
                   onClick={item.label === 'Home' ? goHome : closeMobile}
                 >
                   {item.label}
-                  {item.dropdown && <i className="fa-solid fa-chevron-down nav-arrow" />}
                 </SmartLink>
-                {item.dropdown && (
-                  <div className="dropdown-menu">
-                    {item.dropdown.map((sub) => (
-                      <SmartLink to={sub.href} className="dropdown-item" key={sub.label} onClick={closeMobile}>
-                        <i className={sub.icon} /> {sub.label}
-                      </SmartLink>
-                    ))}
-                  </div>
-                )}
               </li>
             ))}
           </ul>

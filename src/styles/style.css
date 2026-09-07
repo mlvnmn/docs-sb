@@ -37,8 +37,10 @@
   --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Tracks people-wave-bottom's height so the recruitment section (which rides up
-     over the wave) stays flush with it instead of overlapping more as the wave shrinks. */
-  --wave-bleed: 85px;
+     over the wave) stays flush with it instead of overlapping more as the wave shrinks.
+     6.25vw = 90/1440, the wave SVG's own viewBox ratio, so the curve scales without
+     distorting at any width; capped at the original 85px so desktop is unchanged. */
+  --wave-bleed: min(6.25vw, 85px);
 }
 
 /* Reset & Base Setup */
@@ -209,62 +211,6 @@ button {
   background: #e2e8f0;
   color: #0f172a;
   font-weight: 600;
-}
-
-.nav-arrow {
-  font-size: 0.65rem;
-  opacity: 0.7;
-  transition: transform 0.2s ease;
-}
-
-.nav-item:hover .nav-arrow {
-  transform: rotate(180deg);
-}
-
-/* Dropdown */
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 220px;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-  border: 1px solid #e2e8f0;
-  padding: 0.5rem;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.2s ease;
-  z-index: 100;
-}
-
-.nav-item:hover .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(4px);
-}
-
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.6rem 0.9rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #334155;
-  border-radius: 8px;
-}
-
-.dropdown-item i {
-  color: #3b82f6;
-  width: 16px;
-  font-size: 0.85rem;
-}
-
-.dropdown-item:hover {
-  background: #eff6ff;
-  color: #1d4ed8;
 }
 
 /* Header Actions */
@@ -1365,9 +1311,12 @@ button {
 }
 
 /* ==================== OUR PEOPLE SECTION (RETRO BRUTALIST) ==================== */
+/* height tracks --wave-bleed (the SVG's own 1440:90 aspect ratio, capped at the
+   original 85px) instead of a fixed px value, so the curve scales evenly with the
+   viewport instead of getting squashed into "speed bump" bumps as it narrows. */
 .people-wave-top {
   width: 100%;
-  height: 80px;
+  height: var(--wave-bleed);
   margin-bottom: -2px;
   position: relative;
   z-index: 2;
@@ -1378,6 +1327,13 @@ button {
 
 .people-section {
   position: relative;
+  /* Higher than .recruitment-section's z-index:5 (and .people-wave-bottom's 6).
+     .recruitment-section intentionally slides up underneath the full height of
+     .people-wave-bottom (revealed only through the wave's cutout curve) via a
+     negative margin plus a small translateY nudge; without this, that nudge lets
+     its dark background paint over the last sliver of .people-section's own
+     blue, above where the wave visually begins. */
+  z-index: 8;
   background-color: #3761cc;
   padding: 4rem 1rem 4.5rem;
   color: #ffffff;
@@ -1388,7 +1344,7 @@ button {
 .people-wave-bottom {
   position: relative;
   width: 100%;
-  height: 88px;
+  height: var(--wave-bleed);
   margin-top: -3px;
   margin-bottom: 0;
   padding: 0;
@@ -1410,13 +1366,28 @@ button {
   z-index: 7;
 }
 
-.people-wave-top .people-wave-svg,
-.people-wave-bottom .people-wave-svg {
+/* A flat edge of the path (top-wave's bottom seam, bottom-wave's top seam) sits
+   right on the solid-color side of each wave. Landing that edge exactly on the
+   container's overflow:hidden clip line lets sub-pixel/anti-aliasing rounding
+   show a faint seam there at some viewport widths. Overshooting by a small,
+   size-proportional 6% (not a fixed px amount, so it holds at every width)
+   pushes the clip line safely inside the solid fill instead. */
+.people-wave-top .people-wave-svg {
   position: absolute;
-  bottom: 0;
+  bottom: -6%;
   left: 0;
   width: 100%;
-  height: 85px;
+  height: 106%;
+  display: block;
+  line-height: 0;
+}
+
+.people-wave-bottom .people-wave-svg {
+  position: absolute;
+  top: -6%;
+  left: 0;
+  width: 100%;
+  height: 106%;
   display: block;
   line-height: 0;
 }
@@ -2796,6 +2767,14 @@ button {
 
 /* ==================== RESPONSIVE MEDIA QUERIES ==================== */
 
+/* Below the hero card's own comfortable width, the full text-labeled progress
+   tabs bar starts crowding the slide image — the small dot row in
+   .hero-controls-widget is enough of a slide indicator on its own. */
+@media (max-width: 1360px) {
+  .hero-tabs-bar {
+    display: none;
+  }
+}
 
 /* Tablet Landscape & Medium Devices (1024px and below) */
 @media (max-width: 1024px) {
@@ -2825,16 +2804,12 @@ button {
     font-size: 3rem;
   }
 
-  .hero-tabs-bar {
-    left: 5%;
-    width: 90%;
-    max-width: none;
-    gap: 0.9rem;
-  }
-
+  /* .hero-wave-bottom is a fixed 102px tall and reaches nearly full height at
+     its right edge (where this widget sits) - bottom must clear that or the
+     wave (z-index:5, above this widget's z-index:4) paints over the counter/dots. */
   .hero-controls-widget {
     right: 5%;
-    bottom: 96px;
+    bottom: 118px;
   }
 
   .life-grid {
@@ -2890,12 +2865,6 @@ button {
     padding: 0.45rem 0.5rem;
   }
 
-  /* The nav sits close to the right edge at this width, so left-aligned dropdowns
-     open off-screen. Anchor them to the item's right edge instead. */
-  .dropdown-menu {
-    left: auto;
-    right: 0;
-  }
 }
 
 /* Tablet Portrait & Mobile Devices (768px and below) */
@@ -2957,28 +2926,6 @@ button {
     justify-content: space-between;
   }
 
-  .nav-menu.mobile-open .dropdown-menu {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    box-shadow: none;
-    padding: 0.4rem 0 0.4rem 0.8rem;
-    border-left: 3px solid #2563eb;
-    background: #f8fafc;
-    margin: 0.4rem 0;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-
-  .nav-menu.mobile-open .dropdown-item {
-    font-size: 0.85rem;
-    padding: 0.45rem 0.6rem;
-    color: #334155;
-  }
-
   .mobile-toggle {
     display: flex;
   }
@@ -3027,27 +2974,9 @@ button {
     font-size: 2.4rem;
   }
 
-  .hero-tabs-bar {
-    left: 4%;
-    width: 92%;
-    max-width: none;
-    bottom: 18px;
-    gap: 0.55rem;
-  }
-
-  .hero-tab-item {
-    gap: 0.4rem;
-  }
-
-  .tab-label {
-    font-size: 0.68rem;
-    white-space: normal;
-    line-height: 1.25;
-  }
-
   .hero-controls-widget {
     right: 4%;
-    bottom: 74px;
+    bottom: 118px;
   }
 
   .hero-counter {
@@ -3142,18 +3071,6 @@ button {
 
   .news-main-card {
     grid-template-columns: 1fr;
-  }
-
-  :root {
-    --wave-bleed: 60px;
-  }
-
-  .people-wave-top {
-    height: 60px;
-  }
-
-  .people-wave-bottom {
-    height: 60px;
   }
 
   .people-section {
@@ -3256,23 +3173,8 @@ button {
     font-size: 1.95rem;
   }
 
-  /* No room for four labels on a phone - keep the progress bars (padded out to a
-     tappable height) and let the dots above carry the navigation. */
-  .hero-tabs-bar {
-    bottom: 8px;
-    gap: 0.4rem;
-  }
-
-  .hero-tab-item {
-    padding: 7px 0;
-  }
-
-  .tab-label {
-    display: none;
-  }
-
   .hero-controls-widget {
-    bottom: 46px;
+    bottom: 118px;
   }
 
   .hero-counter {
@@ -3386,18 +3288,6 @@ button {
 
   .social-links-row {
     flex-wrap: wrap;
-  }
-
-  :root {
-    --wave-bleed: 45px;
-  }
-
-  .people-wave-top {
-    height: 45px;
-  }
-
-  .people-wave-bottom {
-    height: 45px;
   }
 
   .people-section {
