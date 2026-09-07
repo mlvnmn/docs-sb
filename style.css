@@ -136,11 +136,6 @@ button {
   border-radius: 8px;
 }
 
-.crest-svg {
-  width: 100%;
-  height: 100%;
-}
-
 .brand-text {
   display: flex;
   flex-direction: column;
@@ -318,10 +313,14 @@ button {
 /* ==================== HERO SECTION ==================== */
 .hero-section {
   position: relative;
-  min-height: 100vh;
+  /* The card below is already sized to the viewport; letting the section follow it
+     (instead of forcing 100vh) keeps the frame even when the card hits its max height
+     on very tall screens, rather than leaving a band of empty space above and below. */
+  min-height: auto;
   height: auto;
   padding: 0;
-  background: linear-gradient(135deg, #5795E4 0%, #4663C3 100%);
+  /* Backmost layer of the hero: the same white base the blurry colour blobs sit on */
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 60%, #F1F4F8 100%);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -331,14 +330,16 @@ button {
 .hero-card {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  min-height: auto;
   height: auto;
   background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFC 60%, #F1F4F8 100%);
   border-radius: 0;
   overflow: hidden;
   box-shadow: 0 20px 50px rgba(16, 28, 86, 0.16);
   border: none;
-  padding: 5.5rem 0.8rem 3.5rem;
+  /* Bottom padding = side gap (0.8rem) + the wave crest that sits below the card,
+     so the visible frame around the slider card is even on all four sides. */
+  padding: 5.5rem 0.8rem 1.75rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -444,7 +445,8 @@ button {
 }
 
 .hero-container {
-  max-width: 1580px;
+  /* Full-bleed: the card's own 0.8rem side padding is the frame at every width,
+     so wide monitors get the same even border as laptops instead of a 170px margin. */
   margin: 0 auto;
   width: 100%;
   height: 100%;
@@ -459,7 +461,9 @@ button {
 .hero-slider-card {
   position: relative;
   width: 100%;
-  height: clamp(520px, calc(100vh - 9rem), 780px);
+  /* 7.25rem = the card's 5.5rem top + 1.75rem bottom padding, so the hero still
+     fills exactly one viewport and the top/bottom gaps stay even. */
+  height: clamp(520px, calc(100vh - 7.25rem), 1000px);
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 24px 60px rgba(16, 28, 86, 0.25);
@@ -662,185 +666,6 @@ button {
 .hero-tab-item.active .tab-label,
 .hero-tab-item:hover .tab-label {
   color: #ffffff;
-}
-
-.hero-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: #EC4899;
-  margin-bottom: 1.4rem;
-  text-transform: uppercase;
-  font-family: var(--font-heading);
-}
-
-.hero-prompt {
-  font-family: monospace;
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #EC4899;
-}
-
-.hero-title {
-  font-size: 3.8rem;
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.035em;
-  color: #1A2359;
-  margin-bottom: 1.4rem;
-}
-
-.highlight-text {
-  position: relative;
-  display: inline-block;
-  color: #1A2359;
-}
-
-.highlight-line {
-  position: absolute;
-  bottom: -6px;
-  left: 0;
-  width: 100%;
-  height: 14px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' fill='none'%3E%3Cpath d='M4 12 C 65 3, 135 3, 196 12' stroke='%23F39C12' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center bottom / 100% 100%;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.hero-subtitle {
-  font-size: 1.15rem;
-  color: #4B5563;
-  max-width: 580px;
-  line-height: 1.6;
-  margin-bottom: 2.2rem;
-  font-weight: 400;
-}
-
-.hero-cta-group {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  margin-bottom: 2.5rem;
-  flex-wrap: wrap;
-}
-
-.btn-explore {
-  background: #F03A72;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.85rem 1.8rem;
-  border-radius: 26px;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  box-shadow: 0 8px 24px rgba(240, 58, 114, 0.35);
-}
-
-.btn-explore:hover {
-  background: #e02860;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(240, 58, 114, 0.45);
-}
-
-.btn-video {
-  background: #ffffff;
-  color: #4361EE;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.85rem 1.6rem;
-  border-radius: 27px;
-  border: 1px solid #E5E7EB;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
-}
-
-.btn-video:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
-}
-
-.play-icon {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 1.5px solid #4361EE;
-  color: #4361EE;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.65rem;
-  padding-left: 2px;
-}
-
-/* Social Proof */
-.hero-social-proof {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding-top: 0.5rem;
-}
-
-.avatar-stack {
-  display: flex;
-  align-items: center;
-}
-
-.avatar-img {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 2.5px solid #ffffff;
-  object-fit: cover;
-  margin-left: -10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.avatar-img:first-child {
-  margin-left: 0;
-}
-
-.avatar-badge {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 2.5px solid #ffffff;
-  background: #f59e0b;
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 0.72rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: -10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.proof-text {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.82rem;
-}
-
-.proof-stats {
-  font-weight: 700;
-  color: #1e293b;
-}
-
-.proof-sub {
-  color: #64748b;
-  font-size: 0.78rem;
-}
-
-.color-blue {
-  color: #2563eb;
 }
 
 /* ==================== LIFE @ CS DEPARTMENT ==================== */
@@ -1706,6 +1531,16 @@ button {
   box-sizing: border-box;
 }
 
+/* Grid items default to min-width:auto, so one wide child (a pixel-font badge, a
+   fixed-width photo column, the 320px folder stack) drags the whole track past the
+   screen edge instead of letting the content wrap. */
+.people-grid > *,
+.life-grid > *,
+.salimon-layout > *,
+.landscape-layout > * {
+  min-width: 0;
+}
+
 /* Brutalist Base Card Styling */
 .brutalist-card {
   background: #fffcf2;
@@ -1737,7 +1572,6 @@ button {
   display: inline-block;
   margin-bottom: 0.6rem;
   letter-spacing: 0.04em;
-  white-space: nowrap;
 }
 
 .person-name {
@@ -1926,7 +1760,8 @@ button {
   font-weight: 700;
   margin-top: 0.4rem;
   letter-spacing: 0.04em;
-  white-space: nowrap;
+  /* No nowrap: a long name in the wide pixel font would otherwise push the whole
+     card off-screen on a phone, and off its column in the 3-up faculty grid. */
 }
 
 /* --- Archetype C: Top Portrait Frame Photo --- */
@@ -2864,20 +2699,6 @@ button {
   color: #0f172a;
 }
 
-.video-wrapper {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-}
-
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
 .search-modal-box {
   max-width: 580px;
   padding: 2.2rem;
@@ -2946,13 +2767,42 @@ button {
 
 /* Tablet Landscape & Medium Devices (1024px and below) */
 @media (max-width: 1024px) {
+  /* Tablets: same even frame as desktop, sized against the ~67px header here.
+     min-height:auto stops a tall tablet from centring the capped card and
+     blowing the top/bottom gaps out. */
   .hero-section {
     min-height: auto;
-    padding: 4rem 1.5rem;
+    padding: 0;
   }
 
-  .hero-title {
-    font-size: clamp(2.4rem, 5vw, 3.4rem);
+  .hero-card {
+    min-height: auto;
+  }
+
+  /* Below ~1000px the Contact button and full nav squeeze the brand text into two
+     or three lines, growing the fixed header to 140px until it covers the card. */
+  .btn-contact {
+    display: none;
+  }
+
+  .brand-title {
+    font-size: 0.95rem;
+  }
+
+  .hero-slide-title {
+    font-size: 3rem;
+  }
+
+  .hero-tabs-bar {
+    left: 5%;
+    width: 90%;
+    max-width: none;
+    gap: 0.9rem;
+  }
+
+  .hero-controls-widget {
+    right: 5%;
+    bottom: 96px;
   }
 
   .life-grid {
@@ -3016,6 +2866,31 @@ button {
   }
 }
 
+/* Small tablets that still use the desktop nav: keep the brand on one line by
+   giving the nav less to ask for, or both wrap and the header doubles in height.
+   Scoped above 768px so phones keep their shrinkable brand and full-size menu. */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .brand-logo {
+    flex-shrink: 0;
+  }
+
+  .nav-list {
+    gap: 0.1rem;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+    padding: 0.45rem 0.5rem;
+  }
+
+  /* The nav sits close to the right edge at this width, so left-aligned dropdowns
+     open off-screen. Anchor them to the item's right edge instead. */
+  .dropdown-menu {
+    left: auto;
+    right: 0;
+  }
+}
+
 /* Tablet Portrait & Mobile Devices (768px and below) */
 @media (max-width: 768px) {
   .header-container {
@@ -3030,14 +2905,6 @@ button {
   .dept-logo-img {
     width: 34px;
     height: 34px;
-  }
-
-  .logo-text h1 {
-    font-size: 0.88rem;
-  }
-
-  .logo-sub {
-    font-size: 0.65rem;
   }
 
   .badge-autonomous {
@@ -3117,6 +2984,9 @@ button {
     top: 0.6rem;
     left: 0.6rem;
     right: 0.6rem;
+    /* Without this the base width:100% wins over the insets and the floating
+       header runs 0.6rem past the right edge of the screen. */
+    width: auto;
     border-radius: 20px;
   }
 
@@ -3125,9 +2995,74 @@ button {
   }
 
   .hero-card {
-    padding: 6.5rem 1.75rem 5.5rem;
+    padding: 6.35rem 1.75rem 2.5rem;
     border-radius: 20px 20px 0 0;
     border-bottom: none;
+  }
+
+  /* 9.2rem = the section's 0.35rem top padding + the card's 6.35rem/2.5rem,
+     so the hero still lands on one screen and the frame stays even. */
+  .hero-slider-card {
+    height: clamp(480px, calc(100vh - 9.2rem), 1000px);
+  }
+
+  /* The brand has to shrink here or the fixed header grows past the card's top
+     padding and covers the hero image. */
+  .brand-title {
+    font-size: 0.9rem;
+    line-height: 1.25;
+  }
+
+  .brand-sub {
+    font-size: 0.68rem;
+  }
+
+
+  .hero-slide-content {
+    top: 50%;
+    left: 6%;
+    right: 6%;
+    max-width: none;
+  }
+
+  .hero-slide-title {
+    font-size: 2.4rem;
+  }
+
+  .hero-tabs-bar {
+    left: 4%;
+    width: 92%;
+    max-width: none;
+    bottom: 18px;
+    gap: 0.55rem;
+  }
+
+  .hero-tab-item {
+    gap: 0.4rem;
+  }
+
+  .tab-label {
+    font-size: 0.68rem;
+    white-space: normal;
+    line-height: 1.25;
+  }
+
+  .hero-controls-widget {
+    right: 4%;
+    bottom: 74px;
+  }
+
+  .hero-counter {
+    font-size: 2rem;
+  }
+
+  .hero-counter .total-num {
+    font-size: 1.1rem;
+  }
+
+  .hero-dot {
+    width: 11px;
+    height: 11px;
   }
 
   .hero-wave-bottom {
@@ -3180,14 +3115,6 @@ button {
     filter: blur(28px);
   }
 
-  .hero-title {
-    font-size: 2.3rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-
   .life-section {
     width: 100%;
     max-width: 100%;
@@ -3199,10 +3126,6 @@ button {
 
   .life-title {
     font-size: 2.1rem;
-  }
-
-  .lab-photo {
-    height: 240px;
   }
 
   .features-bar {
@@ -3244,22 +3167,8 @@ button {
     font-size: 2.2rem;
   }
 
-  .masthead-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem;
-  }
-
-  .meta-divider {
-    display: none;
-  }
-
   .news-main-card {
     grid-template-columns: 1fr;
-  }
-
-  .news-main-img {
-    height: 200px;
   }
 
   .people-wave-top {
@@ -3279,12 +3188,14 @@ button {
     margin-bottom: 2rem;
   }
 
-  .salimon-layout {
+  .salimon-layout,
+  .card-archetype-b .landscape-layout {
     grid-template-columns: 1fr;
     text-align: center;
   }
 
-  .salimon-photo-frame {
+  .salimon-photo-frame,
+  .card-archetype-b .landscape-photo-frame {
     margin: 0 auto;
   }
 
@@ -3326,15 +3237,6 @@ button {
     padding: 0.5rem 0.75rem;
   }
 
-  .logo-text h1 {
-    font-size: 0.82rem;
-    line-height: 1.15;
-  }
-
-  .logo-sub {
-    font-size: 0.6rem;
-  }
-
   .search-btn {
     width: 34px;
     height: 34px;
@@ -3359,9 +3261,59 @@ button {
   }
 
   .hero-card {
-    padding: 5.5rem 1.25rem 4.5rem;
+    padding: 5.8rem 1.25rem 1.9rem;
     border-radius: 16px 16px 0 0;
     border-bottom: none;
+  }
+
+  /* 8.05rem = the section's 0.35rem + the card's 5.8rem/1.9rem. Lower floor than
+     the other breakpoints so a 568px-tall phone still fits the hero on one screen. */
+  .hero-slider-card {
+    height: clamp(420px, calc(100vh - 8.05rem), 1000px);
+  }
+
+  .brand-title {
+    font-size: 0.8rem;
+  }
+
+  .brand-sub {
+    font-size: 0.62rem;
+  }
+
+  .hero-slide-title {
+    font-size: 1.95rem;
+  }
+
+  /* No room for four labels on a phone - keep the progress bars (padded out to a
+     tappable height) and let the dots above carry the navigation. */
+  .hero-tabs-bar {
+    bottom: 8px;
+    gap: 0.4rem;
+  }
+
+  .hero-tab-item {
+    padding: 7px 0;
+  }
+
+  .tab-label {
+    display: none;
+  }
+
+  .hero-controls-widget {
+    bottom: 46px;
+  }
+
+  .hero-counter {
+    font-size: 1.7rem;
+  }
+
+  .hero-counter .total-num {
+    font-size: 1rem;
+  }
+
+  .hero-dot {
+    width: 9px;
+    height: 9px;
   }
 
   .hero-wave-bottom {
@@ -3414,32 +3366,6 @@ button {
     filter: blur(22px);
   }
 
-  .hero-tag {
-    font-size: 0.68rem;
-    padding: 0.3rem 0.7rem;
-  }
-
-  .hero-title {
-    font-size: 1.8rem;
-  }
-
-  .hero-cta-group {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .btn-explore,
-  .btn-video {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .hero-social-proof {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .life-title {
     font-size: 1.8rem;
   }
@@ -3457,10 +3383,6 @@ button {
   .g-link {
     font-size: 0.68rem;
     padding: 0.3rem 0.6rem;
-  }
-
-  .headline-main {
-    font-size: 1.35rem;
   }
 
   .people-title {
@@ -3662,5 +3584,25 @@ button {
 
   .company-logo-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  /* The base clamp floors this at 3.2rem, which is wider than a 320px screen.
+     Defined after the base rule so it actually wins the cascade. */
+  .recruitment-title {
+    font-size: clamp(2rem, 9vw, 3.2rem);
+  }
+}
+
+/* ==================== SMALL PHONES (360px and below) ==================== */
+@media (max-width: 360px) {
+  /* The 3D folder stack is built from fixed 320px pieces, so on a 320px screen it
+     runs past the edge. Scale it as a unit and pull the layout box in by the same
+     amount (320 x 0.2 / 2 = 32, 380 x 0.2 / 2 = 38) so the geometry stays exact. */
+  .folder-stack {
+    transform: translateZ(0) scale(0.8);
+    transform-origin: center center;
+    margin: -38px -32px;
   }
 }

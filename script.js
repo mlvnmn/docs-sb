@@ -16,27 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- Video Modal ---
-  const watchVideoBtn = document.getElementById('watchVideoBtn');
-  const videoModal = document.getElementById('videoModal');
-  const closeVideoModal = document.getElementById('closeVideoModal');
-
-  if (watchVideoBtn && videoModal) {
-    watchVideoBtn.addEventListener('click', () => {
-      videoModal.classList.add('active');
-    });
-
-    closeVideoModal.addEventListener('click', () => {
-      videoModal.classList.remove('active');
-    });
-
-    videoModal.addEventListener('click', (e) => {
-      if (e.target === videoModal) {
-        videoModal.classList.remove('active');
-      }
-    });
-  }
-
   // --- Search Modal ---
   const searchBtn = document.getElementById('searchBtn');
   const searchModal = document.getElementById('searchModal');
@@ -72,15 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Close Modals on ESC Key ---
+  // --- Close Search Modal on ESC Key ---
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (videoModal && videoModal.classList.contains('active')) {
-        videoModal.classList.remove('active');
-      }
-      if (searchModal && searchModal.classList.contains('active')) {
-        searchModal.classList.remove('active');
-      }
+    if (e.key === 'Escape' && searchModal && searchModal.classList.contains('active')) {
+      searchModal.classList.remove('active');
     }
   });
 
