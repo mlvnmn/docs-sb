@@ -694,57 +694,163 @@ button {
 
 .life-grid {
   display: grid;
-  grid-template-columns: 1fr 1.25fr;
-  gap: 4rem;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
   align-items: center;
 }
 
+/* Left column is intentionally left blank (see .infra-panel on the right) */
 .life-content {
-  text-align: left;
+  min-width: 0;
 }
 
-.life-title {
-  font-size: 3.4rem;
-  font-weight: 800;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
-  margin-bottom: 1.4rem;
-  color: #ffffff;
-}
-
-.life-desc {
-  font-size: 1.15rem;
-  color: #cbd5e1;
-  line-height: 1.65;
-  margin-bottom: 2.2rem;
-  max-width: 440px;
-}
-
-.btn-viewmore {
-  background: linear-gradient(135deg, #FF5E62 0%, #FF9966 100%);
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 0.8rem 2.2rem;
-  border-radius: 26px;
-  display: inline-block;
-  box-shadow: 0 6px 18px rgba(255, 94, 98, 0.4);
-  transition: var(--transition);
-}
-
-.btn-viewmore:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(255, 94, 98, 0.55);
-}
-
-/* ==================== COMBINED 3D FOLDER CARD STACK ==================== */
+/* ==================== INFRASTRUCTURE PANEL (Life @ CS Department) ==================== */
 .life-media {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 0;
+  align-items: flex-start;
+  padding: 1.5rem 0;
 }
+
+.infra-panel {
+  width: 100%;
+}
+
+.infra-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 1.4rem;
+}
+
+.infra-tab-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: #ffffff;
+  border-radius: 50px;
+  padding: 0.5rem 0.9rem 0.5rem 0.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2.5rem;
+}
+
+.infra-tab-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.infra-tab {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #64748b;
+  padding: 0.3rem 0.1rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.infra-tab.active {
+  color: #0f172a;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Fixed to the taller tab's natural height so switching Labs <-> Others doesn't
+   resize .life-section and shift the wave/rounded bottom under it. Kept on this
+   wrapper (rather than .infra-lab-list itself) so the divider line below still
+   hugs the shorter tab's actual content instead of stretching into blank space. */
+.infra-lab-list-outer {
+  min-height: 390px;
+}
+
+.infra-lab-list {
+  position: relative;
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.infra-divider {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.infra-lab-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.infra-lab-row.reverse {
+  flex-direction: row-reverse;
+}
+
+.infra-lab-info {
+  padding-top: 0.4rem;
+  max-width: 220px;
+}
+
+.infra-lab-name {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.infra-lab-desc {
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+/* Reuse the exact folder-stack visual asset (below) at a smaller scale rather
+   than rebuilding it, so it keeps the same 3D hover-open lid animation.
+   The unscaled .folder-stack is 320x380 but card-1 (its highest peeking photo)
+   only starts 115px down, leaving 115px of transparent space above the actual
+   graphic. Shifting it up by 115px * 0.47 (the scale factor) and shrinking the
+   wrapper to match crops that dead space away, so the folder art lines up with
+   the top of the "Centenary lab" / "SIB lab" label next to it instead of
+   appearing to float lower than the text. */
+.infra-folder-wrap {
+  position: relative;
+  width: 150px;
+  height: 125px;
+  margin-top: 40px;
+  flex-shrink: 0;
+}
+
+/* Others tab only: 10px higher than the Labs tab's folders, nothing else changed. */
+.infra-lab-list--others .infra-folder-wrap {
+  margin-top: 30px;
+}
+
+.infra-folder-wrap .folder-stack {
+  position: absolute;
+  top: -54px;
+  left: 0;
+  cursor: default;
+  transform: scale(0.47);
+  transform-origin: top left;
+}
+
+.infra-folder-wrap .folder-stack:hover {
+  transform: scale(0.47) translateY(-6px);
+}
+
+/* ==================== COMBINED 3D FOLDER CARD STACK ==================== */
 
 .folder-stack {
   --folder-back-1: #f7c14b;
@@ -967,108 +1073,6 @@ button {
   transform: translateX(160px) translateY(-70px) rotate(0deg) scale(1.12);
 }
 
-
-/* Floating Feature Badges Bar */
-.features-wrapper {
-  max-width: 900px;
-  margin: 3.5rem auto 0;
-  position: relative;
-  z-index: 10;
-}
-
-.features-bar {
-  background: #ffffff;
-  border-radius: 30px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.1rem 2.2rem;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-}
-
-.feature-item {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-}
-
-.feature-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.05rem;
-  flex-shrink: 0;
-}
-
-.feature-icon.pink {
-  background: #ffe4e6;
-  color: #e11d48;
-}
-
-.feature-icon.blue {
-  background: #dbeafe;
-  color: #2563eb;
-}
-
-.feature-icon.yellow {
-  background: #fef3c7;
-  color: #d97706;
-}
-
-.feature-icon.green {
-  background: #dcfce7;
-  color: #16a34a;
-}
-
-.feature-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.feature-text strong {
-  font-size: 0.88rem;
-  color: #0f172a;
-  font-weight: 700;
-}
-
-.feature-text span {
-  font-size: 0.78rem;
-  color: #64748b;
-}
-
-.feature-divider {
-  width: 1px;
-  height: 36px;
-  background: #e2e8f0;
-}
-
-.feature-extra {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
-  border-left: 1px solid #e2e8f0;
-  padding-left: 1.5rem;
-}
-
-.quote-text {
-  font-size: 0.76rem;
-  font-weight: 500;
-  color: #1e293b;
-  font-style: italic;
-  max-width: 220px;
-}
-
-.quote-author {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #e11d48;
-  margin-top: 2px;
-}
 
 /* ==================== GAZETTE / NEWSPAPER SECTION ==================== */
 .gazette-section {
@@ -1495,38 +1499,67 @@ button {
     gap: 2.5rem;
     align-items: center;
   }
+
+  /* Same "pinned to a corkboard" scatter as the faculty directory grid
+     (#facultyGrid), scaled down to this section's 2-card teaser. */
+  .people-grid:not(#facultyGrid) .card-stephanie {
+    transform: rotate(-2.2deg) translate(-4px, -10px);
+  }
+
+  .people-grid:not(#facultyGrid) .card-salimon {
+    transform: rotate(1.6deg) translate(4px, 16px);
+  }
+
+  .people-grid:not(#facultyGrid) .card-stephanie:hover {
+    transform: rotate(0deg) translate(-4px, -18px);
+    z-index: 5;
+  }
+
+  .people-grid:not(#facultyGrid) .card-salimon:hover {
+    transform: rotate(0deg) translate(4px, 8px);
+    z-index: 5;
+  }
 }
 
 /* Dedicated Faculty Directory Page (3-Column Grid) */
 @media (min-width: 1024px) {
   #facultyGrid.people-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 3rem 2.2rem;
+    gap: 3.5rem 2.2rem;
   }
 
-  /* Staggered Column Offsets keeping exact Left-to-Right reading order (1->2->3) */
-  #facultyGrid .faculty-card:nth-child(3n+1) {
-    transform: translateY(0);
+  /* Scattered "pinned to a corkboard" collage: every card gets its own tiny
+     rotation + nudge (via custom properties) instead of a repeating 3-cycle,
+     so the grid reads as hand-placed rather than mechanically staggered while
+     staying in its grid cell (jitter stays well inside the row/column gap). */
+  #facultyGrid .faculty-card:nth-child(1)  { --card-rotate: -1.6deg; --card-x: -4px; --card-y: -6px; }
+  #facultyGrid .faculty-card:nth-child(2)  { --card-rotate: 1.2deg;  --card-x: 3px;  --card-y: 18px; }
+  #facultyGrid .faculty-card:nth-child(3)  { --card-rotate: -2.2deg; --card-x: -6px; --card-y: -10px; }
+  #facultyGrid .faculty-card:nth-child(4)  { --card-rotate: 2deg;    --card-x: 5px;  --card-y: 10px; }
+  #facultyGrid .faculty-card:nth-child(5)  { --card-rotate: -1deg;   --card-x: -3px; --card-y: -8px; }
+  #facultyGrid .faculty-card:nth-child(6)  { --card-rotate: 1.6deg;  --card-x: 4px;  --card-y: 16px; }
+  #facultyGrid .faculty-card:nth-child(7)  { --card-rotate: -2.4deg; --card-x: -5px; --card-y: -4px; }
+  #facultyGrid .faculty-card:nth-child(8)  { --card-rotate: 1deg;    --card-x: 6px;  --card-y: 20px; }
+  #facultyGrid .faculty-card:nth-child(9)  { --card-rotate: -1.3deg; --card-x: -4px; --card-y: -12px; }
+  #facultyGrid .faculty-card:nth-child(10) { --card-rotate: 2.2deg;  --card-x: 3px;  --card-y: 14px; }
+  #facultyGrid .faculty-card:nth-child(11) { --card-rotate: -1.8deg; --card-x: -6px; --card-y: -6px; }
+  #facultyGrid .faculty-card:nth-child(12) { --card-rotate: 1deg;    --card-x: 5px;  --card-y: 18px; }
+  #facultyGrid .faculty-card:nth-child(13) { --card-rotate: -2deg;   --card-x: -3px; --card-y: -8px; }
+  #facultyGrid .faculty-card:nth-child(14) { --card-rotate: 1.5deg;  --card-x: 4px;  --card-y: 16px; }
+  #facultyGrid .faculty-card:nth-child(15) { --card-rotate: -1.1deg; --card-x: -5px; --card-y: -4px; }
+  #facultyGrid .faculty-card:nth-child(16) { --card-rotate: 2.3deg;  --card-x: 6px;  --card-y: 12px; }
+  #facultyGrid .faculty-card:nth-child(17) { --card-rotate: -1.6deg; --card-x: -4px; --card-y: -10px; }
+  #facultyGrid .faculty-card:nth-child(18) { --card-rotate: 1.2deg;  --card-x: 3px;  --card-y: 14px; }
+
+  #facultyGrid .faculty-card {
+    transform: translate(var(--card-x, 0px), var(--card-y, 0px)) rotate(var(--card-rotate, 0deg));
   }
 
-  #facultyGrid .faculty-card:nth-child(3n+2) {
-    transform: translateY(35px);
-  }
-
-  #facultyGrid .faculty-card:nth-child(3n) {
-    transform: translateY(-15px);
-  }
-
-  #facultyGrid .faculty-card:nth-child(3n+1):hover {
-    transform: translateY(-6px) translate(-3px, -3px);
-  }
-
-  #facultyGrid .faculty-card:nth-child(3n+2):hover {
-    transform: translateY(29px) translate(-3px, -3px);
-  }
-
-  #facultyGrid .faculty-card:nth-child(3n):hover {
-    transform: translateY(-21px) translate(-3px, -3px);
+  /* On hover the card settles flat and lifts, so the content is easy to read
+     even though it rests at an angle at rest. */
+  #facultyGrid .faculty-card:hover {
+    transform: translate(var(--card-x, 0px), calc(var(--card-y, 0px) - 10px)) rotate(0deg);
+    z-index: 5;
   }
 }
 
@@ -2763,12 +2796,6 @@ button {
 
 /* ==================== RESPONSIVE MEDIA QUERIES ==================== */
 
-/* Desktop & Large Screen Refinements (1200px and below) */
-@media (max-width: 1200px) {
-  .features-bar {
-    padding: 1rem 1.5rem;
-  }
-}
 
 /* Tablet Landscape & Medium Devices (1024px and below) */
 @media (max-width: 1024px) {
@@ -2815,33 +2842,8 @@ button {
     gap: 2.5rem;
   }
 
-  .life-desc {
-    max-width: 100%;
-  }
-
-  .features-bar {
-    flex-wrap: wrap;
-    gap: 1.25rem;
-    border-radius: 24px;
-    padding: 1.2rem 1.5rem;
-  }
-
-  .feature-divider {
-    display: none;
-  }
-
-  .feature-extra {
-    border-left: none;
-    border-top: 1px solid #e2e8f0;
-    padding-left: 0;
-    padding-top: 1rem;
-    width: 100%;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .quote-text {
-    max-width: 100%;
+  .infra-lab-list {
+    padding-left: 1.5rem;
   }
 
   .gazette-grid {
@@ -3115,28 +3117,8 @@ button {
     z-index: 10;
   }
 
-  .life-title {
-    font-size: 2.1rem;
-  }
-
-  .features-bar {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    padding: 1.2rem 1rem;
-    border-radius: 20px;
-  }
-
-  .feature-extra {
-    grid-column: 1 / -1;
-    width: 100%;
-    border-left: none;
-    border-top: 1px solid #e2e8f0;
-    padding-left: 0;
-    padding-top: 0.8rem;
-    margin-top: 0.4rem;
-    align-items: center;
-    text-align: center;
+  .infra-title {
+    font-size: 1.7rem;
   }
 
   .gazette-section {
@@ -3351,13 +3333,30 @@ button {
     filter: blur(22px);
   }
 
-  .life-title {
-    font-size: 1.8rem;
+  .infra-title {
+    font-size: 1.5rem;
   }
 
-  .features-bar {
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
+  .infra-lab-row {
+    gap: 0.75rem;
+  }
+
+  .infra-lab-name {
+    font-size: 0.92rem;
+  }
+
+  .infra-folder-wrap {
+    width: 110px;
+    height: 91px;
+  }
+
+  .infra-folder-wrap .folder-stack {
+    top: -40px;
+    transform: scale(0.345);
+  }
+
+  .infra-folder-wrap .folder-stack:hover {
+    transform: scale(0.345) translateY(-6px);
   }
 
   .gazette-nav {
@@ -3419,7 +3418,7 @@ button {
   width: 100%;
   min-height: clamp(640px, 70vw, 980px);
   background-color: #030712;
-  background-image: url('assets/images/sb_college_campus_mirrored.jpg');
+  background-image: url('/assets/images/sb_college_campus_mirrored.jpg');
   background-size: cover;
   background-position: center 8%;
   background-repeat: no-repeat;
