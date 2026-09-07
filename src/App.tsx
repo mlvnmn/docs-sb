@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import { Home } from './pages/Home';
 import { FacultyDirectory } from './pages/FacultyDirectory';
+import { Timeline } from './pages/Timeline';
 
 function ScrollToHash() {
   const { pathname, hash } = useLocation();
@@ -29,6 +30,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/faculty" element={<FacultyDirectory />} />
+          <Route path="/timeline" element={<Timeline />} />
         </Routes>
       </Layout>
     </BrowserRouter>

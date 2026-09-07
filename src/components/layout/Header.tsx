@@ -16,6 +16,7 @@ export function Header({ onSearchOpen }: HeaderProps) {
   const isActive = (label: string) => {
     if (label === 'Home') return pathname === '/';
     if (label === 'Faculty') return pathname.startsWith('/faculty');
+    if (label === 'Timeline') return pathname.startsWith('/timeline');
     return false;
   };
 
