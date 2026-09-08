@@ -103,3 +103,12 @@ export interface AboutContent {
   highlights: AboutHighlight[];
   courses: AboutCourseGroup[];
 }
+
+export interface GalleryFolder {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  coverImage: string;
+  photos: string[];
+}

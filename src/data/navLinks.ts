@@ -6,6 +6,6 @@ export const navLinks: NavItem[] = [
   { label: 'Campus Life', href: '/#life' },
   { label: 'About', href: '/about' },
   { label: 'Timeline', href: '/timeline' },
-  { label: 'Gallery', href: '#' },
+  { label: 'Gallery', href: '/gallery' },
   { label: 'News', href: '#' },
 ];
