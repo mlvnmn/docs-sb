@@ -85,3 +85,21 @@ export interface InfrastructureLab {
   description?: string;
   images: [string, string, string];
 }
+
+export interface AboutHighlight {
+  id: string;
+  text: string;
+}
+
+export interface AboutCourseGroup {
+  heading: string;
+  items: string[];
+}
+
+export interface AboutContent {
+  title: string;
+  intro: string;
+  since: string;
+  highlights: AboutHighlight[];
+  courses: AboutCourseGroup[];
+}

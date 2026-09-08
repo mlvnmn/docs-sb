@@ -17,6 +17,7 @@ export function Header({ onSearchOpen }: HeaderProps) {
     if (label === 'Home') return pathname === '/';
     if (label === 'Faculty') return pathname.startsWith('/faculty');
     if (label === 'Timeline') return pathname.startsWith('/timeline');
+    if (label === 'About') return pathname.startsWith('/about');
     return false;
   };
 

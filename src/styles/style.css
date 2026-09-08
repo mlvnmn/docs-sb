@@ -4356,3 +4356,224 @@ button {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* ==================== ABOUT PAGE ==================== */
+
+/* -- Hero -- */
+.about-hero {
+  position: relative;
+  /* Navy tint layered over the lab photo (linear-gradient stops here are
+     identical so it reads as a flat color wash, not a fade) so the image
+     shows through only faintly, blended into the section's own blue rather
+     than sitting on top of it as a distinct photo. */
+  background: linear-gradient(rgba(16, 28, 86, 0.88), rgba(16, 28, 86, 0.88)),
+    url('/assets/images/about/computer-lab.jpg') center / cover no-repeat;
+  color: #ffffff;
+  padding: calc(6rem + var(--wave-bleed)) 2rem 0;
+  overflow: hidden;
+}
+
+.about-hero-container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding-bottom: 4.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 1.1rem;
+  border-radius: 999px;
+  border: 2px solid #ffe600;
+  color: #ffe600;
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.5rem;
+}
+
+.about-hero-title {
+  font-family: var(--font-pixel);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  color: #ffe600;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+  text-shadow: 3px 3px 0px #000000;
+  margin-bottom: 1.5rem;
+}
+
+.about-hero-intro {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #dbe1ff;
+  margin-bottom: 2rem;
+}
+
+.about-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #ffe600;
+  color: #0f172a;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 0.9rem 1.85rem;
+  border-radius: 12px;
+  border: 2.5px solid #000000;
+  box-shadow: 5px 5px 0px #000000;
+  transition: var(--transition);
+}
+
+.about-cta-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0px #000000;
+}
+
+/* -- Gradient border card (pink / cyan / yellow mix) -- */
+.gradient-border-card {
+  padding: 3px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f472b6 0%, #38bdf8 50%, #ffe600 100%);
+  height: 100%;
+}
+
+.gradient-border-card-inner {
+  background: #ffffff;
+  border-radius: 17px;
+  height: 100%;
+}
+
+/* -- Section heading (shared) -- */
+.about-section-heading {
+  position: relative;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  color: var(--color-text-dark);
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+}
+
+.about-heading-underline {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 4px;
+  border-radius: 999px;
+  background: #ffe600;
+}
+
+/* -- Highlights -- */
+.about-highlights {
+  background: #ffffff;
+  padding: 5rem 2rem;
+}
+
+.about-highlights-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-highlights-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.about-highlights-grid .gradient-border-card {
+  flex: 1 1 300px;
+  max-width: 340px;
+}
+
+.about-highlight-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.about-highlight-check {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f472b6, #38bdf8, #ffe600);
+  color: #0f172a;
+  font-size: 0.9rem;
+}
+
+.about-highlight-text {
+  font-weight: 600;
+  color: var(--color-text-dark);
+  line-height: 1.4;
+}
+
+/* -- Courses (same section-heading + gradient-border-card style as Highlights) -- */
+.about-courses {
+  background: #ffffff;
+  padding: 0 2rem 5rem;
+}
+
+.about-courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.about-course-card {
+  padding: 1.75rem;
+}
+
+.about-course-heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-text-dark);
+  margin-bottom: 1.1rem;
+}
+
+.about-course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.about-course-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  line-height: 1.4;
+}
+
+/* -- Responsive -- */
+@media (max-width: 768px) {
+  .about-hero {
+    padding-top: calc(5rem + var(--wave-bleed));
+  }
+
+  .about-hero-container {
+    padding-bottom: 3.5rem;
+  }
+
+  .about-highlights,
+  .about-courses {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}

@@ -4,6 +4,7 @@ import { Layout } from './components/layout/Layout';
 import { Home } from './pages/Home';
 import { FacultyDirectory } from './pages/FacultyDirectory';
 import { Timeline } from './pages/Timeline';
+import { About } from './pages/About';
 
 function ScrollToHash() {
   const { pathname, hash } = useLocation();
@@ -31,6 +32,7 @@ export function App() {
           <Route path="/" element={<Home />} />
           <Route path="/faculty" element={<FacultyDirectory />} />
           <Route path="/timeline" element={<Timeline />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </Layout>
     </BrowserRouter>
