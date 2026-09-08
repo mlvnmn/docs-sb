@@ -35,7 +35,7 @@ export function GalleryFolder() {
   }
 
   return (
-    <div className="gallery-page">
+    <div className="gallery-page" key={folder.slug}>
       <span className="gallery-vertical-edge">ARCHIVE</span>
       <div className="gallery-stripes" aria-hidden="true" />
 

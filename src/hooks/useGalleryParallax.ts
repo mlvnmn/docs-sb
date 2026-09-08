@@ -19,6 +19,15 @@ export function useGalleryParallax(containerRef: RefObject<HTMLElement | null>, 
 
     const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
 
+    // The route-change scroll-to-top (App.tsx's ScrollToHash) races the
+    // site's global `html { scroll-behavior: smooth }`, so it's often still
+    // mid-animation when this effect runs. A plain window.scrollTo(0, 0)
+    // here loses that race in Chromium (a second scrollTo issued the same
+    // frame as an in-flight smooth one is dropped). Lenis owns scroll once
+    // constructed, so drive the reset through its own API instead — this
+    // resyncs both its internal state and the real scroll position.
+    lenis.scrollTo(0, { immediate: true });
+
     const onLenisScroll = () => ScrollTrigger.update();
     lenis.on('scroll', onLenisScroll);
 
