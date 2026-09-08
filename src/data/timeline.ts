@@ -74,13 +74,6 @@ export interface TimelineMilestone {
   finale?: boolean;
 }
 
-export const timelineHeroStats: { value: string; label: string; color?: string }[] = [
-  { value: '39+', label: 'Years of Innovation' },
-  { value: '1000+', label: 'Alumni Placed', color: '#FF4F87' },
-  { value: '18', label: 'Faculty Members', color: '#FFD800' },
-  { value: '40+', label: 'Recruiting Partners', color: '#45B86B' },
-];
-
 export const timelineMilestones: TimelineMilestone[] = [
   {
     id: 'founding',
@@ -271,12 +264,3 @@ export const timelineMilestones: TimelineMilestone[] = [
     finale: true,
   },
 ];
-
-export const timelineCTA = {
-  title: 'Be Part of Our Next Chapter on the Serpentine Path',
-  body: 'Whether you’re a prospective student, an alumnus, or a recruiter — there’s a place for you in the story we’re still writing.',
-  primaryLabel: 'Meet Our People',
-  primaryHref: '/faculty',
-  secondaryLabel: 'Get in Touch',
-  secondaryHref: '/#contact',
-};

@@ -1,7 +1,6 @@
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { TimelineHero } from '../components/timeline/TimelineHero';
 import { TimelineRoad } from '../components/timeline/TimelineRoad';
-import { TimelineCTA } from '../components/timeline/TimelineCTA';
 import { Footer } from '../components/layout/Footer';
 
 export function Timeline() {
@@ -14,7 +13,6 @@ export function Timeline() {
     <div className="tl-page">
       <TimelineHero />
       <TimelineRoad />
-      <TimelineCTA />
       <Footer />
     </div>
   );

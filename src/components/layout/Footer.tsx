@@ -39,17 +39,13 @@ export function Footer() {
           <div className="footer-college-box">
             <div className="f-college-header">
               <div className="f-crest-icon">
-                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="f-college-logo-svg">
-                  <path d="M20 3L6 10V21C6 30 12 36 20 38C28 36 34 30 34 21V10L20 3Z" fill="#0B132B" />
-                  <path
-                    d="M20 7L10 12V20C10 26.5 14.5 31 20 33C25.5 31 30 26.5 30 20V12L20 7Z"
-                    stroke="#EAB308"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                  <path d="M15 17H25M20 12V22" stroke="#EAB308" strokeWidth="2" strokeLinecap="round" />
-                  <path d="M14 26C16 24 24 24 26 26" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="https://sbcollege.ac.in/wp-content/themes/sb/images/sb_contact.png"
+                  alt="St Berchmans College Logo"
+                  className="dept-logo-img-sm"
+                />
               </div>
               <div>
                 <h4 className="f-title">{footerCollegeBranding.title}</h4>

@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { timelineMilestones, type TimelineCompanion, type TimelineMilestone } from '../../data/timeline';
 import { useTimelineRoadScroll } from '../../hooks/useTimelineRoadScroll';
 import { useMilestoneReveal } from '../../hooks/useMilestoneReveal';
+import { TimelineGridTexture } from './TimelineGridTexture';
 
 type RoadPoint = [number, number];
 
@@ -241,6 +242,8 @@ export function TimelineRoad() {
 
   return (
     <section className="tl-road" id="evolution-map-container">
+      <TimelineGridTexture patternId="tl-iso-grid-road" />
+
       <div className="tl-road-container" ref={containerRef}>
         <div className="tl-road-svg-wrap" aria-hidden="true">
           <svg
