@@ -4589,6 +4589,26 @@ button {
    it's pulled straight from the department logo's three brand colors
    (pink, blue, orange), sampled from dept_logo.jpeg. */
 
+/* Lenis' required base styles (see useGalleryParallax) — inert everywhere
+   except while the smooth-scroll instance is alive, since Lenis toggles
+   these classes onto <html> itself. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 .gallery-page {
   --gallery-pink: #fe1c5b;
   --gallery-blue: #1b7afc;
@@ -4788,21 +4808,50 @@ button {
   padding: 0 2rem 6rem;
 }
 
+/* Collage-style photo wall: a fixed column grid with a small row unit, where
+   each photo spans a different number of rows/columns (see the TILE_PATTERN
+   cycle in GalleryFolder.tsx) so the folder reads as a hand-built moodboard
+   instead of a uniform camera-roll grid. */
 .gallery-photos-grid {
   max-width: 1160px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 130px;
+  grid-auto-flow: dense;
+  gap: 1rem;
 }
 
 .gallery-photo-card {
   --card-accent: var(--gallery-pink);
   position: relative;
   overflow: hidden;
-  aspect-ratio: 3 / 4;
+  grid-column: span 1;
+  grid-row: span 2;
   border-bottom: 4px solid var(--card-accent);
   box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(48px) scale(0.96);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-photo-card.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.gallery-photo-card--tall {
+  grid-row: span 3;
+}
+
+.gallery-photo-card--wide {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.gallery-photo-card--big {
+  grid-column: span 2;
+  grid-row: span 3;
 }
 
 .gallery-photo-card:nth-child(3n+2) {
@@ -4813,13 +4862,20 @@ button {
   --card-accent: var(--gallery-orange);
 }
 
+/* Sized taller than the (overflow: hidden) card and centered with a
+   negative top offset, so GSAP's ScrollTrigger-driven yPercent parallax
+   (see useGalleryParallax) has headroom to drift the image without ever
+   exposing empty space at the top or bottom of the card. */
 .gallery-photo-card img {
+  position: absolute;
+  top: -15%;
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: 130%;
   object-fit: cover;
   display: block;
   filter: grayscale(0.15);
-  transition: transform 0.4s ease;
+  will-change: transform;
 }
 
 .gallery-photo-overlay {
@@ -4827,10 +4883,6 @@ button {
   inset: 0;
   background: linear-gradient(180deg, rgba(21, 28, 85, 0) 55%, rgba(10, 14, 42, 0.55) 100%);
   pointer-events: none;
-}
-
-.gallery-photo-card:hover img {
-  transform: scale(1.05);
 }
 
 /* -- Full landing-page layout: hero collage, story, explore, culture, CTA -- */
@@ -5161,9 +5213,13 @@ button {
     padding-right: 1.25rem;
   }
 
-  .gallery-folder-card,
-  .gallery-photo-card {
+  .gallery-folder-card {
     aspect-ratio: 4 / 3;
+  }
+
+  .gallery-photos-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 110px;
   }
 
   .gallery-story-accent {

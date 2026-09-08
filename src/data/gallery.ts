@@ -1,5 +1,28 @@
 import type { GalleryFolder } from '../types/content';
 
+function fillTo(pool: string[], count: number): string[] {
+  return Array.from({ length: count }, (_, i) => pool[i % pool.length]);
+}
+
+const activitiesPool = [
+  '/assets/images/topic_industrial.jpg',
+  '/assets/images/baseball_news.jpg',
+  '/assets/images/sb_college_campus_mirrored.jpg',
+];
+
+const snapshotsPool = [
+  '/assets/images/topic_stadium.jpg',
+  '/assets/images/baseball_news.jpg',
+  '/assets/images/sb_college_campus_mirrored.jpg',
+];
+
+const computerLabPool = [
+  '/assets/images/cs lab 1.jpg',
+  '/assets/images/cs lab 2.jpg',
+  '/assets/images/cs lab 3.jpg',
+  '/assets/images/about/computer-lab.jpg',
+];
+
 export const galleryFolders: GalleryFolder[] = [
   {
     id: 'activities-hub',
@@ -7,11 +30,7 @@ export const galleryFolders: GalleryFolder[] = [
     title: 'Department Activities Hub',
     description: 'Workshops, seminars, and department-led events through the academic year.',
     coverImage: '/assets/images/topic_industrial.jpg',
-    photos: [
-      '/assets/images/topic_industrial.jpg',
-      '/assets/images/baseball_news.jpg',
-      '/assets/images/sb_college_campus_mirrored.jpg',
-    ],
+    photos: fillTo(activitiesPool, 15),
   },
   {
     id: 'snapshots',
@@ -19,11 +38,7 @@ export const galleryFolders: GalleryFolder[] = [
     title: 'Snapshots of Moments',
     description: 'Candid moments from campus life, sports, and student gatherings.',
     coverImage: '/assets/images/topic_stadium.jpg',
-    photos: [
-      '/assets/images/topic_stadium.jpg',
-      '/assets/images/baseball_news.jpg',
-      '/assets/images/sb_college_campus_mirrored.jpg',
-    ],
+    photos: fillTo(snapshotsPool, 15),
   },
   {
     id: 'computer-lab',
@@ -31,7 +46,7 @@ export const galleryFolders: GalleryFolder[] = [
     title: 'Computer Lab',
     description: 'A look inside our labs where students build, debug, and learn.',
     coverImage: '/assets/images/cs lab 1.jpg',
-    photos: ['/assets/images/cs lab 1.jpg', '/assets/images/cs lab 2.jpg', '/assets/images/cs lab 3.jpg'],
+    photos: fillTo(computerLabPool, 15),
   },
 ];
 
