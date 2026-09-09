@@ -9,9 +9,9 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     image: '/assets/hero banner/2 banner hero.webp',
-    alt: 'Apply for JET 2026',
-    titleLines: ['APPLY FOR JET', '2026'],
-    tabLabel: 'Start your Application',
+    alt: 'Empowering Future Innovators',
+    titleLines: ['EMPOWERING', 'FUTURE INNOVATORS'],
+    tabLabel: 'Admissions 2026',
   },
   {
     image: '/assets/hero banner/3 banner hero.webp',
@@ -20,9 +20,15 @@ export const heroSlides: HeroSlide[] = [
     tabLabel: "What's New",
   },
   {
-    image: '/assets/hero banner/4 banner hero.jpg',
-    alt: 'Explore CS Department',
+    image: '/assets/hero banner/4 banner hero.webp',
+    alt: 'Discover Your Potential',
     titleLines: ['DISCOVER YOUR', 'POTENTIAL'],
-    tabLabel: 'Explore JAIN',
+    tabLabel: 'Campus Life',
+  },
+  {
+    image: '/assets/hero banner/5 banner hero.webp',
+    alt: 'Excellence in Computer Science',
+    titleLines: ['EXCELLENCE IN', 'COMPUTING'],
+    tabLabel: 'Explore Department',
   },
 ];
