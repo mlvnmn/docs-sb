@@ -625,43 +625,13 @@ button {
   width: 100%;
   max-width: 100%;
   margin: -4px 0 -5rem;
-  /* Matches .tl-page/.tl-road's flat navy exactly (see the "TIMELINE / OUR
-     JOURNEY PAGE" section) — this teaser borrows that page's card styles
-     wholesale, so it now sits on the same base tone instead of a slightly
-     off-hue blue, and the grid texture + glow blobs below are the same
-     atmosphere treatment used behind that page's road. */
-  background-color: #1a2359;
+  background-color: var(--color-primary);
   color: #ffffff;
   padding: 4.5rem 2rem 6.5rem;
   border-radius: 0 0 160px 160px;
   box-shadow: 0 30px 60px rgba(13, 19, 52, 0.35);
   overflow: hidden;
   z-index: 10;
-}
-
-.life-glow-blob {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.blob-life-left {
-  width: 480px;
-  height: 480px;
-  background: radial-gradient(circle, rgba(255, 22, 91, 0.16) 0%, rgba(255, 22, 91, 0) 70%);
-  filter: blur(80px);
-  top: -120px;
-  left: -160px;
-}
-
-.blob-life-right {
-  width: 520px;
-  height: 520px;
-  background: radial-gradient(circle, rgba(27, 121, 255, 0.18) 0%, rgba(27, 121, 255, 0) 70%);
-  filter: blur(90px);
-  bottom: -160px;
-  right: -180px;
 }
 
 .life-container {
