@@ -455,6 +455,14 @@ button {
   position: absolute;
   inset: 0;
   background:
+    /* Subtle top shadow gradient */
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(0, 0, 0, 0.18) 12%,
+      rgba(0, 0, 0, 0.04) 22%,
+      transparent 32%
+    ),
     /* Bottom shadow gradient for depth and tab readability */
     linear-gradient(
       to top,
