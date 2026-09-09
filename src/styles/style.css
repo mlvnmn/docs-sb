@@ -493,17 +493,22 @@ button {
 
 .hero-slide-content {
   position: absolute;
-  top: calc(50% + 50px);
+  bottom: 95px;
   left: 8.5%;
-  transform: translateY(-50%);
   z-index: 3;
   max-width: 720px;
   pointer-events: none;
 }
 
+.hero-slide-content.pos-upper {
+  bottom: auto;
+  top: 36%;
+  transform: translateY(-50%);
+}
+
 .hero-slide-title {
   font-family: 'Outfit', 'Montserrat', 'Segoe UI', sans-serif;
-  font-size: 3.8rem;
+  font-size: clamp(2.5rem, 3.8vw, 3.5rem);
   font-weight: 900;
   letter-spacing: -0.015em;
   line-height: 1.06;

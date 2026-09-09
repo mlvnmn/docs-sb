@@ -32,7 +32,7 @@ export function HeroSlideshow() {
           <div className={`hero-slide${i === currentSlide ? ' active' : ''}`} data-index={i} key={slide.image}>
             <img src={slide.image} alt={slide.alt} className="hero-slide-img" />
             <div className="hero-slide-overlay" />
-            <div className="hero-slide-content">
+            <div className={`hero-slide-content${slide.position ? ` pos-${slide.position}` : ''}`}>
               <h1 className="hero-slide-title">
                 {slide.titleLines.map((line, li) => (
                   <span key={li}>

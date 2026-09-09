@@ -9,6 +9,7 @@ export interface HeroSlide {
   alt: string;
   titleLines: string[];
   tabLabel: string;
+  position?: 'upper' | 'lower';
 }
 
 export type FacultyArchetype = 'a' | 'b' | 'c' | 'd';

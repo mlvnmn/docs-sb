@@ -30,5 +30,6 @@ export const heroSlides: HeroSlide[] = [
     alt: 'Excellence in Computer Science',
     titleLines: ['EXCELLENCE IN', 'COMPUTING'],
     tabLabel: 'Explore Department',
+    position: 'upper',
   },
 ];

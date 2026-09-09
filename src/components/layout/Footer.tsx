@@ -135,8 +135,7 @@ export function Footer() {
             Designed and Developed by{' '}
             <a href={creditText.athlogixUrl} target="_blank" rel="noopener noreferrer" className="credit-athlogix">
               Athlogix
-            </a>{' '}
-            &amp; <a href="#" className="credit-dept">Dept. Dev Team</a>
+            </a>
           </p>
         </div>
       </div>
