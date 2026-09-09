@@ -463,12 +463,21 @@ button {
       rgba(0, 0, 0, 0.18) 34%,
       transparent 52%
     ),
-    /* Left-to-right gradient for title text contrast */
+    /* Left-side gradient for title text contrast */
     linear-gradient(
-      90deg,
+      to right,
       rgba(0, 0, 0, 0.68) 0%,
-      rgba(0, 0, 0, 0.3) 50%,
-      rgba(0, 0, 0, 0.05) 100%
+      rgba(0, 0, 0, 0.32) 32%,
+      rgba(0, 0, 0, 0.05) 52%,
+      transparent 68%
+    ),
+    /* Right-side gradient for control widget and balance */
+    linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0.68) 0%,
+      rgba(0, 0, 0, 0.32) 32%,
+      rgba(0, 0, 0, 0.05) 52%,
+      transparent 68%
     );
   z-index: 1;
   pointer-events: none;
