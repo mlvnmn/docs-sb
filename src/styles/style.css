@@ -133,6 +133,7 @@ button {
   flex-shrink: 0;
   border-radius: 8px;
   overflow: hidden;
+  margin-top: -4px;
 }
 
 .dept-logo-img {
