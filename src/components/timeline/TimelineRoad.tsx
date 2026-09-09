@@ -48,7 +48,7 @@ const ROAD_STATIONS: RoadPoint[] = timelineMilestones.map((_, index) => {
 
 const ROAD_PATH = buildSerpentinePath(ROAD_STATIONS);
 
-function Companion({ companion, accent }: { companion: TimelineCompanion; accent: string }) {
+export function Companion({ companion, accent }: { companion: TimelineCompanion; accent: string }) {
   const accentStyle = { ['--tl-accent' as string]: accent };
 
   if (companion.kind === 'chart') {
@@ -186,7 +186,7 @@ function Companion({ companion, accent }: { companion: TimelineCompanion; accent
   );
 }
 
-function MilestoneContent({ milestone }: { milestone: TimelineMilestone }) {
+export function MilestoneContent({ milestone }: { milestone: TimelineMilestone }) {
   const accentStyle = { ['--tl-accent' as string]: milestone.accent };
 
   return (

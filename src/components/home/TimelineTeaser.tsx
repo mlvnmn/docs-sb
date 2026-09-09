@@ -1,10 +1,17 @@
-import type { CSSProperties } from 'react';
+import { useRef } from 'react';
 import { timelineMilestones } from '../../data/timeline';
 import { SmartLink } from '../shared/SmartLink';
+import { Companion, MilestoneContent } from '../timeline/TimelineRoad';
 import { TimelineTeaserRoad } from './TimelineTeaserRoad';
+import { useTeaserRoadPath } from '../../hooks/useTeaserRoadPath';
 
 export function TimelineTeaser() {
   const glimpseMilestones = timelineMilestones.slice(0, 2);
+
+  const cardsRef = useRef<HTMLDivElement | null>(null);
+  const firstCardRef = useRef<HTMLDivElement | null>(null);
+  const secondCardRef = useRef<HTMLDivElement | null>(null);
+  const roadGeometry = useTeaserRoadPath(cardsRef, firstCardRef, secondCardRef);
 
   return (
     <div className="timeline-teaser">
@@ -20,30 +27,16 @@ export function TimelineTeaser() {
         research, infrastructure, and industry ties it holds today.
       </p>
 
-      <div className="timeline-teaser-cards tl-page">
-        <TimelineTeaserRoad />
+      <div className="timeline-teaser-cards tl-page" ref={cardsRef}>
+        <TimelineTeaserRoad geometry={roadGeometry} />
 
         {glimpseMilestones.map((milestone, index) => (
-          <div className={`timeline-teaser-row${index % 2 === 1 ? ' timeline-teaser-row-reverse' : ''}`} key={milestone.id}>
-            <div
-              className="tl-card tl-glass timeline-teaser-card"
-              style={{ ['--tl-accent' as string]: milestone.accent } as CSSProperties}
-            >
-              <span className="tl-card-bar" />
-              <div className="tl-card-head">
-                <div className="tl-card-head-left">
-                  <span className="tl-era-pill" style={{ color: milestone.tint }}>
-                    {milestone.era}
-                  </span>
-                  <span className="tl-era-year">{milestone.year}</span>
-                </div>
-                <div className="tl-icon-box">
-                  <span className="material-symbols-outlined">{milestone.icon}</span>
-                </div>
-              </div>
-
-              <h3 className="tl-card-title">{milestone.title}</h3>
-              <p className="tl-card-desc">{milestone.description}</p>
+          <div className={`timeline-teaser-row tl-node${index % 2 === 1 ? ' tl-node-reverse' : ''}`} key={milestone.id}>
+            <div className="tl-col-content" ref={index === 0 ? firstCardRef : secondCardRef}>
+              <MilestoneContent milestone={milestone} />
+            </div>
+            <div className="tl-col-companion">
+              <Companion companion={milestone.companion} accent={milestone.accent} />
             </div>
           </div>
         ))}
