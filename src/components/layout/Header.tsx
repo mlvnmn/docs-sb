@@ -19,6 +19,7 @@ export function Header({ onSearchOpen }: HeaderProps) {
     if (label === 'Timeline') return pathname.startsWith('/timeline');
     if (label === 'About') return pathname.startsWith('/about');
     if (label === 'Gallery') return pathname.startsWith('/gallery');
+    if (label === 'News') return pathname.startsWith('/news');
     return false;
   };
 

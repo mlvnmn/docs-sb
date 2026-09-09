@@ -112,3 +112,27 @@ export interface GalleryFolder {
   coverImage: string;
   photos: string[];
 }
+
+export interface NewsArticle {
+  id: string;
+  category: string;
+  title: string;
+  date: string;
+  comments: number;
+  excerpt: string;
+  image: string;
+  body: string;
+  author?: string;
+  readTime?: string;
+  featured?: boolean;
+  tags?: string[];
+}
+
+export interface GazetteTopic {
+  title: string;
+  image: string;
+  alt: string;
+  category?: string;
+  date?: string;
+}
+

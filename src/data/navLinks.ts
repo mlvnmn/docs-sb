@@ -7,5 +7,5 @@ export const navLinks: NavItem[] = [
   { label: 'About', href: '/about' },
   { label: 'Timeline', href: '/timeline' },
   { label: 'Gallery', href: '/gallery' },
-  { label: 'News', href: '#' },
+  { label: 'News', href: '/news' },
 ];

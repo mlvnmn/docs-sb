@@ -1,16 +1,35 @@
 import { GazetteNav } from './GazetteNav';
-import { featuredArticle, topicCards } from '../../data/gazette';
+import { useNews } from '../../hooks/useNews';
+import { SmartLink } from '../shared/SmartLink';
 
-export function GazetteSection() {
+interface GazetteSectionProps {
+  onSelectCategory?: (category: string) => void;
+  selectedCategory?: string;
+  isFullPage?: boolean;
+}
+
+export function GazetteSection({
+  onSelectCategory,
+  selectedCategory,
+  isFullPage = false,
+}: GazetteSectionProps) {
+  const { featuredArticle, topicCards } = useNews();
+
   return (
     <section className="gazette-section" id="gazette">
       <div className="gazette-container">
         <div className="gazette-masthead">
-          <div className="masthead-top-rule" />
-          <h2 className="masthead-title">Los Angeles</h2>
-          <div className="masthead-bottom-rule" />
+          <div className="masthead-double-rule" />
+          <div className="masthead-banner">
+            <h2 className="masthead-title">The Computer Science Chronicle</h2>
+          </div>
+          <div className="masthead-single-rule" />
 
-          <GazetteNav />
+          <GazetteNav
+            onSelectCategory={onSelectCategory}
+            selectedCategory={selectedCategory}
+          />
+          <div className="masthead-single-rule" />
         </div>
 
         <div className="gazette-grid">
@@ -36,19 +55,21 @@ export function GazetteSection() {
                     loading="lazy"
                     decoding="async"
                     src={featuredArticle.image}
-                    alt="Featured Sports News"
+                    alt={featuredArticle.title}
                     className="news-img"
                   />
                 </div>
-                <p className="article-body-latin">{featuredArticle.body}</p>
+                <p className="article-body-latin">{featuredArticle.body.slice(0, 200)}...</p>
               </div>
             </div>
 
-            <div className="gazette-footer-action">
-              <a href="#gazette" className="btn-gazette-viewall">
-                View all <i className="fa-solid fa-arrow-right-long" />
-              </a>
-            </div>
+            {!isFullPage && (
+              <div className="gazette-footer-action">
+                <SmartLink to="/news" className="btn-gazette-viewall">
+                  View all <i className="fa-solid fa-arrow-right-long" />
+                </SmartLink>
+              </div>
+            )}
           </div>
 
           <aside className="gazette-sidebar">

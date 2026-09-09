@@ -7,6 +7,7 @@ import { Timeline } from './pages/Timeline';
 import { About } from './pages/About';
 import { Gallery } from './pages/Gallery';
 import { GalleryFolder } from './pages/GalleryFolder';
+import { News } from './pages/News';
 
 function ScrollToHash() {
   const { pathname, hash } = useLocation();
@@ -37,6 +38,7 @@ export function App() {
           <Route path="/about" element={<About />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/gallery/:slug" element={<GalleryFolder />} />
+          <Route path="/news" element={<News />} />
         </Routes>
       </Layout>
     </BrowserRouter>
