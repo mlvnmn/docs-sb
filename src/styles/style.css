@@ -454,11 +454,24 @@ button {
 .hero-slide-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg,
+  background:
+    /* Bottom shadow gradient for depth and tab readability */
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.82) 0%,
+      rgba(0, 0, 0, 0.5) 18%,
+      rgba(0, 0, 0, 0.18) 34%,
+      transparent 52%
+    ),
+    /* Left-to-right gradient for title text contrast */
+    linear-gradient(
+      90deg,
       rgba(0, 0, 0, 0.68) 0%,
       rgba(0, 0, 0, 0.3) 50%,
-      rgba(0, 0, 0, 0.05) 100%);
+      rgba(0, 0, 0, 0.05) 100%
+    );
   z-index: 1;
+  pointer-events: none;
 }
 
 .hero-slide-content {
