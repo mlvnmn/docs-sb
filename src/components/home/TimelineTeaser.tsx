@@ -8,7 +8,12 @@ export function TimelineTeaser() {
 
   return (
     <div className="timeline-teaser">
-      <h2 className="timeline-teaser-title">Our Milestones &amp; Momentum</h2>
+      <span className="timeline-teaser-kicker-bar" aria-hidden="true" />
+
+      <h2 className="timeline-teaser-title">
+        Our <span className="timeline-teaser-title-violet">Milestones</span> &amp;{' '}
+        <span className="title-highlight">Momentum</span>
+      </h2>
 
       <p className="timeline-teaser-sub">
         Trace the milestones that shaped the Department of Computer Science — from its founding batch to the

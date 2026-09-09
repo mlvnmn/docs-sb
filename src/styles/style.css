@@ -625,18 +625,50 @@ button {
   width: 100%;
   max-width: 100%;
   margin: -4px 0 -5rem;
-  background-color: #101c56;
+  /* Matches .tl-page/.tl-road's flat navy exactly (see the "TIMELINE / OUR
+     JOURNEY PAGE" section) — this teaser borrows that page's card styles
+     wholesale, so it now sits on the same base tone instead of a slightly
+     off-hue blue, and the grid texture + glow blobs below are the same
+     atmosphere treatment used behind that page's road. */
+  background-color: #1a2359;
   color: #ffffff;
   padding: 4.5rem 2rem 6.5rem;
   border-radius: 0 0 160px 160px;
-  box-shadow: 0 30px 60px rgba(16, 28, 86, 0.28);
+  box-shadow: 0 30px 60px rgba(13, 19, 52, 0.35);
   overflow: hidden;
   z-index: 10;
+}
+
+.life-glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.blob-life-left {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(255, 22, 91, 0.16) 0%, rgba(255, 22, 91, 0) 70%);
+  filter: blur(80px);
+  top: -120px;
+  left: -160px;
+}
+
+.blob-life-right {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(27, 121, 255, 0.18) 0%, rgba(27, 121, 255, 0) 70%);
+  filter: blur(90px);
+  bottom: -160px;
+  right: -180px;
 }
 
 .life-container {
   max-width: 1360px;
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 .life-grid {
@@ -658,6 +690,15 @@ button {
   max-width: 620px;
 }
 
+.timeline-teaser-kicker-bar {
+  display: block;
+  width: 46px;
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.6);
+}
+
 .timeline-teaser-title {
   font-family: var(--font-heading);
   font-weight: 800;
@@ -665,6 +706,14 @@ button {
   line-height: 1.15;
   color: #ffffff;
   letter-spacing: -0.01em;
+}
+
+.timeline-teaser-title-violet {
+  background: linear-gradient(135deg, #a78bfa 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 .timeline-teaser-sub {
@@ -681,7 +730,10 @@ button {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: calc(1.5rem + 20px);
+  /* Gives the connecting road's bend (see TimelineTeaserRoad.tsx) enough
+     vertical room between the two rows to read as a real arc rather than a
+     tight, sharp-looking elbow. */
+  gap: calc(2rem + 32px);
   margin-top: 0.5rem;
   background: transparent;
 }
@@ -702,18 +754,30 @@ button {
   position: relative;
   z-index: 1;
   display: flex;
-  padding-left: 1.75rem;
+  /* Just wide enough to clear the road's stroke (see TimelineTeaserRoad.tsx)
+     without overlapping the card, so the glowing track reads as hugging the
+     card's own edge rather than floating in a wide separate gutter. */
+  padding-left: 1rem;
 }
 
 .timeline-teaser-row-reverse {
   padding-left: 0;
-  padding-right: 1.75rem;
+  padding-right: 1rem;
 }
 
 .timeline-teaser-card {
   flex: 1;
   min-width: 0;
   padding: 0.85rem 1rem;
+  border-radius: 1.25rem;
+  background: rgba(11, 16, 42, 0.94);
+}
+
+/* The glowing SVG track stands in for the flat accent bar the shared .tl-card
+   family normally renders on every card's left edge — without this, the
+   teaser would show both at once. */
+.timeline-teaser-card .tl-card-bar {
+  display: none;
 }
 
 .timeline-teaser-card .tl-card-head {
@@ -732,6 +796,8 @@ button {
 .timeline-teaser-card .tl-icon-box {
   width: 1.7rem;
   height: 1.7rem;
+  background: color-mix(in srgb, var(--tl-accent) 16%, transparent);
+  border-color: color-mix(in srgb, var(--tl-accent) 45%, transparent);
 }
 
 .timeline-teaser-card .tl-icon-box .material-symbols-outlined {
