@@ -16,26 +16,22 @@ export function FacultyDirectory() {
       <section className="people-section" id="people" style={{ paddingTop: '1rem' }}>
         <div className="retro-star star-1">✦</div>
         <div className="retro-star star-2">✧</div>
-        <div className="retro-star star-3">✦</div>
-        <div className="retro-star star-4">✦</div>
+        <div className="retro-star star-3">✳</div>
+        <div className="retro-star star-4">+</div>
 
         <div className="people-container">
-          <h1 className="people-title" style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', marginBottom: '0.5rem' }}>
-            OUR PEOPLE
-          </h1>
-          <p
-            style={{
-              textAlign: 'center',
-              color: '#cbd5e1',
-              fontSize: '1.1rem',
-              maxWidth: '720px',
-              margin: '0 auto 2.5rem',
-              fontWeight: 500,
-            }}
-          >
-            Meet the dedicated educators, researchers, and technical experts guiding the next generation of computer
-            scientists at St Berchmans College Autonomous.
-          </p>
+          <div className="people-heading-block">
+            <span className="people-kicker">Neo-Brutalism &middot; Faculty Directory</span>
+            <h1 className="people-heading">
+              Our People.
+              <br />
+              Our Department.
+            </h1>
+            <p className="people-lede">
+              Meet the dedicated educators, researchers, and technical experts guiding the next generation of
+              computer scientists at St Berchmans College Autonomous.
+            </p>
+          </div>
 
           <FacultyGrid />
         </div>

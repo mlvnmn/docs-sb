@@ -5,7 +5,9 @@ export function OverviewSection() {
 
   return (
     <section className="overview-section" id="overview">
-      <span className="overview-arcs" aria-hidden="true" />
+      <span className="overview-seam-fade" aria-hidden="true" />
+      <span className="overview-arcs arcs-top" aria-hidden="true" />
+      <span className="overview-arcs arcs-bottom" aria-hidden="true" />
       <img
         className="overview-watermark"
         src="/assets/images/dept_logo.jpeg"

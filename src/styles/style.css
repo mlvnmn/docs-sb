@@ -416,6 +416,31 @@ button {
   z-index: 1;
 }
 
+/* 5. Bridge Wash - the yellow and green corner blobs above don't reach the
+   middle of the card, so without this the flat white of .hero-card/.hero-section
+   shows through as a hard straight line across the bottom-center, right where
+   it should be blending into .overview-section's own amber-to-green gradient.
+   This is a flat, full-width, low-opacity echo of that same gradient bridging
+   the gap between the two corner blobs. */
+.hero-blob.blob-bridge,
+.hero-bottom-bridge {
+  position: absolute;
+  bottom: -55px;
+  left: 4%;
+  width: 92%;
+  height: 130px;
+  border-radius: 50%;
+  background: linear-gradient(90deg,
+      rgba(251, 191, 36, 0.32) 0%,
+      rgba(251, 191, 36, 0.1) 28%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(52, 168, 83, 0.1) 72%,
+      rgba(52, 168, 83, 0.32) 100%);
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 1;
+}
+
 .hero-container {
   /* Full-bleed: the card's own 0.8rem side padding is the frame at every width,
      so wide monitors get the same even border as laptops instead of a 170px margin. */
@@ -685,27 +710,54 @@ button {
     #ffffff;
 }
 
+/* Smooths the hand-off from the hero section's fading glow into this section's
+   own amber/green tint gradient. Both are independently-tuned gradients that
+   don't land on the same colour value right at the shared DOM edge, which reads
+   as a thin, hard line at that exact boundary; fading this section's own tint
+   in from white over the first ~110px erases that mismatch instead of trying
+   to hand-tune two unrelated gradients to match at one pixel row. */
+.overview-seam-fade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 110px;
+  background: linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Two small, separate ring clusters - one tucked behind the kicker/heading,
+   one tucked between the stats pill and the tagline - matching the reference,
+   which is NOT one continuous arc behind the whole section. */
 .overview-arcs {
   position: absolute;
-  top: -50px;
   left: 0;
-  width: 320px;
-  height: calc(100% + 50px);
+  width: 180px;
+  height: 170px;
   pointer-events: none;
   z-index: 0;
-  background: radial-gradient(circle at -40px 38%,
-      transparent 0 36px,
-      #ff5e62 36px 39px,
-      transparent 39px 52px,
-      #fbbf24 52px 55px,
-      transparent 55px 68px,
-      #34a853 68px 71px,
-      transparent 71px 84px,
-      #3b82f6 84px 87px,
-      transparent 87px 100px,
-      #a78bfa 100px 103px,
-      transparent 103px 9999px);
-  opacity: 0.55;
+  background: radial-gradient(circle at -45px 50%,
+      transparent 0 60px,
+      #ff5e62 60px 64px,
+      transparent 64px 72px,
+      #fbbf24 72px 76px,
+      transparent 76px 84px,
+      #34a853 84px 88px,
+      transparent 88px 96px,
+      #3b82f6 96px 100px,
+      transparent 100px 108px,
+      #a78bfa 108px 112px,
+      transparent 112px 9999px);
+  opacity: 0.6;
+}
+
+.overview-arcs.arcs-top {
+  top: 10px;
+}
+
+.overview-arcs.arcs-bottom {
+  bottom: 30px;
 }
 
 .overview-watermark {
@@ -754,7 +806,10 @@ button {
   color: var(--color-text-dark);
   text-transform: uppercase;
   white-space: nowrap;
-  max-width: 780px;
+  /* No max-width: as a block-level flex row it already fills .overview-container
+     (capped at 1360px there), so space-between spreads the two words across the
+     section's actual width instead of a fixed px box that reads correctly only
+     around 1440px and leaves a shrunken gap on wider screens. */
   margin-bottom: 2.5rem;
 }
 
@@ -855,8 +910,21 @@ button {
   }
 
   .overview-arcs {
-    width: 160px;
-    opacity: 0.4;
+    width: 130px;
+    height: 130px;
+    background: radial-gradient(circle at -35px 50%,
+        transparent 0 45px,
+        #ff5e62 45px 48px,
+        transparent 48px 54px,
+        #fbbf24 54px 57px,
+        transparent 57px 63px,
+        #34a853 63px 66px,
+        transparent 66px 72px,
+        #3b82f6 72px 75px,
+        transparent 75px 81px,
+        #a78bfa 81px 84px,
+        transparent 84px 9999px);
+    opacity: 0.5;
   }
 
   .overview-tagline {
@@ -880,6 +948,107 @@ button {
 
   .overview-tagline {
     font-size: 1rem;
+  }
+}
+
+/* ==================== PROGRAMS SECTION (HOME) ==================== */
+.programs-section {
+  position: relative;
+  width: 100%;
+  padding: 0.5rem 2rem 5rem;
+}
+
+.programs-container {
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.6rem;
+}
+
+.program-card {
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: var(--shadow-lg);
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.program-card:hover {
+  transform: translateY(-6px);
+}
+
+.program-poster {
+  position: relative;
+  aspect-ratio: 3 / 4.4;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.program-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.program-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.7rem 0.3rem;
+}
+
+.program-badge {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
+}
+
+.program-visit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
+}
+
+.program-visit-link i {
+  font-size: 0.68rem;
+  color: #3b82f6;
+}
+
+.program-visit-link:hover {
+  color: var(--color-primary);
+}
+
+@media (max-width: 1200px) {
+  .programs-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 620px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .programs-section {
+    padding: 0.5rem 1rem 3.5rem;
+  }
+
+  .programs-grid {
+    grid-template-columns: 1fr;
+    max-width: 380px;
   }
 }
 
@@ -2081,11 +2250,11 @@ button {
      .people-wave-bottom (revealed only through the wave's cutout curve) via a
      negative margin plus a small translateY nudge; without this, that nudge lets
      its dark background paint over the last sliver of .people-section's own
-     blue, above where the wave visually begins. */
+     cream, above where the wave visually begins. */
   z-index: 8;
-  background-color: #3761cc;
+  background-color: #fbeee2;
   padding: 4rem 1rem 4.5rem;
-  color: #ffffff;
+  color: #0f172a;
   overflow: hidden;
   margin-bottom: 0;
 }
@@ -2111,7 +2280,7 @@ button {
   left: 0;
   right: 0;
   height: 5px;
-  background-color: #3761cc;
+  background-color: #fbeee2;
   z-index: 7;
 }
 
@@ -2193,6 +2362,44 @@ button {
   letter-spacing: 0.08em;
   margin-bottom: 4rem;
   text-shadow: 4px 4px 0px #000000;
+}
+
+/* Neo-brutalist testimonial-template heading block: small letter-spaced
+   kicker + big bold left-aligned two-line heading, matching the reference's
+   bottom-left "NEO-BRUTALISM / Testimonial Cards Template" title treatment. */
+.people-heading-block {
+  text-align: left;
+  max-width: 620px;
+  margin-bottom: 3.5rem;
+}
+
+.people-kicker {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #0f172a;
+  margin-bottom: 1rem;
+}
+
+.people-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.1rem;
+  text-transform: none;
+}
+
+.people-lede {
+  font-size: 1.05rem;
+  color: #475569;
+  max-width: 520px;
+  font-weight: 500;
+  line-height: 1.6;
 }
 
 /* ==================== STRUCTURAL NEO-BRUTALISM FACULTY MASONRY GRID ==================== */
@@ -2390,10 +2597,10 @@ button {
 
 /* Brutalist Base Card Styling */
 .brutalist-card {
-  background: #fffcf2;
+  background: #ffffff;
   border: 2.5px solid #000000;
-  border-radius: 18px;
-  box-shadow: 5px 5px 0px #000000;
+  border-radius: 20px;
+  box-shadow: 6px 6px 0px #000000;
   padding: 1.6rem 1.4rem;
   position: relative;
   color: #000000;
@@ -2445,44 +2652,49 @@ button {
 .star-rating,
 .salimon-stars {
   color: #000000;
-  font-size: 0.75rem;
-  letter-spacing: 0.25rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.3rem;
   margin-top: 0.4rem;
   margin-bottom: 0.2rem;
 }
 
-/* Hard Corner Accent Triangles */
-.card-accent-triangle {
+/* Corner Accent Arrows (paper-plane doodles, echoing the reference template's
+   scattered colored arrow icons pointing off each card's corner). */
+.card-accent-arrow {
   position: absolute;
-  width: 0;
-  height: 0;
-  border-style: solid;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
   z-index: 10;
   pointer-events: none;
 }
 
-.triangle-left {
-  top: 45%;
-  left: -14px;
-  border-width: 12px 0 12px 18px;
+.arrow-left {
+  top: 42%;
+  left: -18px;
+  transform: rotate(-55deg);
 }
 
-.triangle-top-right {
-  top: -14px;
-  right: 25px;
-  border-width: 0 14px 20px 14px;
+.arrow-top-right {
+  top: -16px;
+  right: 22px;
+  transform: rotate(35deg);
 }
 
-.triangle-top-left {
-  top: -14px;
-  left: 25px;
-  border-width: 0 14px 20px 14px;
+.arrow-top-left {
+  top: -16px;
+  left: 22px;
+  transform: rotate(-15deg);
 }
 
-.triangle-bottom-right {
-  bottom: -14px;
-  right: 25px;
-  border-width: 20px 14px 0 14px;
+.arrow-bottom-right {
+  bottom: -16px;
+  right: 22px;
+  transform: rotate(120deg);
 }
 
 /* Wireframe Globe & Ring Ornaments */
@@ -2499,19 +2711,19 @@ button {
 .globe-top-right {
   top: -16px;
   right: 20px;
-  background: #fffcf2;
+  background: #ffffff;
 }
 
 .globe-top-left {
   top: -16px;
   left: 20px;
-  background: #fffcf2;
+  background: #ffffff;
 }
 
 .globe-bottom-right {
   bottom: -16px;
   right: 20px;
-  background: #fffcf2;
+  background: #ffffff;
 }
 
 /* --- Archetype A / Stephanie: Vertical Arch Portrait --- */
@@ -3878,6 +4090,15 @@ button {
     filter: blur(28px);
   }
 
+  .hero-blob.blob-bridge,
+  .hero-bottom-bridge {
+    bottom: -25px;
+    left: 2%;
+    width: 96%;
+    height: 80px;
+    filter: blur(22px);
+  }
+
   .life-section {
     width: 100%;
     max-width: 100%;
@@ -3923,6 +4144,10 @@ button {
     margin-bottom: 2rem;
   }
 
+  .people-heading-block {
+    margin-bottom: 2.5rem;
+  }
+
   .salimon-layout,
   .card-archetype-b .landscape-layout {
     grid-template-columns: 1fr;
@@ -3938,7 +4163,7 @@ button {
     display: none;
   }
 
-  .card-accent-triangle {
+  .card-accent-arrow {
     display: none;
   }
 
@@ -4074,6 +4299,15 @@ button {
     filter: blur(22px);
   }
 
+  .hero-blob.blob-bridge,
+  .hero-bottom-bridge {
+    bottom: -18px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    filter: blur(18px);
+  }
+
   .infra-title {
     font-size: 1.5rem;
   }
@@ -4114,6 +4348,14 @@ button {
     font-size: 1.6rem;
   }
 
+  .people-heading {
+    font-size: 2rem;
+  }
+
+  .people-heading-block {
+    margin-bottom: 2.2rem;
+  }
+
   .brutalist-card {
     padding: 1.4rem 1rem;
     box-shadow: 4px 4px 0px #000000;
@@ -4145,171 +4387,212 @@ button {
 .recruitment-section {
   position: relative;
   width: 100%;
-  min-height: clamp(640px, 70vw, 980px);
-  background-color: #030712;
-  background-image: url('/assets/images/sb_college_campus_mirrored.jpg');
-  background-size: cover;
-  background-position: center 8%;
-  background-repeat: no-repeat;
-  margin-top: calc(-1 * var(--wave-bleed));
-  padding: calc(7rem + var(--wave-bleed)) 4.5rem 7rem;
-  transform: translateY(-1px);
-  box-sizing: border-box;
+  background: #ffffff;
+  padding: 5rem 1.5rem 4rem;
   overflow: hidden;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Concentric semi-circle rings, same radial-gradient-ring trick as
+   .overview-arcs, but centered on the tower and arcing upward. */
+.recruitment-arcs {
+  position: absolute;
+  left: 50%;
+  bottom: 150px;
+  transform: translateX(-50%);
+  width: min(1400px, 160vw);
+  height: 620px;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 100%,
+      transparent 0 220px,
+      rgba(15, 23, 42, 0.07) 220px 223px,
+      transparent 223px 300px,
+      rgba(15, 23, 42, 0.06) 300px 303px,
+      transparent 303px 380px,
+      rgba(15, 23, 42, 0.05) 380px 383px,
+      transparent 383px 9999px);
+}
+
+.recruitment-orbit {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+  height: 440px;
+  margin: 0 auto;
+}
+
+.recruitment-tower {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 150px;
+  height: auto;
+  color: #cbd5e1;
+}
+
+.orbit-logo {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
   display: flex;
   align-items: center;
-  z-index: 5;
+  justify-content: center;
+  padding: 0.85rem;
 }
 
-.recruitment-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg,
-      rgba(3, 7, 18, 0.97) 0%,
-      rgba(3, 7, 18, 0.90) 38%,
-      rgba(3, 7, 18, 0.48) 68%,
-      rgba(3, 7, 18, 0.08) 100%);
-  z-index: 1;
+.orbit-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-.recruitment-container {
-  max-width: 1440px;
-  width: 100%;
-  height: 100%;
-  min-height: 640px;
-  margin: 0 auto;
+.orbit-left-1 {
+  bottom: 250px;
+  left: 40%;
+}
+
+.orbit-left-2 {
+  bottom: 175px;
+  left: 27%;
+}
+
+.orbit-left-3 {
+  bottom: 90px;
+  left: 12%;
+}
+
+.orbit-left-4 {
+  bottom: 10px;
+  left: 4%;
+}
+
+.orbit-right-1 {
+  bottom: 250px;
+  right: 40%;
+}
+
+.orbit-right-2 {
+  bottom: 175px;
+  right: 27%;
+}
+
+.orbit-right-3 {
+  bottom: 90px;
+  right: 12%;
+}
+
+.orbit-right-4 {
+  bottom: 10px;
+  right: 4%;
+}
+
+.recruitment-heading {
   position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
+  z-index: 1;
+  margin-top: 1rem;
 }
 
-.recruitment-title-col {
-  text-align: left;
-  max-width: 660px;
-  margin-bottom: 4rem;
+.recruitment-kicker {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 0.5rem;
 }
 
 .recruitment-title {
   font-family: var(--font-heading);
-  font-size: clamp(3.2rem, 6.2vw, 5rem);
-  font-weight: 900;
-  line-height: 1.02;
-  letter-spacing: -0.025em;
-  margin-bottom: 1.4rem;
-}
-
-.title-highlight {
-  background: linear-gradient(135deg, #38bdf8 0%, #4ade80 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-}
-
-.title-main {
-  color: #ffffff;
-}
-
-.recruitment-sub {
-  color: #94a3b8;
-  font-size: 1.2rem;
-  line-height: 1.65;
-  max-width: 540px;
-  font-weight: 400;
-}
-
-.recruitment-grid-col {
-  width: 100%;
-  max-width: 960px;
-}
-
-/* Company Logos Grid */
-.company-logo-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1.2rem 1.4rem;
-  align-items: center;
-}
-
-.company-logo-card {
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 0.9rem;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1.5px solid rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(8px);
-  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-  user-select: none;
-}
-
-.company-logo-card:hover {
-  background: #ffffff;
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
-  border-color: #38bdf8;
-}
-
-.company-logo-img {
-  max-height: 38px;
-  max-width: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  display: block;
-}
-
-.company-more-badge {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1.5px dashed rgba(255, 255, 255, 0.35);
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 1.05rem;
-  box-shadow: none;
-}
-
-.company-more-badge:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: #38bdf8;
-  color: #38bdf8;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.01em;
 }
 
 @media (max-width: 1024px) {
-  .recruitment-section {
-    min-height: auto;
-    padding: calc(7rem + var(--wave-bleed)) 2rem 4.5rem;
+  .recruitment-orbit {
+    height: 380px;
   }
 
-  .recruitment-container {
-    min-height: auto;
-  }
-
-  .company-logo-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .orbit-logo {
+    width: 62px;
+    height: 62px;
+    padding: 0.65rem;
   }
 }
 
 @media (max-width: 640px) {
   .recruitment-section {
-    padding: calc(7rem + var(--wave-bleed)) 1.25rem 3.5rem;
+    padding: 3.5rem 1rem 3rem;
   }
 
-  .company-logo-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .recruitment-orbit {
+    height: 300px;
+    max-width: 420px;
   }
-}
 
-@media (max-width: 480px) {
+  .recruitment-tower {
+    width: 100px;
+  }
 
-  /* The base clamp floors this at 3.2rem, which is wider than a 320px screen.
-     Defined after the base rule so it actually wins the cascade. */
-  .recruitment-title {
-    font-size: clamp(2rem, 9vw, 3.2rem);
+  .orbit-logo {
+    width: 48px;
+    height: 48px;
+    padding: 0.5rem;
+  }
+
+  .orbit-left-1,
+  .orbit-right-1 {
+    bottom: 190px;
+  }
+
+  .orbit-left-2,
+  .orbit-right-2 {
+    bottom: 130px;
+  }
+
+  .orbit-left-3,
+  .orbit-right-3 {
+    bottom: 68px;
+  }
+
+  .orbit-left-4,
+  .orbit-right-4 {
+    bottom: 6px;
+  }
+
+  .orbit-left-1 {
+    left: 34%;
+  }
+
+  .orbit-right-1 {
+    right: 34%;
+  }
+
+  .orbit-left-2 {
+    left: 18%;
+  }
+
+  .orbit-right-2 {
+    right: 18%;
+  }
+
+  .orbit-left-3,
+  .orbit-left-4 {
+    left: 2%;
+  }
+
+  .orbit-right-3,
+  .orbit-right-4 {
+    right: 2%;
   }
 }
 

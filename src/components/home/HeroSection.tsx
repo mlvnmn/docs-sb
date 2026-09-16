@@ -8,6 +8,7 @@ export function HeroSection() {
         <div className="hero-blob blob-blue hero-right-blue" aria-hidden="true" />
         <div className="hero-blob blob-green hero-bottom-green" aria-hidden="true" />
         <div className="hero-blob blob-yellow hero-left-yellow" aria-hidden="true" />
+        <div className="hero-blob blob-bridge hero-bottom-bridge" aria-hidden="true" />
 
         <div className="hero-container">
           <HeroSlideshow />

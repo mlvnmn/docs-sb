@@ -19,7 +19,7 @@ export function PeopleWave({ variant, style }: PeopleWaveProps) {
         className="people-wave-svg"
         preserveAspectRatio="none"
       >
-        <path d={path} fill="#3761cc" />
+        <path d={path} fill="#fbeee2" />
       </svg>
     </div>
   );

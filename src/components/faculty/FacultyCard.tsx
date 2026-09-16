@@ -13,10 +13,7 @@ export function FacultyCard({ member, eager = false }: FacultyCardProps) {
   if (archetype === 'a') {
     return (
       <div className="brutalist-card faculty-card card-archetype-a">
-        <div
-          className="card-accent-triangle triangle-top-right"
-          style={{ borderColor: `transparent ${accentColor} transparent transparent` }}
-        />
+        <i className="fa-solid fa-paper-plane card-accent-arrow arrow-top-right" style={{ color: accentColor }} />
         <div className="wireframe-globe globe-bottom-right" />
 
         <div className="person-photo-arch">
@@ -41,10 +38,7 @@ export function FacultyCard({ member, eager = false }: FacultyCardProps) {
   if (archetype === 'b') {
     return (
       <div className="brutalist-card faculty-card card-archetype-b">
-        <div
-          className="card-accent-triangle triangle-left"
-          style={{ borderColor: `transparent transparent transparent ${accentColor}` }}
-        />
+        <i className="fa-solid fa-paper-plane card-accent-arrow arrow-left" style={{ color: accentColor }} />
         <div className="wireframe-globe globe-top-right" />
 
         <div className="landscape-layout">
@@ -73,10 +67,7 @@ export function FacultyCard({ member, eager = false }: FacultyCardProps) {
   if (archetype === 'c') {
     return (
       <div className="brutalist-card faculty-card card-archetype-c">
-        <div
-          className="card-accent-triangle triangle-top-left"
-          style={{ borderColor: `${accentColor} transparent transparent transparent` }}
-        />
+        <i className="fa-solid fa-paper-plane card-accent-arrow arrow-top-left" style={{ color: accentColor }} />
 
         <div className="banner-photo-box" style={{ background: accentColor }}>
           <img {...imgProps} src={photo} alt={name} className="banner-img" />
@@ -99,10 +90,7 @@ export function FacultyCard({ member, eager = false }: FacultyCardProps) {
   return (
     <div className="brutalist-card faculty-card card-archetype-d">
       <div className="wireframe-globe globe-top-left" />
-      <div
-        className="card-accent-triangle triangle-bottom-right"
-        style={{ borderColor: `transparent transparent ${accentColor} transparent` }}
-      />
+      <i className="fa-solid fa-paper-plane card-accent-arrow arrow-bottom-right" style={{ color: accentColor }} />
 
       <div className="avatar-center-header" style={{ textAlign: 'center' }}>
         <span className="faculty-role-badge" style={{ background: accentColor, color: '#fff', marginBottom: '0.8rem' }}>

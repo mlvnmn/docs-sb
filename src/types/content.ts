@@ -151,3 +151,11 @@ export interface OverviewContent {
   taglineEmphasis: string;
 }
 
+export interface ProgramCard {
+  id: string;
+  badge: string;
+  title: string;
+  poster: string;
+  href: string;
+}
+
