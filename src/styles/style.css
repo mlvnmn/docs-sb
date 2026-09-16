@@ -2412,17 +2412,32 @@ button {
   }
 }
 
-/* Dedicated Faculty Directory Page (3-Column Grid) */
-@media (min-width: 1024px) {
-  #facultyGrid.people-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3.5rem 2.2rem;
-  }
+/* Dedicated Faculty Directory Page — horizontal-scrolling card rail.
+   #facultyGrid's id+class selector outranks the plain-class .people-grid
+   rules above (and the max-width:1024px single-column override below), so
+   this flex layout holds at every viewport width instead of just >=1024px. */
+#facultyGrid.people-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  overflow-x: auto;
+  overflow-y: visible;
+  gap: 3rem 2.2rem;
+  padding: 1.5rem 0.75rem 3rem;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
 
-  /* Scattered "pinned to a corkboard" collage: every card gets its own tiny
-     rotation + nudge (via custom properties) instead of a repeating 3-cycle,
-     so the grid reads as hand-placed rather than mechanically staggered while
-     staying in its grid cell (jitter stays well inside the row/column gap). */
+#facultyGrid.people-grid .faculty-card {
+  flex: 0 0 300px;
+  width: 300px;
+  scroll-snap-align: start;
+}
+
+/* Scattered "pinned to a corkboard" collage: every card gets its own tiny
+   rotation + nudge (via custom properties) instead of a repeating 3-cycle,
+   so the row reads as hand-placed rather than mechanically staggered. */
+@media (min-width: 640px) {
   #facultyGrid .faculty-card:nth-child(1) {
     --card-rotate: -1.6deg;
     --card-x: -4px;
