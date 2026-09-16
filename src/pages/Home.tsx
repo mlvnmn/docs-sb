@@ -1,9 +1,7 @@
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { HeroSection } from '../components/home/HeroSection';
-import { LifeSection } from '../components/home/LifeSection';
-import { GazetteSection } from '../components/home/GazetteSection';
-import { PeopleTeaserSection } from '../components/home/PeopleTeaserSection';
-import { RecruitmentSection } from '../components/home/RecruitmentSection';
+import { OverviewSection } from '../components/home/OverviewSection';
+import { AboutTeaserSection } from '../components/home/AboutTeaserSection';
 import { ContactSection } from '../components/home/ContactSection';
 import { Footer } from '../components/layout/Footer';
 
@@ -16,10 +14,8 @@ export function Home() {
   return (
     <>
       <HeroSection />
-      <LifeSection />
-      <GazetteSection />
-      <PeopleTeaserSection />
-      <RecruitmentSection />
+      <OverviewSection />
+      <AboutTeaserSection />
       <ContactSection />
       <Footer />
     </>

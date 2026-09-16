@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Header } from './Header';
 import { SearchModal } from './SearchModal';
 import { useSearchModal } from '../../hooks/useSearchModal';
+import { useHeaderHeight } from '../../hooks/useHeaderHeight';
 
 interface LayoutProps {
   children: ReactNode;
@@ -9,6 +10,7 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   const { isOpen, open, close, inputRef, fillQuickTag } = useSearchModal();
+  useHeaderHeight();
 
   return (
     <>

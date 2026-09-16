@@ -137,3 +137,17 @@ export interface GazetteTopic {
   date?: string;
 }
 
+export interface OverviewStat {
+  id: string;
+  value: string;
+  label: string;
+}
+
+export interface OverviewContent {
+  kicker: string;
+  headingLead: string;
+  headingTrail: string;
+  taglineLead: string;
+  taglineEmphasis: string;
+}
+

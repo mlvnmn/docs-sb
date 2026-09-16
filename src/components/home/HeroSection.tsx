@@ -1,5 +1,4 @@
 import { HeroSlideshow } from './HeroSlideshow';
-import { HeroWave } from './HeroWave';
 
 export function HeroSection() {
   return (
@@ -14,8 +13,6 @@ export function HeroSection() {
           <HeroSlideshow />
         </div>
       </div>
-
-      <HeroWave />
     </section>
   );
 }
