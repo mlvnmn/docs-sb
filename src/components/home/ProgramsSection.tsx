@@ -6,6 +6,10 @@ export function ProgramsSection() {
   return (
     <section className="programs-section" id="programs">
       <div className="programs-container">
+        <div className="programs-heading">
+          <h2 className="programs-title">Programs We Offer</h2>
+        </div>
+
         <div className="programs-grid">
           {programs.map((program) => (
             <div className="program-card" key={program.id}>

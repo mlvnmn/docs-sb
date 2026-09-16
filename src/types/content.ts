@@ -24,18 +24,13 @@ export interface FacultyMember {
   archetype: FacultyArchetype;
 }
 
-export interface TeaserPerson {
-  id: string;
-  name: string;
-  photo: string;
-  quote: string;
-  accentColor: string;
-  layout: 'arch' | 'landscape';
-}
-
 export interface Recruiter {
   name: string;
   logo: string;
+  /** Short display name for tickers / tight tiles (falls back to `name`). */
+  short?: string;
+  /** Industry label shown on the partners wall, e.g. "IT services". */
+  sector?: string;
 }
 
 export interface FooterLinkItem {
@@ -78,13 +73,6 @@ export interface SocialLink {
   label: string;
   icon: string;
   href: string;
-}
-
-export interface InfrastructureLab {
-  id: string;
-  name: string;
-  description?: string;
-  images: [string, string, string];
 }
 
 export interface AboutHighlight {
