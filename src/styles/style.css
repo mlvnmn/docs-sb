@@ -459,9 +459,7 @@ button {
 .hero-slider-card {
   position: relative;
   width: 100%;
-  /* The card's top padding (live header height + 15px gap) plus its 15px bottom
-     padding, so the hero still fills exactly one viewport. */
-  height: clamp(520px, calc(100vh - var(--header-height, 75px) - 30px), 1000px);
+  height: clamp(380px, 62vh, 680px);
   border-radius: 24px;
   overflow: hidden;
   /* No box-shadow: its dark blue-grey tint was showing through as a pale band
@@ -795,9 +793,9 @@ button {
    Grotesk, tight tracking, one word solid and the other stroked-outline. */
 .overview-kicker {
   display: block;
-  text-align: center;
+  text-align: left;
   font-family: var(--font-heading);
-  font-size: clamp(2.75rem, 6.5vw, 5.5rem);
+  font-size: clamp(1.5rem, 3.5vw, 2.75rem);
   line-height: 0.9;
   font-weight: 700;
   letter-spacing: -0.035em;
@@ -807,7 +805,7 @@ button {
 }
 
 .overview-title {
-  text-align: center;
+  text-align: left;
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: clamp(2.75rem, 6.5vw, 5.5rem);
@@ -3974,9 +3972,8 @@ button {
     border-bottom: none;
   }
 
-  /* The section's 0.35rem top padding plus the card's own live-header-based padding. */
   .hero-slider-card {
-    height: clamp(480px, calc(100vh - var(--header-height, 60px) - 30px - 0.35rem), 1000px);
+    height: clamp(360px, 55vh, 600px);
   }
 
   /* The brand has to shrink here or the fixed header grows past the card's top
@@ -4193,11 +4190,8 @@ button {
     border-bottom: none;
   }
 
-  /* The section's 0.35rem top padding plus the card's own live-header-based padding.
-     Lower floor than the other breakpoints so a 568px-tall phone still fits the hero
-     on one screen. */
   .hero-slider-card {
-    height: clamp(420px, calc(100vh - var(--header-height, 57px) - 30px - 0.35rem), 1000px);
+    height: clamp(320px, 50vh, 560px);
   }
 
   .brand-title {

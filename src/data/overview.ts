@@ -1,9 +1,9 @@
 import type { OverviewContent, OverviewStat } from '../types/content';
 
 export const overviewContent: OverviewContent = {
-  kicker: 'Overview',
-  headingLead: 'Of',
-  headingTrail: 'Department',
+  kicker: 'Presenting Computer Science',
+  headingLead: 'Department',
+  headingTrail: 'of the Future',
   taglineLead: '',
   taglineEmphasis: '',
 };

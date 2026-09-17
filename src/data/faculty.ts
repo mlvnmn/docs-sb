@@ -157,7 +157,7 @@ export const faculty: FacultyMember[] = [
   {
     id: 'melbin-johnson',
     name: 'Mr. Melbin Johnson',
-    role: 'LAB ASSISTANT',
+    role: 'LAB INSTRUCTOR',
     email: 'melbin@sbcollege.ac.in',
     photo: '/assets/images/faculty/mr__melbin_johnson.jpg',
     accentColor: '#ec4899',
