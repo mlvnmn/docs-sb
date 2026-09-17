@@ -364,8 +364,13 @@ button {
 .hero-right-blue {
   position: absolute;
   top: 22%;
-  right: -75px;
-  width: 510px;
+  /* right:0 + a width trimmed by the old -75px overhang reproduces the exact
+     same visible sliver (it was always clipped by body's overflow-x: hidden),
+     but without the extra 75px of real horizontal scroll-width that a negative
+     right value adds - that phantom width was visible as a gap on narrow
+     viewports whenever a browser/devtools zoom level exposed the clipped area. */
+  right: 0;
+  width: 435px;
   height: 250px;
   border-radius: 125px;
   background: #3B82F6;
@@ -384,8 +389,8 @@ button {
 .hero-bottom-green {
   position: absolute;
   bottom: -90px;
-  right: -60px;
-  width: 480px;
+  right: 0;
+  width: 420px;
   height: 320px;
   border-radius: 50%;
   background: radial-gradient(ellipse 70% 65% at 55% 40%,
@@ -459,7 +464,11 @@ button {
 .hero-slider-card {
   position: relative;
   width: 100%;
-  height: clamp(380px, 62vh, 680px);
+  /* The card's top padding (live header height + 15px gap) plus its 15px bottom
+     padding, so the hero still fills exactly one viewport - no upper cap, so it
+     keeps filling the viewport on tall windows/monitors instead of leaving a
+     gap of unframed white space below once the old 1000px ceiling was hit. */
+  height: max(520px, calc(100vh - var(--header-height, 75px) - 30px));
   border-radius: 24px;
   overflow: hidden;
   /* No box-shadow: its dark blue-grey tint was showing through as a pale band
@@ -768,10 +777,13 @@ button {
 .overview-watermark {
   position: absolute;
   top: 50%;
-  right: -6%;
+  /* right:0 + sizes trimmed by the old -6% overhang reproduces the same visible
+     watermark (the overhang was always invisible, clipped by body's
+     overflow-x: hidden) without adding real horizontal scroll-width. */
+  right: 0;
   transform: translateY(-50%);
-  width: 620px;
-  max-width: 55vw;
+  width: 580px;
+  max-width: 51vw;
   height: auto;
   object-fit: contain;
   filter: grayscale(1);
@@ -3972,8 +3984,9 @@ button {
     border-bottom: none;
   }
 
+  /* The section's 0.35rem top padding plus the card's own live-header-based padding. */
   .hero-slider-card {
-    height: clamp(360px, 55vh, 600px);
+    height: max(480px, calc(100vh - var(--header-height, 60px) - 30px - 0.35rem));
   }
 
   /* The brand has to shrink here or the fixed header grows past the card's top
@@ -4034,8 +4047,8 @@ button {
   .hero-blob.blob-blue,
   .hero-right-blue {
     top: 25%;
-    right: -80px;
-    width: 380px;
+    right: 0;
+    width: 300px;
     height: 190px;
     border-radius: 95px;
     filter: blur(24px);
@@ -4045,8 +4058,8 @@ button {
   .hero-blob.blob-green,
   .hero-bottom-green {
     bottom: -40px;
-    right: -40px;
-    width: 500px;
+    right: 0;
+    width: 460px;
     height: 180px;
     border-radius: 90px;
     filter: blur(26px);
@@ -4190,8 +4203,11 @@ button {
     border-bottom: none;
   }
 
+  /* The section's 0.35rem top padding plus the card's own live-header-based padding.
+     Lower floor than the other breakpoints so a 568px-tall phone still fits the hero
+     on one screen. */
   .hero-slider-card {
-    height: clamp(320px, 50vh, 560px);
+    height: max(420px, calc(100vh - var(--header-height, 57px) - 30px - 0.35rem));
   }
 
   .brand-title {
@@ -4240,8 +4256,8 @@ button {
   .hero-blob.blob-blue,
   .hero-right-blue {
     top: 30%;
-    right: -90px;
-    width: 300px;
+    right: 0;
+    width: 210px;
     height: 150px;
     border-radius: 75px;
     filter: blur(20px);
@@ -4251,8 +4267,8 @@ button {
   .hero-blob.blob-green,
   .hero-bottom-green {
     bottom: -30px;
-    right: -30px;
-    width: 360px;
+    right: 0;
+    width: 330px;
     height: 150px;
     border-radius: 75px;
     filter: blur(22px);
