@@ -20,12 +20,6 @@ export const heroSlides: HeroSlide[] = [
     tabLabel: "What's New",
   },
   {
-    image: '/assets/hero banner/4 banner hero.webp',
-    alt: 'Discover Your Potential',
-    titleLines: ['DISCOVER YOUR', 'POTENTIAL'],
-    tabLabel: 'Campus Life',
-  },
-  {
     image: '/assets/hero banner/5 banner hero.webp',
     alt: 'Excellence in Computer Science',
     titleLines: ['EXCELLENCE IN', 'COMPUTING'],

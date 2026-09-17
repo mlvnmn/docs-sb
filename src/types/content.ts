@@ -67,6 +67,7 @@ export interface FooterBrandingBlock {
   subText: string;
   badge: string;
   tagline: string;
+  url?: string;
 }
 
 export interface SocialLink {
@@ -78,17 +79,28 @@ export interface SocialLink {
 export interface AboutHighlight {
   id: string;
   text: string;
+  icon: string;
 }
 
 export interface AboutCourseGroup {
   heading: string;
+  badge: string;
   items: string[];
+}
+
+export interface AboutStoryContent {
+  eyebrow: string;
+  title: string;
+  paragraphs: string[];
+  image: string;
 }
 
 export interface AboutContent {
   title: string;
   intro: string;
+  teaserIntro: string;
   since: string;
+  story: AboutStoryContent;
   highlights: AboutHighlight[];
   courses: AboutCourseGroup[];
 }

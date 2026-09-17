@@ -19,10 +19,12 @@ export function ProgramsSection() {
 
               <div className="program-card-footer">
                 <span className="program-badge">{program.badge}</span>
-                <a className="program-visit-link" href={program.href}>
-                  visit website
-                  <i className="fa-solid fa-arrow-up-right-from-square" />
-                </a>
+                {program.href.startsWith('http') && (
+                  <a className="program-visit-link" href={program.href} target="_blank" rel="noopener noreferrer">
+                    visit website
+                    <i className="fa-solid fa-arrow-up-right-from-square" />
+                  </a>
+                )}
               </div>
             </div>
           ))}

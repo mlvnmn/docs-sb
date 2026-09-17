@@ -20,13 +20,13 @@ export const programs: ProgramCard[] = [
     badge: 'B.Sc AI & DS',
     title: 'AI & Data Science',
     poster: '/assets/images/programs/aids.jpg',
-    href: '#',
+    href: 'https://monday-website-kohl.vercel.app/',
   },
   {
     id: 'mca',
     badge: 'MCA',
     title: 'Master of Computer Applications',
     poster: '/assets/images/programs/mca.jpg',
-    href: '#',
+    href: 'https://sb-college-mca-website.vercel.app/',
   },
 ];

@@ -17,6 +17,7 @@ export const footerCollegeBranding: FooterBrandingBlock = {
   subText: 'Autonomous • Changanassery',
   badge: 'NAAC A+ Grade (Cycle 5)',
   tagline: 'College with Potential for Excellence • Affiliated to MG University, Kottayam.',
+  url: 'https://sbcollege.ac.in/',
 };
 
 export const socialLinks: SocialLink[] = [

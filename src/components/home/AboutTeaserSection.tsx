@@ -30,7 +30,7 @@ export function AboutTeaserSection() {
               <span className="about-v2-title-line-inner about-v2-title-accent">{headingSecondLine}</span>
             </span>
           </h2>
-          <p className="about-v2-text">{aboutContent.intro}</p>
+          <p className="about-v2-text">{aboutContent.teaserIntro}</p>
 
           <SmartLink to="/faculty" className="about-v2-link">
             Expert Faculties

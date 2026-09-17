@@ -1,10 +1,14 @@
+import { useRef } from 'react';
 import { useOverview } from '../../hooks/useOverview';
+import { useOverviewReveal } from '../../hooks/useOverviewReveal';
 
 export function OverviewSection() {
   const { content, stats } = useOverview();
+  const sectionRef = useRef<HTMLElement | null>(null);
+  useOverviewReveal(sectionRef);
 
   return (
-    <section className="overview-section" id="overview">
+    <section className="overview-section" id="overview" ref={sectionRef}>
       <span className="overview-seam-fade" aria-hidden="true" />
       <img
         className="overview-watermark"
@@ -15,9 +19,15 @@ export function OverviewSection() {
       />
 
       <div className="overview-container">
-        <span className="overview-kicker">{content.kicker}</span>
+        <span className="overview-kicker-line">
+          <span className="overview-kicker overview-kicker-line-inner">{content.kicker}</span>
+        </span>
         <h2 className="overview-title">
-          {content.headingLead} {content.headingTrail}
+          <span className="overview-title-line">
+            <span className="overview-title-line-inner">
+              {content.headingLead} {content.headingTrail}
+            </span>
+          </span>
         </h2>
 
         <div className="overview-stats-row">

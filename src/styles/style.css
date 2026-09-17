@@ -11,6 +11,7 @@
   --font-pixel: 'Press Start 2P', cursive, monospace;
   --font-fredoka: 'Fredoka', cursive, sans-serif;
   --font-overlock: 'Overlock', Georgia, serif;
+  --font-script: 'Caveat', cursive;
 
   --color-primary: #151c55;
   --color-primary-dark: #0a0e2a;
@@ -803,6 +804,12 @@ button {
 
 /* Same treatment as the "Our Partners" wall heading (.partners-title): Space
    Grotesk, tight tracking, one word solid and the other stroked-outline. */
+.overview-kicker-line {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 0.1em;
+}
+
 .overview-kicker {
   display: block;
   text-align: left;
@@ -813,7 +820,10 @@ button {
   letter-spacing: -0.035em;
   text-transform: uppercase;
   color: var(--color-primary-dark);
-  margin-bottom: 0.1em;
+}
+
+.overview-kicker-line-inner {
+  will-change: transform;
 }
 
 .overview-title {
@@ -827,6 +837,18 @@ button {
   -webkit-text-stroke: 1.5px var(--color-primary-dark);
   text-transform: uppercase;
   margin-bottom: 2.5rem;
+}
+
+.overview-title-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.overview-title-line-inner {
+  display: block;
+  will-change: transform;
 }
 
 .overview-stats {
@@ -938,11 +960,11 @@ button {
   position: relative;
   width: 100%;
   padding: 0.5rem 2rem 5rem;
-  margin-top: -120px;
+  margin-top: -40px;
 }
 
 .programs-container {
-  max-width: 1050px;
+  max-width: 1220px;
   margin: 0 auto;
 }
 
@@ -963,7 +985,7 @@ button {
 .programs-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.2rem;
+  gap: 1.5rem;
 }
 
 .program-card {
@@ -993,6 +1015,7 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top;
   display: block;
 }
 
@@ -1006,7 +1029,7 @@ button {
 .program-badge {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 0.9rem;
+  font-size: 1.02rem;
   color: var(--color-primary);
   letter-spacing: 0.02em;
 }
@@ -1015,14 +1038,14 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.68rem;
+  font-size: 0.76rem;
   font-weight: 600;
   color: var(--color-text-muted);
   transition: color 0.2s ease;
 }
 
 .program-visit-link i {
-  font-size: 0.68rem;
+  font-size: 0.76rem;
   color: #3b82f6;
 }
 
@@ -1169,6 +1192,12 @@ button {
   object-position: bottom center;
   pointer-events: none;
   transform: translateY(50px);
+  /* The source line-art canvas ends mid-building, so its bottom edge is a
+     hard rectangular cutoff against the section background. Fade the last
+     slice of the artwork to transparent so it dissolves into the page
+     instead of showing that cut line. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%);
 }
 
 @media (max-width: 900px) {
@@ -3474,6 +3503,11 @@ button {
   transform: translateY(-2px);
 }
 
+.footer-college-box-link {
+  display: block;
+  cursor: pointer;
+}
+
 .f-brand-header,
 .f-college-header {
   display: flex;
@@ -4798,8 +4832,8 @@ button {
   --tl-font-headline: 'Plus Jakarta Sans', sans-serif;
   --tl-font-body: 'Inter', sans-serif;
   --tl-font-mono: 'JetBrains Mono', monospace;
-  background: #1a2359;
-  color: #dee0ff;
+  background: #ffffff;
+  color: #1a2359;
   font-family: var(--tl-font-body);
   /* The site's global body rule sets line-height:1.6 for prose. Every label/
      heading class in this page that doesn't declare its own line-height would
@@ -4849,14 +4883,33 @@ button {
      darker tone) so there's no visible seam where this section hands off to
      the next — a gradient ending darker than the road's flat color produced
      a hard band right at that boundary. */
-  background: #1a2359;
+  background: #ffffff;
 }
 
 .tl-grid-texture {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.25;
+  opacity: 0.4;
+}
+
+/* Adds depth to the flat white fill (.tl-hero/.tl-road) without changing its
+   color: a visible dot-grid, layered under the isometric .tl-grid-texture
+   svg via a shared ::before. */
+.tl-hero::before,
+.tl-road::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(26, 35, 89, 0.22) 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
+}
+
+.tl-hero > *,
+.tl-road > * {
+  z-index: 1;
 }
 
 .tl-hero-container {
@@ -4876,17 +4929,16 @@ button {
   font-size: clamp(2rem, 5.5vw, 3.75rem);
   line-height: 1.1;
   letter-spacing: -0.02em;
-  color: #ffffff;
+  color: #1a2359;
   max-width: 780px;
   margin-bottom: 1rem;
   text-wrap: balance;
-  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.5));
 }
 
 .tl-hero-sub {
   font-size: clamp(1rem, 1.6vw, 1.25rem);
   line-height: 1.7;
-  color: #c8d0ea;
+  color: #4a5380;
   max-width: 640px;
   margin: 0 auto;
 }
@@ -4897,7 +4949,7 @@ button {
   width: 100%;
   padding: 4.5rem 0;
   overflow: hidden;
-  background: #1a2359;
+  background: #ffffff;
 }
 
 .tl-road-container {
@@ -5551,97 +5603,274 @@ button {
 }
 
 /* ==================== ABOUT PAGE ==================== */
+/* Soft pastel / rounded-card redesign: white canvas, a single pink/magenta
+   accent for badges, buttons and underlines, and per-item pastel colors
+   (pink/blue/teal/purple/amber) cycling across the highlight & course icons. */
 
-/* -- Hero -- */
-.about-hero {
-  position: relative;
-  /* Navy tint layered over the lab photo (linear-gradient stops here are
-     identical so it reads as a flat color wash, not a fade) so the image
-     shows through only faintly, blended into the section's own blue rather
-     than sitting on top of it as a distinct photo. */
-  background: linear-gradient(rgba(16, 28, 86, 0.88), rgba(16, 28, 86, 0.88)),
-    url('/assets/images/about/computer-lab.jpg') center / cover no-repeat;
-  color: #ffffff;
-  padding: calc(6rem + var(--wave-bleed)) 2rem 0;
-  overflow: hidden;
+.about-pink {
+  --about-accent: #ff4d94;
+  --about-accent-soft: #ffe1ec;
+}
+.about-blue {
+  --about-accent: #2f7ef0;
+  --about-accent-soft: #dbeaff;
+}
+.about-teal {
+  --about-accent: #10b981;
+  --about-accent-soft: #d7f5ea;
+}
+.about-purple {
+  --about-accent: #8b5cf6;
+  --about-accent-soft: #ede9fe;
+}
+.about-amber {
+  --about-accent: #d97706;
+  --about-accent-soft: #fef3c7;
 }
 
-.about-hero-container {
-  max-width: 780px;
-  margin: 0 auto;
-  padding-bottom: 4.5rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
+/* -- Shared badge / buttons -- */
 .about-hero-badge {
   display: inline-flex;
   align-items: center;
   padding: 0.4rem 1.1rem;
   border-radius: 999px;
-  border: 2px solid #ffe600;
-  color: #ffe600;
-  font-family: var(--font-pixel);
-  font-size: 0.7rem;
+  border: 1.5px solid #ff4d94;
+  background: #ffffff;
+  color: #ff4d94;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
-  margin-bottom: 1.5rem;
-}
-
-.about-hero-title {
-  font-family: var(--font-pixel);
-  font-size: clamp(1.6rem, 4vw, 2.6rem);
-  color: #ffe600;
-  letter-spacing: 0.03em;
-  line-height: 1.4;
-  text-shadow: 3px 3px 0px #000000;
-  margin-bottom: 1.5rem;
-}
-
-.about-hero-intro {
-  font-size: 1.05rem;
-  line-height: 1.8;
-  color: #dbe1ff;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 .about-cta-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  background: #ffe600;
-  color: #0f172a;
+  gap: 0.6rem;
+  background: #ff4d94;
+  color: #ffffff;
   font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 1rem;
-  padding: 0.9rem 1.85rem;
-  border-radius: 12px;
-  border: 2.5px solid #000000;
-  box-shadow: 5px 5px 0px #000000;
+  font-weight: 700;
+  font-size: 0.98rem;
+  padding: 0.9rem 1.75rem;
+  border-radius: 999px;
+  border: none;
+  box-shadow: 0 12px 24px rgba(255, 77, 148, 0.3);
   transition: var(--transition);
 }
 
 .about-cta-btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 7px 7px 0px #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 28px rgba(255, 77, 148, 0.38);
 }
 
-/* -- Gradient border card (pink / cyan / yellow mix) -- */
-.gradient-border-card {
-  padding: 3px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, #f472b6 0%, #38bdf8 50%, #ffe600 100%);
-  height: 100%;
+/* -- Decorative pastel blobs -- */
+.about-blob {
+  position: absolute;
+  border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%;
+  z-index: 0;
+  pointer-events: none;
 }
 
-.gradient-border-card-inner {
+.about-blob-blue {
+  background: #dbeaff;
+}
+
+.about-blob-pink {
+  background: #ffe1ec;
+}
+
+.about-blob-hero-tl {
+  top: -1.5rem;
+  left: -1.5rem;
+  width: 130px;
+  height: 130px;
+}
+
+.about-blob-hero-br {
+  bottom: -1.75rem;
+  right: -1.25rem;
+  width: 100px;
+  height: 100px;
+}
+
+.about-blob-story-tl {
+  top: -1.5rem;
+  left: -1.75rem;
+  width: 110px;
+  height: 110px;
+}
+
+.about-blob-story-br {
+  bottom: -1.5rem;
+  right: -1.5rem;
+  width: 90px;
+  height: 90px;
+}
+
+/* -- Hero -- */
+.about-hero {
+  position: relative;
   background: #ffffff;
-  border-radius: 17px;
-  height: 100%;
+  padding: calc(4.5rem + var(--wave-bleed)) 2rem 4rem;
+  overflow: hidden;
+}
+
+.about-hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 3.5rem;
+}
+
+.about-hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.about-hero-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  color: var(--color-text-dark);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.about-hero-intro {
+  font-size: 1.02rem;
+  line-height: 1.8;
+  color: var(--color-text-muted);
+  margin: 1.5rem 0 2rem;
+  max-width: 46ch;
+}
+
+.about-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.about-hero-media {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.about-hero-photo {
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.16);
+  position: relative;
+  z-index: 1;
+}
+
+.about-hero-arrow {
+  position: absolute;
+  top: 42%;
+  right: -0.5rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #ff4d94;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+  z-index: 2;
+}
+
+.about-hero-script {
+  position: absolute;
+  right: -0.5rem;
+  bottom: -1.5rem;
+  font-family: var(--font-script);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1.15;
+  color: #ff4d94;
+  transform: rotate(-6deg);
+  z-index: 2;
+}
+
+/* -- Story -- */
+.about-story {
+  background: #ffffff;
+  padding: 5.5rem 2rem;
+}
+
+.about-story-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: 4rem;
+}
+
+.about-story-media {
+  position: relative;
+}
+
+.about-story-media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.16);
+  position: relative;
+  z-index: 1;
+}
+
+.about-story-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.15rem);
+  color: var(--color-text-dark);
+  margin-bottom: 1.25rem;
+  line-height: 1.3;
+}
+
+.about-story-text {
+  font-size: 1.02rem;
+  line-height: 1.8;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
 }
 
 /* -- Section heading (shared) -- */
+.about-section-eyebrow {
+  display: inline-flex;
+  align-self: center;
+  padding: 0.4rem 1.1rem;
+  border-radius: 999px;
+  border: 1.5px solid #ff4d94;
+  background: #ffffff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: #ff4d94;
+  margin: 0 auto 1rem;
+}
+
+.about-highlights-container .about-section-eyebrow,
+.about-highlights-container .about-section-heading {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
 .about-section-heading {
   position: relative;
   font-family: var(--font-heading);
@@ -5650,7 +5879,7 @@ button {
   color: var(--color-text-dark);
   text-align: center;
   margin-bottom: 3rem;
-  padding-bottom: 1rem;
+  padding-bottom: 1.1rem;
 }
 
 .about-heading-underline {
@@ -5661,18 +5890,28 @@ button {
   width: 64px;
   height: 4px;
   border-radius: 999px;
-  background: #ffe600;
+  background: linear-gradient(90deg, #ff4d94, #ffb020);
+}
+
+.about-heading-underline-left {
+  position: static;
+  display: block;
+  transform: none;
+  margin: 0.9rem 0 1.5rem;
 }
 
 /* -- Highlights -- */
 .about-highlights {
-  background: #ffffff;
-  padding: 5rem 2rem;
+  background: var(--color-bg-light);
+  padding: 5.5rem 2rem;
 }
 
 .about-highlights-container {
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .about-highlights-grid {
@@ -5680,69 +5919,131 @@ button {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.5rem;
-}
-
-.about-highlights-grid .gradient-border-card {
-  flex: 1 1 300px;
-  max-width: 340px;
+  width: 100%;
 }
 
 .about-highlight-card {
+  flex: 1 1 300px;
+  max-width: 340px;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1.5rem;
+  gap: 1.1rem;
+  padding: 1.6rem;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
 }
 
-.about-highlight-check {
+.about-highlight-icon {
   flex-shrink: 0;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f472b6, #38bdf8, #ffe600);
-  color: #0f172a;
-  font-size: 0.9rem;
+  background: var(--about-accent-soft);
+  color: var(--about-accent);
+  font-size: 1.05rem;
+}
+
+.about-highlight-icon-sm {
+  flex-shrink: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--about-accent-soft);
+  color: var(--about-accent);
+  font-size: 0.7rem;
+}
+
+.about-highlight-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
 .about-highlight-text {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-text-dark);
   line-height: 1.4;
 }
 
-/* -- Courses (same section-heading + gradient-border-card style as Highlights) -- */
+.about-highlight-underline {
+  width: 32px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--about-accent);
+}
+
+/* -- Courses (same section-heading style as Highlights) -- */
 .about-courses {
   background: #ffffff;
-  padding: 0 2rem 5rem;
+  padding: 5.5rem 2rem;
 }
 
 .about-courses-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  max-width: 840px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.75rem;
+  max-width: 900px;
   margin: 0 auto;
 }
 
 .about-course-card {
-  padding: 1.75rem;
+  padding: 2rem;
+  border-radius: 20px;
+  background: var(--about-accent-soft);
+  border: 1px solid rgba(15, 23, 42, 0.04);
+}
+
+.about-course-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.about-course-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--about-accent);
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 0.25rem 0.85rem;
+}
+
+.about-course-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: var(--about-accent);
+  font-size: 1rem;
 }
 
 .about-course-heading {
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   color: var(--color-text-dark);
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.25rem;
 }
 
 .about-course-list {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.9rem;
 }
 
 .about-course-list li {
@@ -5755,20 +6056,98 @@ button {
 }
 
 /* -- Responsive -- */
-@media (max-width: 768px) {
-  .about-hero {
-    padding-top: calc(5rem + var(--wave-bleed));
+@media (max-width: 900px) {
+  .about-hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
   }
 
-  .about-hero-container {
-    padding-bottom: 3.5rem;
+  .about-hero-copy {
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-hero-media {
+    order: -1;
+  }
+
+  .about-heading-underline-left {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-story-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .about-story-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-hero {
+    padding-top: calc(4rem + var(--wave-bleed));
   }
 
   .about-highlights,
-  .about-courses {
+  .about-courses,
+  .about-story {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }
+}
+
+/* ==================== COMING SOON PAGE ==================== */
+.coming-soon-page {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #ffffff;
+  color: var(--color-text-dark);
+  padding: calc(6rem + var(--wave-bleed)) 2rem 5rem;
+}
+
+.coming-soon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.coming-soon-title {
+  font-family: var(--font-old-english);
+  font-weight: 400;
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  margin-bottom: 2.5rem;
+}
+
+.coming-soon-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: transparent;
+  color: var(--color-text-dark);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.9rem 1.85rem;
+  border-radius: 12px;
+  border: 2.5px solid rgba(15, 23, 42, 0.2);
+  transition: var(--transition);
+}
+
+.coming-soon-btn-ghost:hover {
+  border-color: var(--color-primary);
+  background: rgba(15, 23, 42, 0.04);
 }
 
 /* ==================== GALLERY PAGE ====================
@@ -5806,8 +6185,8 @@ html.lenis body {
   --gallery-pink: #fe1c5b;
   --gallery-blue: #1b7afc;
   --gallery-orange: #f68701;
-  --gallery-bg: var(--color-primary-dark);
-  --gallery-bg-light: var(--color-primary-light);
+  --gallery-bg: #ffffff;
+  --gallery-bg-light: #f5f2ee;
   position: relative;
   background: var(--gallery-bg);
   overflow: hidden;
@@ -5823,7 +6202,7 @@ html.lenis body {
   font-weight: 700;
   letter-spacing: 0.4em;
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.28);
+  color: rgba(15, 23, 42, 0.32);
   z-index: 1;
 }
 
@@ -5847,7 +6226,7 @@ html.lenis body {
   position: relative;
   z-index: 1;
   background: radial-gradient(ellipse at top, var(--gallery-bg-light) 0%, var(--gallery-bg) 65%);
-  color: #ffffff;
+  color: #0f172a;
   padding: calc(6rem + var(--wave-bleed)) 2rem 3rem;
   text-align: left;
 }
@@ -5873,7 +6252,7 @@ html.lenis body {
 }
 
 .gallery-hero-sub {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(15, 23, 42, 0.68);
   font-size: 1.05rem;
   max-width: 520px;
   margin: 0 auto;
@@ -6085,12 +6464,12 @@ html.lenis body {
   letter-spacing: -0.01em;
   font-size: clamp(1.9rem, 3.6vw, 2.75rem);
   line-height: 1.05;
-  color: #ffffff;
+  color: #0f172a;
   margin: 0 0 1.1rem;
 }
 
 .gallery-section-body {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(15, 23, 42, 0.68);
   font-size: 1.02rem;
   line-height: 1.7;
   max-width: 480px;
@@ -6114,7 +6493,7 @@ html.lenis body {
 }
 
 .gallery-hero-text {
-  color: #ffffff;
+  color: #0f172a;
 }
 
 .gallery-hero-cta {
@@ -6253,9 +6632,9 @@ html.lenis body {
 
 .gallery-pill {
   padding: 0.4rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(15, 23, 42, 0.18);
   border-radius: 999px;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(15, 23, 42, 0.75);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -6338,8 +6717,8 @@ html.lenis body {
 }
 
 .gallery-cta-left {
-  background: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
+  background: rgba(15, 23, 42, 0.04);
+  color: #0f172a;
   display: flex;
   align-items: center;
 }

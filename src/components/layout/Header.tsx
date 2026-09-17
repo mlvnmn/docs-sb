@@ -54,7 +54,7 @@ export function Header({ onSearchOpen }: HeaderProps) {
           <div className="brand-text">
             <span className="brand-title">Department of Computer Science</span>
             <span className="brand-sub">
-              St Berchmans College <span className="badge-autonomous">Autonomous</span>
+              St Berchmans College <span className="badge-autonomous">Powering Generations</span>
             </span>
           </div>
         </SmartLink>

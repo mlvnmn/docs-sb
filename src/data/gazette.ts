@@ -2,7 +2,7 @@ import type { NewsArticle, GazetteTopic } from '../types/content';
 
 export const gazetteNavLinks = [
   { label: 'All', hasDropdown: false },
-  { label: 'Market', hasDropdown: false },
+  { label: 'Initiatives', hasDropdown: false },
   { label: 'Tech & AI', hasDropdown: false },
   { label: 'Research', hasDropdown: false },
   { label: 'Campus News', hasDropdown: false },

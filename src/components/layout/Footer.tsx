@@ -36,7 +36,12 @@ export function Footer() {
             <p className="f-tagline">{footerDeptBranding.tagline}</p>
           </div>
 
-          <div className="footer-college-box">
+          <a
+            href={footerCollegeBranding.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-college-box footer-college-box-link"
+          >
             <div className="f-college-header">
               <div className="f-crest-icon">
                 <img
@@ -56,7 +61,7 @@ export function Footer() {
               </div>
             </div>
             <p className="f-tagline">{footerCollegeBranding.tagline}</p>
-          </div>
+          </a>
         </div>
 
         <div className="footer-divider-line" />

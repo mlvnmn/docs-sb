@@ -1,5 +1,6 @@
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { AboutHero } from '../components/about/AboutHero';
+import { AboutStory } from '../components/about/AboutStory';
 import { AboutHighlights } from '../components/about/AboutHighlights';
 import { AboutCourses } from '../components/about/AboutCourses';
 import { Footer } from '../components/layout/Footer';
@@ -13,6 +14,7 @@ export function About() {
   return (
     <>
       <AboutHero />
+      <AboutStory />
       <AboutHighlights />
       <AboutCourses />
       <Footer />
