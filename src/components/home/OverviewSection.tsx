@@ -1,11 +1,13 @@
 import { useRef } from 'react';
 import { useOverview } from '../../hooks/useOverview';
 import { useOverviewReveal } from '../../hooks/useOverviewReveal';
+import { useOverviewCounters } from '../../hooks/useOverviewCounters';
 
 export function OverviewSection() {
   const { content, stats } = useOverview();
   const sectionRef = useRef<HTMLElement | null>(null);
   useOverviewReveal(sectionRef);
+  useOverviewCounters(sectionRef);
 
   return (
     <section className="overview-section" id="overview" ref={sectionRef}>
@@ -38,12 +40,14 @@ export function OverviewSection() {
             {stats.map((stat) => (
               <div className="overview-stat" key={stat.id}>
                 <div className="overview-stat-value">
-                  {stat.value}
+                  <span className="overview-stat-num" data-value={stat.value}>
+                    {stat.value}
+                  </span>
                   <svg className="overview-stat-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path
                       d="M6 18L18 6M18 6H9M18 6V15"
                       stroke="currentColor"
-                      strokeWidth="2.4"
+                      strokeWidth="3.2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />

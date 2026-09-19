@@ -1,6 +1,7 @@
 import { useCallback, useLayoutEffect, useRef, useState, type FocusEvent, type MouseEvent, type RefObject } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { onEnterViewport } from './useEnterViewport';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -91,10 +92,7 @@ export function usePartnersKinetic(sectionRef: RefObject<HTMLElement | null>) {
 
         // ---- Entrance.
         const rows = q('.partners-row');
-        const tl = gsap.timeline({
-          defaults: { ease: 'power3.out' },
-          scrollTrigger: { trigger: section, start: 'top 65%', once: true },
-        });
+        const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
         tl.from(q('.partners-eyebrow'), { y: -8, autoAlpha: 0, duration: 0.6 }, 0)
           .from(q('.partners-title-line-inner'), { yPercent: 110, duration: 1, stagger: 0.09 }, 0.05)
           .from(q('.partners-lede'), { y: 14, autoAlpha: 0, duration: 0.7 }, 0.35)
@@ -104,6 +102,8 @@ export function usePartnersKinetic(sectionRef: RefObject<HTMLElement | null>) {
             0.25,
           )
           .from(q('.partners-foot'), { y: 10, autoAlpha: 0, duration: 0.6 }, 0.8);
+
+        const cleanupObserver = onEnterViewport(section, () => tl.play());
 
         // ---- Scroll-velocity skew on the rows.
         const proxy = { skew: 0 };
@@ -129,6 +129,8 @@ export function usePartnersKinetic(sectionRef: RefObject<HTMLElement | null>) {
         });
 
         return () => {
+          cleanupObserver();
+          tl.kill();
           moveX.current = null;
           moveY.current = null;
           tilt.current = null;

@@ -1,5 +1,7 @@
+import { useRef } from 'react';
 import { aboutContent } from '../../data/about';
 import { SmartLink } from '../shared/SmartLink';
+import { useAboutTeaserReveal } from '../../hooks/useAboutTeaserReveal';
 
 const TOWER_SRC = '/assets/images/about/tower-lineart.png';
 const WATERMARK_SRC = '/assets/images/dcs-watermark.png';
@@ -15,9 +17,11 @@ export function AboutTeaserSection() {
   const titleWords = aboutContent.title.split(' ');
   const headingFirstLine = titleWords.slice(0, -1).join(' ');
   const headingSecondLine = titleWords[titleWords.length - 1];
+  const sectionRef = useRef<HTMLElement | null>(null);
+  useAboutTeaserReveal(sectionRef);
 
   return (
-    <section className="about-v2-section" id="about">
+    <section className="about-v2-section" id="about" ref={sectionRef}>
       <div className="about-v2-frame">
         <img className="about-v2-watermark" src={WATERMARK_SRC} alt="" aria-hidden="true" loading="lazy" decoding="async" />
 

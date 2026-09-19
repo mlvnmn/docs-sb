@@ -1,13 +1,21 @@
+import { useRef } from 'react';
 import { usePrograms } from '../../hooks/usePrograms';
+import { useProgramsReveal } from '../../hooks/useProgramsReveal';
 
 export function ProgramsSection() {
   const programs = usePrograms();
+  const sectionRef = useRef<HTMLElement | null>(null);
+  useProgramsReveal(sectionRef);
 
   return (
-    <section className="programs-section" id="programs">
+    <section className="programs-section" id="programs" ref={sectionRef}>
       <div className="programs-container">
         <div className="programs-heading">
-          <h2 className="programs-title">Programs We Offer</h2>
+          <h2 className="programs-title">
+            <span className="programs-title-line">
+              <span className="programs-title-line-inner">Programs We Offer</span>
+            </span>
+          </h2>
         </div>
 
         <div className="programs-grid">

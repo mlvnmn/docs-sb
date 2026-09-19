@@ -3,12 +3,10 @@ import { gsap } from 'gsap';
 import { onEnterViewport } from './useEnterViewport';
 
 /**
- * Same "lines rise out of their overflow-hidden mask" entrance used by the
- * homepage "OUR PARTNERS" heading (usePartnersKinetic) — applied here to the
- * Overview section's kicker + title so the two headings share one signature
- * reveal instead of each section inventing its own.
+ * "Line slides in from the left out of its overflow-hidden mask" entrance
+ * for "Programs We Offer".
  */
-export function useOverviewReveal(sectionRef: RefObject<HTMLElement | null>) {
+export function useProgramsReveal(sectionRef: RefObject<HTMLElement | null>) {
   useLayoutEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
@@ -21,11 +19,7 @@ export function useOverviewReveal(sectionRef: RefObject<HTMLElement | null>) {
 
       const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
 
-      tl.from(q('.overview-kicker-line-inner'), { yPercent: 110, duration: 0.8 }, 0).from(
-        q('.overview-title-line-inner'),
-        { yPercent: 110, duration: 1 },
-        0.1,
-      );
+      tl.from(q('.programs-title-line-inner'), { xPercent: -110, duration: 0.8 }, 0);
 
       cleanupObserver = onEnterViewport(section, () => tl.play());
 
