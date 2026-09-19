@@ -84,9 +84,7 @@ export function PartnersSection() {
       <div className="partners-container">
         <header className="partners-head">
           <div>
-            <p className="partners-eyebrow">
-              <span className="partners-eyebrow-mark">§</span> Placements · {pad(partners.length)} partners
-            </p>
+            <span className="partners-title-bar" aria-hidden="true" />
             <h2 className="partners-title" id="partners-heading">
               <span className="partners-title-line">
                 <span className="partners-title-line-inner">Our</span>

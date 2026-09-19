@@ -749,14 +749,17 @@ button {
    small fragments. */
 .overview-stats-row {
   position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
   margin-bottom: 3.5rem;
-  transform: translateX(-150px);
+  box-sizing: border-box;
 }
 
 .overview-rings {
   position: absolute;
   top: 50%;
-  left: -178px;
+  left: -228px;
   transform: translateY(-50%);
   width: 356px;
   height: 356px;
@@ -804,17 +807,28 @@ button {
 
 /* Same treatment as the "Our Partners" wall heading (.partners-title): Space
    Grotesk, tight tracking, one word solid and the other stroked-outline. */
+.overview-title-bar {
+  display: block;
+  width: 55px;
+  height: 4.5px;
+  background: #f43f5e;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  margin-left: 30px;
+}
+
 .overview-kicker-line {
   display: block;
   overflow: hidden;
   margin-bottom: 0.1em;
+  margin-left: 30px;
 }
 
 .overview-kicker {
   display: block;
   text-align: left;
   font-family: var(--font-heading);
-  font-size: clamp(1.5rem, 3.5vw, 2.75rem);
+  font-size: calc(clamp(1.5rem, 3.5vw, 2.75rem) + 5px);
   line-height: 0.9;
   font-weight: 700;
   letter-spacing: -0.035em;
@@ -830,13 +844,14 @@ button {
   text-align: left;
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: clamp(2.75rem, 6.5vw, 5.5rem);
+  font-size: calc(clamp(2.75rem, 6.5vw, 5.5rem) + 5px);
   line-height: 0.9;
   letter-spacing: -0.035em;
   color: transparent;
   -webkit-text-stroke: 1.5px var(--color-primary-dark);
   text-transform: uppercase;
-  margin-bottom: 2.5rem;
+  margin-bottom: 4rem;
+  margin-left: 30px;
 }
 
 .overview-title-line {
@@ -862,6 +877,7 @@ button {
   padding: 1.5rem 8rem 1.5rem 9rem;
   box-shadow: var(--shadow-lg);
   flex-wrap: wrap;
+  margin-left: -100px;
 }
 
 .overview-stat {
@@ -921,7 +937,7 @@ button {
   .overview-rings {
     width: 280px;
     height: 280px;
-    left: -140px;
+    left: -190px;
     background: radial-gradient(circle at 50% 50%,
         transparent 0 105px,
         #34a853 105px 110px,
@@ -1081,6 +1097,7 @@ button {
 .about-v2-section {
   position: relative;
   width: 100%;
+  margin-top: 3rem;
 }
 
 .about-v2-frame {
@@ -1117,13 +1134,21 @@ button {
   flex-direction: column;
   align-items: flex-start;
   gap: 1.1rem;
-  transform: translate(45px, 5px);
+  transform: translate(62px, 5px);
+}
+
+.about-v2-title-bar {
+  display: block;
+  width: 55px;
+  height: 4.5px;
+  background: #f43f5e;
+  border-radius: 4px;
 }
 
 .about-v2-title {
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: clamp(2.75rem, 6.5vw, 5.5rem);
+  font-size: calc(clamp(2.75rem, 6.5vw, 5.5rem) + 5px);
   line-height: 0.9;
   letter-spacing: -0.035em;
   text-transform: uppercase;
@@ -1137,6 +1162,10 @@ button {
 
 .about-v2-title-line-inner {
   display: block;
+}
+
+.about-v2-title-line:first-child {
+  font-size: calc(clamp(1.5rem, 3.5vw, 2.75rem) + 5px);
 }
 
 .about-v2-title-accent {
@@ -1217,7 +1246,7 @@ button {
     top: 0;
     width: 100%;
     max-width: none;
-    padding: 3rem 1.5rem 0;
+    padding: 1.5rem 1.5rem 0 50px;
     transform: none;
   }
 
@@ -2930,7 +2959,7 @@ button {
   position: relative;
   width: 100%;
   background: #ffffff;
-  padding: 6.5rem 2rem 5rem;
+  padding: 10rem 2rem 5rem;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -2983,16 +3012,30 @@ button {
 
 .contact-title {
   font-family: var(--font-heading);
-  font-size: clamp(2.4rem, 4.5vw, 3.4rem);
   font-weight: 700;
-  color: #0f172a;
   letter-spacing: -0.035em;
   line-height: 0.9;
   margin-bottom: 0.8rem;
   text-transform: uppercase;
 }
 
+.contact-title-line {
+  display: block;
+}
+
+.contact-title-lead {
+  font-size: calc(clamp(1.5rem, 3.5vw, 2.75rem) + 5px);
+  color: var(--color-primary-dark);
+}
+
+.contact-title-accent {
+  font-size: calc(clamp(2.75rem, 6.5vw, 5.5rem) + 5px);
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-primary-dark);
+}
+
 .contact-title-bar {
+  display: block;
   width: 55px;
   height: 4.5px;
   background: #f43f5e;
@@ -4423,7 +4466,7 @@ button {
   position: relative;
   background: #ffffff;
   color: var(--p-ink);
-  padding: clamp(4rem, 9vh, 6.5rem) 0 clamp(3rem, 7vh, 5rem);
+  padding: clamp(6.5rem, 13vh, 10rem) 0 clamp(3rem, 7vh, 5rem);
   overflow: hidden;
 }
 
@@ -4443,28 +4486,24 @@ button {
   margin-bottom: clamp(2rem, 5vh, 3.5rem);
 }
 
-.partners-eyebrow {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 0.74rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--p-ink-soft);
-  margin-bottom: 1.25rem;
-}
-
-.partners-eyebrow-mark {
-  color: var(--p-accent);
-  margin-right: 0.35rem;
+.partners-title-bar {
+  display: block;
+  width: 55px;
+  height: 4.5px;
+  background: #f43f5e;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  margin-left: 30px;
 }
 
 .partners-title {
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: min(calc((100vw - 4rem) * 0.55 / 4.7), 7.5rem);
+  font-size: calc(clamp(2.75rem, 6.5vw, 5.5rem) + 10px);
   line-height: 0.9;
   letter-spacing: -0.035em;
   text-transform: uppercase;
+  margin-left: 30px;
 }
 
 .partners-title-line {
@@ -4477,6 +4516,10 @@ button {
 .partners-title-line-inner {
   display: block;
   will-change: transform;
+}
+
+.partners-title-line:first-child {
+  font-size: calc(clamp(1.5rem, 3.5vw, 2.75rem) + 10px);
 }
 
 .partners-title-accent {
@@ -4754,10 +4797,6 @@ button {
     row-gap: 1.25rem;
   }
 
-  .partners-title {
-    font-size: min(calc((100vw - 4rem) / 4.7), 7rem);
-  }
-
   .partners-lede {
     padding-bottom: 0;
   }
@@ -4770,10 +4809,6 @@ button {
 
   .partners-section {
     --word-size: clamp(2rem, 10.5vw, 3rem);
-  }
-
-  .partners-title {
-    font-size: min(calc((100vw - 2.5rem) / 4.7), 5rem);
   }
 
   .partners-lede {

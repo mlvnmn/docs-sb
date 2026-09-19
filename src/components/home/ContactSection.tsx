@@ -11,8 +11,11 @@ export function ContactSection() {
       <div className="contact-container">
         <div className="contact-header">
           <div className="contact-header-left">
-            <h2 className="contact-title">TALK TO US!</h2>
-            <div className="contact-title-bar" />
+            <span className="contact-title-bar" aria-hidden="true" />
+            <h2 className="contact-title">
+              <span className="contact-title-line contact-title-lead">Talk</span>
+              <span className="contact-title-line contact-title-accent">To Us!</span>
+            </h2>
             <p className="contact-desc">
               We're here to help! Reach out to us for any questions, collaborations, or general inquiries.
             </p>

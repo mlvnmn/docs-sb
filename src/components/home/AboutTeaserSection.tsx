@@ -22,6 +22,7 @@ export function AboutTeaserSection() {
         <img className="about-v2-watermark" src={WATERMARK_SRC} alt="" aria-hidden="true" loading="lazy" decoding="async" />
 
         <div className="about-v2-content">
+          <span className="about-v2-title-bar" aria-hidden="true" />
           <h2 className="about-v2-title">
             <span className="about-v2-title-line">
               <span className="about-v2-title-line-inner">{headingFirstLine}</span>

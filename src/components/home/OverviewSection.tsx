@@ -19,6 +19,7 @@ export function OverviewSection() {
       />
 
       <div className="overview-container">
+        <span className="overview-title-bar" aria-hidden="true" />
         <span className="overview-kicker-line">
           <span className="overview-kicker overview-kicker-line-inner">{content.kicker}</span>
         </span>
