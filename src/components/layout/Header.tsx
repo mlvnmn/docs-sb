@@ -4,11 +4,7 @@ import { useHeaderScroll } from '../../hooks/useHeaderScroll';
 import { useMobileMenu } from '../../hooks/useMobileMenu';
 import { SmartLink } from '../shared/SmartLink';
 
-interface HeaderProps {
-  onSearchOpen: () => void;
-}
-
-export function Header({ onSearchOpen }: HeaderProps) {
+export function Header() {
   const isScrolled = useHeaderScroll();
   const { isOpen: isMobileOpen, toggle: toggleMobile, close: closeMobile } = useMobileMenu();
   const { pathname } = useLocation();
@@ -76,9 +72,6 @@ export function Header({ onSearchOpen }: HeaderProps) {
         </nav>
 
         <div className="header-actions">
-          <button className="search-btn" id="searchBtn" aria-label="Search" onClick={onSearchOpen}>
-            <i className="fa-solid fa-magnifying-glass" />
-          </button>
           <SmartLink to="/#contact" className="btn-contact">
             Contact Us
           </SmartLink>

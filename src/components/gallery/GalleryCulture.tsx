@@ -10,8 +10,20 @@ export function GalleryCulture() {
       </div>
 
       <div className="gallery-culture-images">
-        <img src={galleryPageCopy.cultureImageA} alt="Lab session" className="gallery-culture-img-a" />
-        <img src={galleryPageCopy.cultureImageB} alt="Department event" className="gallery-culture-img-b" />
+        <img
+          src={galleryPageCopy.cultureImageA}
+          alt="Lab session"
+          className="gallery-culture-img-a"
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          src={galleryPageCopy.cultureImageB}
+          alt="Department event"
+          className="gallery-culture-img-b"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, type CSSProperties } from 'react';
 import { usePrograms } from '../../hooks/usePrograms';
 import { useProgramsReveal } from '../../hooks/useProgramsReveal';
 
@@ -18,17 +18,31 @@ export function ProgramsSection() {
           </h2>
         </div>
 
-        <div className="programs-grid">
+        <div className="programs-row">
           {programs.map((program) => (
-            <div className="program-card" key={program.id}>
+            <div
+              className="program-card"
+              key={program.id}
+              style={{ '--program-color': program.color } as CSSProperties}
+            >
               <div className="program-poster">
-                <img src={program.poster} alt={program.title} loading="lazy" decoding="async" />
+                <picture>
+                  <source srcSet={program.poster} type="image/webp" />
+                  <img src={program.posterFallback} alt={program.title} loading="lazy" decoding="async" />
+                </picture>
               </div>
 
-              <div className="program-card-footer">
+              <div className="program-overlay">
                 <span className="program-badge">{program.badge}</span>
+                <h3 className="program-overlay-title">{program.title}</h3>
+                <p className="program-overlay-desc">{program.description}</p>
                 {program.href.startsWith('http') && (
-                  <a className="program-visit-link" href={program.href} target="_blank" rel="noopener noreferrer">
+                  <a
+                    className="program-visit-link"
+                    href={program.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     visit website
                     <i className="fa-solid fa-arrow-up-right-from-square" />
                   </a>

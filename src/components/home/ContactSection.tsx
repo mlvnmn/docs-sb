@@ -1,10 +1,15 @@
+import { useRef } from 'react';
 import { siteInfo } from '../../data/siteInfo';
 import { GeometricArt } from './GeometricArt';
 import { ContactForm } from './ContactForm';
+import { useContactReveal } from '../../hooks/useContactReveal';
 
 export function ContactSection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  useContactReveal(sectionRef);
+
   return (
-    <section className="contact-section" id="contact">
+    <section className="contact-section" id="contact" ref={sectionRef}>
       <div className="contact-blob blob-contact-left" aria-hidden="true" />
       <div className="contact-blob blob-contact-right" aria-hidden="true" />
 

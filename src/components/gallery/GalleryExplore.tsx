@@ -24,7 +24,13 @@ export function GalleryExplore() {
       </div>
 
       <div className="gallery-explore-image-wrap">
-        <img src={galleryPageCopy.exploreImage} alt="Campus moment" className="gallery-explore-image" />
+        <img
+          src={galleryPageCopy.exploreImage}
+          alt="Campus moment"
+          className="gallery-explore-image"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </section>
   );

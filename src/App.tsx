@@ -1,14 +1,15 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import { Home } from './pages/Home';
-import { FacultyDirectory } from './pages/FacultyDirectory';
-import { Timeline } from './pages/Timeline';
-import { About } from './pages/About';
-import { Gallery } from './pages/Gallery';
-import { GalleryFolder } from './pages/GalleryFolder';
-import { News } from './pages/News';
-import { Initiatives } from './pages/Initiatives';
+
+const FacultyDirectory = lazy(() => import('./pages/FacultyDirectory').then((m) => ({ default: m.FacultyDirectory })));
+const Timeline = lazy(() => import('./pages/Timeline').then((m) => ({ default: m.Timeline })));
+const About = lazy(() => import('./pages/About').then((m) => ({ default: m.About })));
+const Gallery = lazy(() => import('./pages/Gallery').then((m) => ({ default: m.Gallery })));
+const GalleryFolder = lazy(() => import('./pages/GalleryFolder').then((m) => ({ default: m.GalleryFolder })));
+const News = lazy(() => import('./pages/News').then((m) => ({ default: m.News })));
+const Initiatives = lazy(() => import('./pages/Initiatives').then((m) => ({ default: m.Initiatives })));
 
 function ScrollToHash() {
   const { pathname, hash } = useLocation();
@@ -32,16 +33,18 @@ export function App() {
     <BrowserRouter>
       <ScrollToHash />
       <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/faculty" element={<FacultyDirectory />} />
-          <Route path="/timeline" element={<Timeline />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/gallery/:slug" element={<GalleryFolder />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/initiatives" element={<Initiatives />} />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/faculty" element={<FacultyDirectory />} />
+            <Route path="/timeline" element={<Timeline />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/gallery/:slug" element={<GalleryFolder />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/initiatives" element={<Initiatives />} />
+          </Routes>
+        </Suspense>
       </Layout>
     </BrowserRouter>
   );

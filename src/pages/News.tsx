@@ -102,7 +102,13 @@ export function News() {
                     <span>{story.comments} COMMENTS</span>
                   </div>
                   <div className="secondary-story-grid">
-                    <img src={story.image} alt={story.title} className="secondary-thumb" />
+                    <img
+                      src={story.image}
+                      alt={story.title}
+                      className="secondary-thumb"
+                      loading="lazy"
+                      decoding="async"
+                    />
                     <p className="secondary-excerpt">{story.excerpt}</p>
                   </div>
                   <div className="broadsheet-read-more small">
@@ -163,7 +169,13 @@ export function News() {
                   onClick={() => openArticle(article)}
                 >
                   <div className="grid-item-media">
-                    <img src={article.image} alt={article.title} className="grid-item-img" />
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="grid-item-img"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
                   <div className="grid-item-content">
                     <span className="broadsheet-category-badge">{article.category}</span>

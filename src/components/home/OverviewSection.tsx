@@ -41,7 +41,26 @@ export function OverviewSection() {
               <div className="overview-stat" key={stat.id}>
                 <div className="overview-stat-value">
                   <span className="overview-stat-num" data-value={stat.value}>
-                    {stat.value}
+                    {stat.value.split('').map((char, i) => {
+                      const end = Number(char);
+                      const start = stat.digitStart ? stat.digitStart[i] : 0;
+                      const sequence =
+                        start === null || start === undefined
+                          ? [end]
+                          : Array.from({ length: end - start + 1 }, (_, n) => start + n);
+
+                      return (
+                        <span className="overview-digit-reel" key={i}>
+                          <span className="overview-digit-track">
+                            {sequence.map((digit, di) => (
+                              <span className="overview-digit-cell" key={di}>
+                                {digit}
+                              </span>
+                            ))}
+                          </span>
+                        </span>
+                      );
+                    })}
                   </span>
                   <svg className="overview-stat-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path

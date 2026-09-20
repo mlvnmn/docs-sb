@@ -9,7 +9,7 @@ export interface HeroSlide {
   alt: string;
   titleLines: string[];
   tabLabel: string;
-  position?: 'upper' | 'lower';
+  position?: 'top-left' | 'bottom-right';
 }
 
 export type FacultyArchetype = 'a' | 'b' | 'c' | 'd';
@@ -141,6 +141,13 @@ export interface OverviewStat {
   id: string;
   value: string;
   label: string;
+  /**
+   * Per-character odometer start digit, aligned index-for-index with
+   * `value`. `null` means that digit position stays static (no roll);
+   * a number rolls from that digit up to the real one at that position.
+   * Omitting this entirely defaults every position to rolling from 0.
+   */
+  digitStart?: (number | null)[];
 }
 
 export interface OverviewContent {
@@ -155,7 +162,10 @@ export interface ProgramCard {
   id: string;
   badge: string;
   title: string;
+  description: string;
+  color: string;
   poster: string;
+  posterFallback: string;
   href: string;
 }
 

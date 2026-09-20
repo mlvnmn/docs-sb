@@ -1,4 +1,5 @@
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
+import { useSmoothScroll } from '../hooks/useSmoothScroll';
 import { HeroSection } from '../components/home/HeroSection';
 import { OverviewSection } from '../components/home/OverviewSection';
 import { ProgramsSection } from '../components/home/ProgramsSection';
@@ -12,6 +13,7 @@ export function Home() {
     'Department of Computer Science | St Berchmans College Autonomous',
     'Department of Computer Science, St Berchmans College Autonomous. Where Ideas Become Impact. Committed to excellence in education, research, and innovation.',
   );
+  useSmoothScroll();
 
   return (
     <>

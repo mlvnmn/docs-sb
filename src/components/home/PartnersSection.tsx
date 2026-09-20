@@ -49,7 +49,6 @@ export function PartnersSection() {
   const kinetic = usePartnersKinetic(sectionRef);
 
   const rows = splitRows(partners);
-  const sectorCount = new Set(partners.map((p) => p.sector).filter(Boolean)).size;
   const current = kinetic.hovered !== null ? partners[kinetic.hovered] : null;
 
   const renderTrack = (items: RowItem[], clone: boolean) => (
@@ -141,12 +140,6 @@ export function PartnersSection() {
       <div className="partners-container">
         <div className="partners-foot">
           <p className="partners-foot-stats">
-            <span className="partners-foot-stat">
-              <span className="partners-foot-num">{pad(partners.length)}</span> companies
-            </span>
-            <span className="partners-foot-stat">
-              <span className="partners-foot-num">{pad(sectorCount)}</span> sectors
-            </span>
             <span className="partners-foot-stat partners-foot-stat--wide">Campus drives · Internships · Placements</span>
           </p>
           <SmartLink to="/#contact" className="partners-foot-link">

@@ -9,8 +9,8 @@ export const overviewContent: OverviewContent = {
 };
 
 export const overviewStats: OverviewStat[] = [
-  { id: 'students', value: '600', label: 'Students' },
-  { id: 'faculty', value: '20', label: 'Faculty' },
+  { id: 'students', value: '400', label: 'Students', digitStart: [0, null, null] },
+  { id: 'faculty', value: '18', label: 'Faculty', digitStart: [0, 6] },
   { id: 'ai-labs', value: '3', label: 'AI Labs' },
   { id: 'communities', value: '6', label: 'Communities' },
 ];

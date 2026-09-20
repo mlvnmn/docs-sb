@@ -5,7 +5,13 @@ export function GalleryStory() {
     <section className="gallery-story">
       <div className="gallery-story-image-wrap">
         <div className="gallery-story-accent" aria-hidden="true" />
-        <img src={galleryPageCopy.storyImage} alt="Campus" className="gallery-story-image" />
+        <img
+          src={galleryPageCopy.storyImage}
+          alt="Campus"
+          className="gallery-story-image"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
 
       <div className="gallery-story-text">

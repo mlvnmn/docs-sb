@@ -39,14 +39,14 @@ export function ContactForm() {
       >
         <div className="form-group">
           <label htmlFor="contactName" className="form-label">
-            What is your name?<span className="form-req">*</span>
+            What is your name?
           </label>
           <input type="text" id="contactName" name="name" placeholder="Full Name" required className="form-input" />
         </div>
 
         <div className="form-group">
           <label htmlFor="contactEmail" className="form-label">
-            What's your email address?<span className="form-req">*</span>
+            What's your email address?
           </label>
           <input
             type="email"
@@ -60,7 +60,7 @@ export function ContactForm() {
 
         <div className="form-group">
           <label htmlFor="contactPhone" className="form-label">
-            What's your phone number?<span className="form-req">*</span>
+            What's your phone number?
           </label>
           <div className="phone-input-row">
             <div className="country-pill">
@@ -81,7 +81,7 @@ export function ContactForm() {
 
         <div className="form-group">
           <label htmlFor="contactMessage" className="form-label">
-            What's your message?<span className="form-req">*</span>
+            What's your message?
           </label>
           <textarea
             id="contactMessage"

@@ -1,5 +1,4 @@
 import {
-  footerDeptBranding,
   footerCollegeBranding,
   socialLinks,
   quickLinksColumn,
@@ -14,35 +13,14 @@ export function Footer() {
   return (
     <footer className="site-footer" id="footer">
       <div className="footer-container">
-        <div className="footer-header-row">
-          <div className="footer-brand-box">
-            <div className="f-brand-header">
-              <div className="f-logo-icon">
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src="/assets/images/dept_logo.jpeg"
-                  alt="Department of Computer Science Logo"
-                  className="dept-logo-img-sm"
-                />
-              </div>
-              <div>
-                <h4 className="f-title">{footerDeptBranding.title}</h4>
-                <p className="f-sub">
-                  {footerDeptBranding.subText} <span className="badge-gold">{footerDeptBranding.badge}</span>
-                </p>
-              </div>
-            </div>
-            <p className="f-tagline">{footerDeptBranding.tagline}</p>
-          </div>
-
-          <a
-            href={footerCollegeBranding.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="footer-college-box footer-college-box-link"
-          >
-            <div className="f-college-header">
+        <div className="footer-columns-grid">
+          <div className="footer-col">
+            <a
+              href={footerCollegeBranding.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-college-banner"
+            >
               <div className="f-crest-icon">
                 <img
                   loading="lazy"
@@ -54,21 +32,14 @@ export function Footer() {
               </div>
               <div>
                 <h4 className="f-title">{footerCollegeBranding.title}</h4>
-                <p className="f-sub">
-                  {footerCollegeBranding.subText}{' '}
-                  <span className="badge-gold">{footerCollegeBranding.badge}</span>
-                </p>
+                <p className="f-sub-plain">{footerCollegeBranding.subText}</p>
+                <span className="footer-visit-btn">
+                  visit website <i className="fa-solid fa-up-right-from-square" />
+                </span>
               </div>
-            </div>
-            <p className="f-tagline">{footerCollegeBranding.tagline}</p>
-          </a>
-        </div>
+            </a>
 
-        <div className="footer-divider-line" />
-
-        <div className="footer-columns-grid">
-          <div className="footer-col">
-            <h5 className="col-heading">FOLLOW US</h5>
+            <div className="footer-identity-divider" />
             <p className="col-text">Stay connected with the Department of Computer Science on social channels.</p>
             <div className="social-links-row">
               {socialLinks.map((s) => (
@@ -81,10 +52,13 @@ export function Footer() {
 
           <div className="footer-col">
             <h5 className="col-heading">{quickLinksColumn.heading}</h5>
+            <span className="col-heading-underline" aria-hidden="true" />
             <ul className="col-links">
               {quickLinksColumn.links.map((link) => (
                 <li key={link.label}>
-                  <SmartLink to={link.href}>• {link.label}</SmartLink>
+                  <SmartLink to={link.href}>
+                    <span className="link-bullet">•</span> {link.label}
+                  </SmartLink>
                 </li>
               ))}
             </ul>
@@ -92,11 +66,13 @@ export function Footer() {
 
           <div className="footer-col">
             <h5 className="col-heading">{resourcesColumn.heading}</h5>
+            <span className="col-heading-underline" aria-hidden="true" />
             <ul className="col-links">
               {resourcesColumn.links.map((link) => (
                 <li key={link.label}>
                   <a href={link.href}>
-                    • {link.label} {link.external && <span className="ext-icon">↗</span>}
+                    <span className="link-bullet">•</span> {link.label}{' '}
+                    {link.external && <span className="ext-icon">↗</span>}
                   </a>
                 </li>
               ))}
@@ -105,6 +81,7 @@ export function Footer() {
 
           <div className="footer-col">
             <h5 className="col-heading">CONTACT INFO</h5>
+            <span className="col-heading-underline" aria-hidden="true" />
             <ul className="contact-info-list">
               <li className="contact-item">
                 <i className="fa-solid fa-location-dot contact-icon" />

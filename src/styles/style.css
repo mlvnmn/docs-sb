@@ -223,23 +223,6 @@ button {
   gap: 0.8rem;
 }
 
-.search-btn {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: #f1f5f9;
-  color: #475569;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9rem;
-}
-
-.search-btn:hover {
-  background: #e2e8f0;
-  color: #0f172a;
-}
-
 .btn-contact {
   background: #111827;
   color: #ffffff;
@@ -258,8 +241,13 @@ button {
 
 .mobile-toggle {
   display: none;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
   background: none;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
+  line-height: 1;
   color: #1e293b;
 }
 
@@ -518,8 +506,27 @@ button {
   animation-play-state: paused;
 }
 
+/* Per-slide horizontal framing so each photo's featured person stays
+   centered in the crop on every breakpoint, not just where the default
+   center crop happens to land them. */
+.hero-slide[data-index="0"] .hero-slide-img {
+  object-position: 58% center;
+}
+
+.hero-slide[data-index="1"] .hero-slide-img {
+  object-position: 54% center;
+}
+
+.hero-slide[data-index="2"] .hero-slide-img {
+  object-position: 29% center;
+}
+
 .hero-slide.active .hero-slide-img {
   animation-play-state: running;
+}
+
+.hero-slider-card.paused .hero-slide.active .hero-slide-img {
+  animation-play-state: paused;
 }
 
 @keyframes heroKenBurns {
@@ -572,21 +579,61 @@ button {
   pointer-events: none;
 }
 
-.hero-slide-content.pos-upper {
+/* Per-slide placement so the headline never sits over a face in that slide's
+   photo — each slide picks whichever corner is clear in its own image. */
+.hero-slide-content.pos-top-left {
   bottom: auto;
-  top: 36%;
-  transform: translateY(-50%);
+  top: 16%;
+}
+
+.hero-slide-content.pos-bottom-right {
+  /* Clears the counter/dots widget in this same corner (right:5%, bottom:115px,
+     ~75px tall), not just the photo's faces. */
+  bottom: 100px;
+  left: auto;
+  right: 20%;
+  text-align: right;
 }
 
 .hero-slide-title {
   font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 3.8vw, 3.5rem);
+  font-size: clamp(3.2rem, 5vw, 5.25rem);
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 0.9;
   color: #ffffff;
   text-transform: uppercase;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Each line rises up out of its own overflow-hidden mask, staggered slightly -
+   the same "lines rise from below" reveal used by the Overview heading
+   (useOverviewReveal). Re-triggered every slide change by remounting the
+   <h1> on a `key={currentSlide}` change, so it plays every time, including
+   every time the slideshow loops back to slide 1. */
+.hero-slide-title-line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-slide-title-line-inner {
+  display: block;
+  animation: heroTitleRise 0.85s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes heroTitleRise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide-title-line-inner {
+    animation: none;
+  }
 }
 
 /* Right-side Counter & Control Dots Widget */
@@ -814,7 +861,7 @@ button {
   height: auto;
   object-fit: contain;
   filter: grayscale(1);
-  opacity: 0.05;
+  opacity: 0.09;
   pointer-events: none;
   z-index: 0;
   -webkit-mask-image: radial-gradient(circle, #000 55%, transparent 100%);
@@ -845,6 +892,14 @@ button {
   overflow: hidden;
   margin-bottom: 0.1em;
   margin-left: 30px;
+  /* The outline title's -webkit-text-stroke renders outside the glyph's
+     normal metrics box, so the stroke on the very first character can spill
+     a pixel or two left of x:0 - this wrapper's own overflow: hidden (needed
+     to clip the scroll-reveal slide) then crops that overshoot off. A
+     couple pixels of padding gives it room without shifting the text
+     noticeably. */
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 .overview-kicker {
@@ -882,6 +937,8 @@ button {
   overflow: hidden;
   padding-bottom: 0.06em;
   margin-bottom: -0.06em;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 .overview-title-line-inner {
@@ -924,6 +981,26 @@ button {
   font-variant-numeric: tabular-nums;
 }
 
+.overview-digit-reel {
+  display: inline-block;
+  overflow: hidden;
+  height: 1em;
+  line-height: 1;
+  vertical-align: text-bottom;
+}
+
+.overview-digit-track {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.overview-digit-cell {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}
+
 .overview-stat-arrow {
   width: 20px;
   height: 20px;
@@ -948,7 +1025,7 @@ button {
 
 @media (max-width: 1200px) {
   .overview-watermark {
-    opacity: 0.04;
+    opacity: 0.07;
   }
 }
 
@@ -957,25 +1034,83 @@ button {
     padding: 4rem 1.25rem 4.5rem;
   }
 
-  .overview-stats {
-    gap: 1.75rem;
-    padding: 1.25rem 1.75rem 1.25rem 7rem;
+  /* The desktop heading scales with vw, but its clamp() floor (2.75rem for
+     the outline title, 1.5rem for the kicker) is tuned for tablet/desktop
+     widths - on a phone that floor is still oversized relative to the
+     viewport, forcing "PRESENTING COMPUTER SCIENCE" and "DEPARTMENT OF THE
+     FUTURE" into a cramped 2-3 line wrap. Below 768px we drop to fixed,
+     phone-appropriate sizes instead, and fully center each line (bar,
+     kicker, title) - both the block itself and the text inside it - instead
+     of hugging the desktop-only 30px left offset. */
+  .overview-kicker-line,
+  .overview-title {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
   }
 
+  /* Same centering, but the bar is an empty decorative span with no text of
+     its own to size to - `width: fit-content` on an empty element collapses
+     to 0 (making it vanish entirely), so it keeps its fixed 55px width and
+     only gets centered via the margins. */
+  .overview-title-bar {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .overview-kicker {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .overview-title {
+    font-size: 2.6rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  /* Centered at top:50% (of the whole section) the watermark lands right
+     behind the stats card and gets almost fully hidden under it - anchoring
+     it near the top-right corner instead keeps it clear of the card. */
+  .overview-watermark {
+    top: 30px;
+    right: 0;
+    transform: none;
+  }
+
+  .overview-stats-row {
+    display: flex;
+    justify-content: center;
+  }
+
+  .overview-stats {
+    flex-wrap: nowrap;
+    gap: 1.75rem;
+    padding: 1.25rem 1.75rem 1.25rem 7rem;
+    margin-left: 0;
+  }
+
+  /* Below 900px the heading/pill/next-section spacing is too tight for the
+     desktop ring's full 356px sweep - it started punching into the heading
+     above and the section boundary below. Each breakpoint below sizes the
+     ring to what its own vertical gap can actually take (verified against
+     real layout measurements, not just guessed), scaling the same band
+     proportions (75% transparent core, four ~3.5%-wide colour rings) down
+     to the smaller radius instead of reusing the desktop pixel stops. */
   .overview-rings {
-    width: 280px;
-    height: 280px;
-    left: -190px;
+    width: 180px;
+    height: 180px;
+    left: -108px;
     background: radial-gradient(circle at 50% 50%,
-        transparent 0 105px,
-        #34a853 105px 110px,
-        transparent 110px 115px,
-        #fbbf24 115px 120px,
-        transparent 120px 125px,
-        #3b82f6 125px 130px,
-        transparent 130px 135px,
-        #ff5e62 135px 140px,
-        transparent 140px 9999px);
+        transparent 0 68px,
+        #34a853 68px 71px,
+        transparent 71px 74px,
+        #fbbf24 74px 77px,
+        transparent 77px 80px,
+        #3b82f6 80px 83px,
+        transparent 83px 86px,
+        #ff5e62 86px 90px,
+        transparent 90px 9999px);
     opacity: 0.5;
   }
 
@@ -985,14 +1120,53 @@ button {
 }
 
 @media (max-width: 480px) {
+  .overview-kicker {
+    font-size: 1.15rem;
+  }
+
+  .overview-title {
+    font-size: 2.1rem;
+    margin-bottom: 2rem;
+  }
+
+  /* Below 480px the ring bleeds taller than the pill itself and starts
+     overlapping the heading above it, and a single cramped row leaves each
+     stat too small to read comfortably - a centered 2x2 grid with real
+     padding reads far better on a phone than shrinking one row forever. */
+  .overview-rings {
+    display: none;
+  }
+
   .overview-stats {
-    gap: 1.25rem 1.5rem;
-    padding: 1.1rem 1.4rem 1.1rem 2.5rem;
-    margin-left: -30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* The desktop pill's border-radius: 999px only reads as a stadium shape
+       because its width dwarfs its height; on this near-square 2x2 grid the
+       same radius clamps to half the box's shorter side, eating deep into
+       top and bottom and squeezing the two rows into a thin empty-looking
+       band. A fixed, modest radius keeps this a proper rounded card. */
+    border-radius: 28px;
+    row-gap: 1.25rem;
+    column-gap: 2rem;
+    padding: 1.5rem 1.75rem;
+    margin-left: 0;
+    width: 100%;
+    max-width: 300px;
   }
 
   .overview-stat-value {
     font-size: 1.5rem;
+    gap: 0.3rem;
+  }
+
+  .overview-stat-arrow {
+    width: 16px;
+    height: 16px;
+  }
+
+  .overview-stat-label {
+    font-size: 0.85rem;
+    white-space: nowrap;
   }
 
   .overview-tagline {
@@ -1001,25 +1175,23 @@ button {
 }
 
 @media (max-width: 400px) {
-  /* Below this, even the trimmed single-row pill can't fit four stats
-     without wrapping — and a wrapped row inside a fully pill-rounded
-     (999px) box gets its second line clipped by the corner curve. Switch
-     to an explicit 2x2 grid with a modest radius instead, so it degrades
-     to a compact rounded card rather than a broken pill. */
   .overview-stats {
-    display: inline-grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 1.75rem;
-    row-gap: 1rem;
-    padding: 1.15rem 1.5rem;
-    border-radius: 28px;
-    margin-left: -15px;
+    column-gap: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    max-width: 280px;
   }
 
-  .overview-rings {
-    width: 220px;
-    height: 220px;
-    left: -130px;
+  .overview-stat-value {
+    font-size: 1.3rem;
+  }
+
+  .overview-stat-arrow {
+    width: 14px;
+    height: 14px;
+  }
+
+  .overview-stat-label {
+    font-size: 0.78rem;
   }
 }
 
@@ -1060,33 +1232,33 @@ button {
   will-change: transform;
 }
 
-.programs-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+.programs-row {
+  display: flex;
+  align-items: stretch;
+  gap: 1.1rem;
+  height: 460px;
 }
 
 .program-card {
-  background: #ffffff;
-  border-radius: 18px;
+  position: relative;
+  flex: 1 1 0%;
+  min-width: 0;
+  border-radius: 20px;
+  overflow: hidden;
   box-shadow: var(--shadow-lg);
-  padding: 0.55rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  cursor: pointer;
+  contain: content;
+  transition: flex-grow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.program-card:hover {
-  transform: translateY(-6px);
+.program-card:hover,
+.program-card:focus-within {
+  flex-grow: 2.6;
 }
 
 .program-poster {
-  position: relative;
-  aspect-ratio: 3 / 4.4;
-  border-radius: 13px;
-  overflow: hidden;
-  background: #0f172a;
+  position: absolute;
+  inset: 0;
 }
 
 .program-poster img {
@@ -1095,58 +1267,185 @@ button {
   object-fit: cover;
   object-position: top;
   display: block;
+  will-change: transform;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.program-card-footer {
+.program-card:hover .program-poster img,
+.program-card:focus-within .program-poster img {
+  transform: scale(1.06);
+}
+
+.program-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.4rem 0.55rem 0.25rem;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 34%;
+  padding: 1.1rem 1.3rem;
+  overflow: hidden;
+  contain: layout paint;
+  will-change: height;
+  transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Single static tint + fade mask — only `height` above animates, so the
+   fade's proportions stay put instead of racing two transitions at once.
+   No backdrop-filter: blurring the region behind a resizing element forces
+   a full re-sample every animation frame and was the main source of the
+   hover/scroll jank — a plain masked gradient gets the same soft edge for
+   a fraction of the cost. */
+.program-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: color-mix(in srgb, var(--program-color) 40%, black);
+  mask-image: linear-gradient(
+    to top,
+    black 0%,
+    black 18%,
+    rgba(0, 0, 0, 0.82) 34%,
+    rgba(0, 0, 0, 0.5) 55%,
+    rgba(0, 0, 0, 0.18) 78%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to top,
+    black 0%,
+    black 18%,
+    rgba(0, 0, 0, 0.82) 34%,
+    rgba(0, 0, 0, 0.5) 55%,
+    rgba(0, 0, 0, 0.18) 78%,
+    transparent 100%
+  );
+}
+
+.program-card:hover .program-overlay,
+.program-card:focus-within .program-overlay {
+  height: 82%;
 }
 
 .program-badge {
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 1.02rem;
-  color: var(--color-primary);
-  letter-spacing: 0.02em;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  opacity: 0.85;
+  margin-bottom: 0.4rem;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+.program-overlay-title {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.3rem;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0 0 0.6rem;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+}
+
+.program-overlay-desc {
+  position: relative;
+  z-index: 1;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+  margin: 0 0 0.9rem;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.program-card:hover .program-overlay-desc,
+.program-card:focus-within .program-overlay-desc {
+  max-height: 160px;
+  opacity: 1;
+  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.05s, opacity 0.35s ease 0.12s;
 }
 
 .program-visit-link {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  transition: color 0.2s ease;
+  gap: 0.5rem;
+  align-self: flex-start;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, transform 0.3s ease;
+}
+
+.program-card:hover .program-visit-link,
+.program-card:focus-within .program-visit-link {
+  max-height: 2.5rem;
+  opacity: 1;
+  transform: translateY(0);
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, opacity 0.35s ease 0.18s,
+    transform 0.35s ease 0.18s;
 }
 
 .program-visit-link i {
-  font-size: 0.76rem;
-  color: #3b82f6;
+  font-size: 0.78rem;
 }
 
-.program-visit-link:hover {
-  color: var(--color-primary);
-}
+@media (max-width: 1024px) {
+  .programs-row {
+    height: 400px;
+  }
 
-@media (max-width: 1200px) {
-  .programs-grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 620px;
-    margin: 0 auto;
+  .program-overlay-title {
+    font-size: 1.12rem;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .programs-row {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .program-card {
+    flex: 1 1 auto;
+    height: 400px;
+    transition: height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .program-card:hover,
+  .program-card:focus-within {
+    flex-grow: 1;
+    height: 500px;
+  }
+
+  .program-overlay {
+    height: 44%;
+  }
+
+  .program-card:hover .program-overlay,
+  .program-card:focus-within .program-overlay {
+    height: 88%;
+  }
+}
+
+@media (max-width: 480px) {
   .programs-section {
     padding: 0.5rem 1rem 3.5rem;
-  }
-
-  .programs-grid {
-    grid-template-columns: 1fr;
-    max-width: 380px;
   }
 }
 
@@ -1180,8 +1479,14 @@ button {
   height: auto;
   object-fit: contain;
   object-position: left bottom;
-  opacity: 0.45;
-  clip-path: inset(0 0 1px 0);
+  opacity: 0.6;
+  /* The source art's letterforms end on a hard flat baseline right at the
+     bottom of the file - at low opacity over the gradient background that
+     reads as a stray straight line. Fading the last slice out (same trick
+     as .about-v2-tower's mask below) dissolves it instead of leaving a
+     crisp cut edge. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 94%, transparent 100%);
   pointer-events: none;
 }
 
@@ -1242,6 +1547,7 @@ button {
   line-height: 1.225;
   color: #000000;
   opacity: 0.7;
+  margin-top: 0.5rem;
 }
 
 .about-v2-link {
@@ -1249,6 +1555,8 @@ button {
   align-items: center;
   gap: 0.5rem;
   width: fit-content;
+  margin-top: 2.1rem;
+  margin-left: 4px;
   font-family: var(--font-heading);
   font-size: 0.78rem;
   font-weight: 700;
@@ -1308,8 +1616,25 @@ button {
     top: 0;
     width: 100%;
     max-width: none;
-    padding: 1.5rem 1.5rem 0 50px;
+    padding: 1.5rem 1.5rem 0;
     transform: none;
+  }
+
+  /* Center just the heading block on phones - the bar and outline title sit
+     as a unit in the middle of the frame, while their own text (and the
+     paragraph/link below) stays left-aligned, matching the same treatment
+     given to the other homepage section headings. */
+  .about-v2-title-bar,
+  .about-v2-title {
+    align-self: center;
+  }
+
+  .about-v2-title {
+    font-size: 2.6rem;
+  }
+
+  .about-v2-title-line:first-child {
+    font-size: 1.4rem;
   }
 
   .about-v2-tower {
@@ -1317,10 +1642,34 @@ button {
     z-index: 2;
     left: 0;
     top: 0;
-    width: 55%;
+    width: 42%;
     height: auto;
     aspect-ratio: 441 / 699;
-    margin: 1.5rem auto 0;
+    /* Shifted right (margin-left: auto, small right gap instead of
+       centering) and pulled closer to the text above/below it - less
+       top/bottom air means the section itself ends up shorter. */
+    margin: -1.75rem 8% 0.75rem auto;
+    /* The desktop rule's translateY(50px) nudges the tower down inside its
+       absolutely-positioned frame - harmless there since the frame has
+       fixed height to spare. Once the tower is back in normal flow here,
+       that same nudge doesn't move anything else out of the way, so it
+       just pushed the art 50px past the end of its own box and into
+       whatever section follows. Not needed once it's laid out in flow. */
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-v2-content {
+    padding: 1.25rem 1.25rem 0;
+  }
+
+  .about-v2-title {
+    font-size: 2.1rem;
+  }
+
+  .about-v2-title-line:first-child {
+    font-size: 1.15rem;
   }
 }
 
@@ -3465,13 +3814,13 @@ button {
 }
 
 .contact-submit-btn {
-  background: #181d45;
+  background: #3b82f6;
   color: #ffffff;
   font-size: 1rem;
   font-weight: 700;
   font-family: inherit;
   padding: 0.85rem 2.2rem;
-  border-radius: 10px;
+  border-radius: 999px;
   border: none;
   cursor: pointer;
   display: inline-flex;
@@ -3481,9 +3830,9 @@ button {
 }
 
 .contact-submit-btn:hover {
-  background: #0f172a;
+  background: #2563eb;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(24, 29, 69, 0.25);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
 }
 
 .contact-submit-btn i {
@@ -3513,9 +3862,30 @@ button {
   }
 }
 
+@media (max-width: 768px) {
+  /* Unlike the other homepage headings, this one stays left-aligned overall
+     on phones (not centered as a block) - only the oversized clamp() floor
+     needs correcting here. */
+  .contact-title-lead {
+    font-size: 1.4rem;
+  }
+
+  .contact-title-accent {
+    font-size: 2.6rem;
+  }
+}
+
 @media (max-width: 480px) {
   .contact-section {
     padding: 4.5rem 1.25rem 3.5rem;
+  }
+
+  .contact-title-lead {
+    font-size: 1.15rem;
+  }
+
+  .contact-title-accent {
+    font-size: 2.1rem;
   }
 
   .form-heading {
@@ -3538,42 +3908,42 @@ button {
 
 /* ==================== FOOTER ==================== */
 .site-footer {
-  width: calc(100% - 0.7rem);
-  margin: 3.5rem 0.35rem 0.35rem 0.35rem;
-  background: linear-gradient(180deg, #0d1532 0%, #080d22 100%);
-  color: #94a3b8;
+  margin: 2rem 15px 15px 15px;
+  background: linear-gradient(135deg, #fdf1f6 0%, #ffffff 42%, #eef4fd 100%);
+  color: var(--color-text-muted);
   padding: 3.8rem 3.2rem 2.6rem;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  box-shadow: 0 20px 50px rgba(8, 13, 34, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  border-radius: 32px;
+  border: 1px solid #eef1f7;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   box-sizing: border-box;
 }
 
-/* Ambient glow highlights inside footer */
-.site-footer::before {
-  content: "";
-  position: absolute;
-  top: -100px;
-  right: -100px;
-  width: 380px;
-  height: 380px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 1;
-}
-
+/* Decorative squiggle flourishes, corner-anchored */
+.site-footer::before,
 .site-footer::after {
   content: "";
   position: absolute;
-  bottom: -80px;
-  left: -80px;
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(circle, rgba(234, 179, 8, 0.07) 0%, transparent 70%);
+  width: 130px;
+  height: 150px;
+  background-repeat: no-repeat;
+  background-size: contain;
   pointer-events: none;
   z-index: 1;
+  opacity: 0.85;
+}
+
+.site-footer::before {
+  bottom: -8px;
+  left: -18px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 160' fill='none'%3E%3Cpath d='M14 12 C48 38 14 66 44 86 C70 104 96 90 100 116 C103 136 82 146 68 134' stroke='%23f472b6' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='68' cy='134' r='6' stroke='%23f472b6' stroke-width='2.5'/%3E%3C/svg%3E");
+}
+
+.site-footer::after {
+  top: -8px;
+  right: -18px;
+  transform: rotate(180deg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 160' fill='none'%3E%3Cpath d='M14 12 C48 38 14 66 44 86 C70 104 96 90 100 116 C103 136 82 146 68 134' stroke='%23f472b6' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='68' cy='134' r='6' stroke='%23f472b6' stroke-width='2.5'/%3E%3C/svg%3E");
 }
 
 .footer-container {
@@ -3583,120 +3953,93 @@ button {
   z-index: 2;
 }
 
-/* Footer Institutional Header */
-.footer-header-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-  padding-bottom: 2.4rem;
-}
-
-.footer-brand-box,
-.footer-college-box {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 20px;
-  padding: 1.6rem 1.8rem;
-  backdrop-filter: blur(10px);
-  transition: border-color 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
-}
-
-.footer-brand-box:hover,
-.footer-college-box:hover {
-  border-color: rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.045);
-  transform: translateY(-2px);
-}
-
-.footer-college-box-link {
-  display: block;
+/* Institutional banner - crest, name and a "Visit Website" CTA, styled with
+   the footer's own white-card + navy/magenta palette rather than a one-off
+   color scheme, so it reads as part of this footer, not a bolted-on widget.
+   Sits inside the "Follow Us" column (not spanning the full row), so it's
+   sized to that column's width - stacked rather than a wide left-to-right
+   bar, with its own breathing room before the "FOLLOW US" heading below. */
+.footer-college-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+  margin-bottom: 1.75rem;
   cursor: pointer;
 }
 
-.f-brand-header,
-.f-college-header {
-  display: flex;
-  align-items: center;
-  gap: 1.1rem;
-  margin-bottom: 0.65rem;
+.footer-college-banner:hover .f-title {
+  color: var(--color-accent-magenta);
 }
 
-.f-logo-icon,
+.footer-college-banner:hover .f-crest-icon {
+  transform: translateY(-2px);
+}
+
 .f-crest-icon {
   width: 52px;
   height: 52px;
   background: #ffffff;
+  border: 1px solid #eef1f7;
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
   flex-shrink: 0;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.05);
+  transition: transform 0.25s ease;
 }
 
 .dept-logo-img-sm {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  border-radius: 8px;
-}
-
-.f-crest-icon {
-  padding: 0;
-  overflow: hidden;
-}
-
-.f-crest-icon .dept-logo-img-sm {
   object-fit: cover;
   border-radius: 14px;
 }
 
 .f-title {
-  color: #ffffff;
+  color: var(--color-primary);
   font-size: 1.12rem;
   font-weight: 700;
   line-height: 1.25;
+  transition: color 0.25s ease;
 }
 
-.f-sub {
-  font-size: 0.82rem;
-  color: #94a3b8;
-  display: flex;
+.f-sub-plain {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+}
+
+.footer-visit-btn {
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.25rem;
-  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+  color: var(--color-accent-magenta);
+  font-weight: 700;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  transition: color 0.2s ease;
 }
 
-.badge-gold {
-  background: #eab308;
-  color: #0b132b;
-  font-size: 0.65rem;
-  font-weight: 800;
-  padding: 0.2rem 0.55rem;
-  border-radius: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+.footer-visit-btn i {
+  font-size: 0.72rem;
+  transition: transform 0.2s ease;
 }
 
-.f-tagline {
-  font-size: 0.86rem;
-  color: #64748b;
-  margin-top: 0.4rem;
-  line-height: 1.55;
+.footer-college-banner:hover .footer-visit-btn {
+  color: #be185d;
 }
 
-.footer-divider-line {
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 20%, rgba(255, 255, 255, 0.1) 80%, transparent 100%);
-  margin-bottom: 2.8rem;
+.footer-college-banner:hover .footer-visit-btn i {
+  transform: translateX(3px);
 }
 
 /* Columns */
 .footer-columns-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1.3fr;
+  grid-template-columns: 1.3fr 1fr 1fr 1.3fr;
   gap: 2.5rem;
   padding-bottom: 2.5rem;
 }
@@ -3704,15 +4047,30 @@ button {
 .col-heading {
   font-size: 0.85rem;
   font-weight: 800;
-  color: #eab308;
+  color: var(--color-accent-magenta);
   letter-spacing: 0.08em;
-  margin-bottom: 1.3rem;
+  margin-bottom: 0.7rem;
   text-transform: uppercase;
+}
+
+.col-heading-underline {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: var(--color-accent-magenta);
+  border-radius: 2px;
+  margin-bottom: 1.3rem;
+}
+
+.footer-identity-divider {
+  height: 1px;
+  background: #e7ebf1;
+  margin: 1.5rem 0;
 }
 
 .col-text {
   font-size: 0.84rem;
-  color: #94a3b8;
+  color: var(--color-text-muted);
   line-height: 1.55;
   margin-bottom: 1.2rem;
 }
@@ -3726,19 +4084,19 @@ button {
 .social-icon {
   width: 34px;
   height: 34px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 6px;
+  background: #f1f2f8;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.85rem;
-  color: #ffffff;
+  color: var(--color-primary);
   transition: var(--transition);
 }
 
 .social-icon:hover {
-  background: #eab308;
-  color: #0b132b;
+  background: var(--color-accent-magenta);
+  color: #ffffff;
   transform: translateY(-2px);
 }
 
@@ -3748,7 +4106,7 @@ button {
 
 .col-links a {
   font-size: 0.85rem;
-  color: #cbd5e1;
+  color: var(--color-primary);
   display: flex;
   align-items: center;
   gap: 0.3rem;
@@ -3756,12 +4114,17 @@ button {
 }
 
 .col-links a:hover {
-  color: #ffffff;
+  color: var(--color-accent-magenta);
+}
+
+.link-bullet {
+  color: var(--color-accent-magenta);
 }
 
 .ext-icon {
   font-size: 0.75rem;
-  opacity: 0.6;
+  opacity: 0.75;
+  color: var(--color-accent-magenta);
 }
 
 .contact-info-list {
@@ -3774,18 +4137,18 @@ button {
   display: flex;
   gap: 0.8rem;
   font-size: 0.84rem;
-  color: #cbd5e1;
+  color: var(--color-primary);
   line-height: 1.5;
 }
 
 .sub-contact-text {
   font-size: 0.78rem;
-  color: #64748b;
+  color: var(--color-text-muted);
   margin-top: 0.2rem;
 }
 
 .contact-icon {
-  color: #eab308;
+  color: var(--color-accent-magenta);
   font-size: 0.95rem;
   margin-top: 0.2rem;
   flex-shrink: 0;
@@ -3794,41 +4157,41 @@ button {
 /* Footer Bottom */
 .footer-bottom-row {
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid #e7ebf1;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 0.82rem;
-  color: #64748b;
+  color: var(--color-text-muted);
   flex-wrap: wrap;
   gap: 1rem;
 }
 
 .credit-athlogix {
-  font-family: var(--font-fredoka);
-  font-weight: 600;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
   font-size: 0.95rem;
-  color: #eab308;
+  color: var(--color-accent-magenta);
   text-decoration: none;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   display: inline-block;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .credit-athlogix:hover {
-  color: #facc15;
+  color: #be185d;
   transform: translateY(-1px);
 }
 
 .credit-dept {
-  color: #eab308;
+  color: var(--color-accent-magenta);
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .credit-dept:hover {
-  color: #facc15;
+  color: #be185d;
   text-decoration: underline;
 }
 
@@ -3887,63 +4250,6 @@ button {
   color: #0f172a;
 }
 
-.search-modal-box {
-  max-width: 580px;
-  padding: 2.2rem;
-}
-
-.search-modal-box h3 {
-  font-size: 1.3rem;
-  color: #0f172a;
-  margin-bottom: 1.2rem;
-}
-
-.search-input-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  background: #f1f5f9;
-  border: 1px solid #cbd5e1;
-  padding: 0.8rem 1.2rem;
-  border-radius: 30px;
-  margin-bottom: 1.2rem;
-}
-
-.search-input-wrap i {
-  color: #64748b;
-}
-
-.search-input-wrap input {
-  border: none;
-  background: transparent;
-  outline: none;
-  width: 100%;
-  font-size: 0.95rem;
-}
-
-.search-quick-tags {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  font-size: 0.8rem;
-  color: #64748b;
-}
-
-.quick-tag {
-  background: #e2e8f0;
-  color: #334155;
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 0.35rem 0.75rem;
-  border-radius: 15px;
-}
-
-.quick-tag:hover {
-  background: #2563eb;
-  color: #ffffff;
-}
-
 /* ==================== RESPONSIVE MEDIA QUERIES ==================== */
 
 /* Below the hero card's own comfortable width, the full text-labeled progress
@@ -3981,7 +4287,7 @@ button {
   }
 
   .hero-slide-title {
-    font-size: 3rem;
+    font-size: 3.6rem;
   }
 
   /* .hero-wave-bottom is a fixed 102px tall and reaches nearly full height at
@@ -4015,11 +4321,6 @@ button {
   .people-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
-  }
-
-  .footer-header-row {
-    grid-template-columns: 1fr;
-    gap: 2rem;
   }
 
   .footer-columns-grid {
@@ -4091,6 +4392,12 @@ button {
     overflow-y: auto;
   }
 
+  .nav-menu.mobile-open .nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
   .nav-menu.mobile-open .nav-item {
     width: 100%;
     margin-bottom: 0.3rem;
@@ -4146,15 +4453,23 @@ button {
   }
 
 
-  .hero-slide-content {
-    top: 50%;
+  /* Below this width the crop is too tight/portrait for the desktop per-slide
+     corner placement to reliably clear faces, so every slide falls back to the
+     same centered treatment regardless of its pos-* class. */
+  .hero-slide-content,
+  .hero-slide-content.pos-top-left,
+  .hero-slide-content.pos-bottom-right {
+    top: 70px;
+    bottom: auto;
     left: 6%;
     right: 6%;
+    transform: none;
     max-width: none;
+    text-align: left;
   }
 
   .hero-slide-title {
-    font-size: 2.4rem;
+    font-size: 2.85rem;
   }
 
   .hero-controls-widget {
@@ -4302,8 +4617,7 @@ button {
   }
 
   .site-footer {
-    width: calc(100% - 0.7rem);
-    margin: 2.5rem 0.35rem 0.35rem 0.35rem;
+    margin: 1.5rem 15px 15px 15px;
     border-radius: 20px;
     padding: 2.4rem 1.6rem 1.8rem;
   }
@@ -4325,12 +4639,6 @@ button {
 @media (max-width: 480px) {
   .header-container {
     padding: 0.5rem 0.75rem;
-  }
-
-  .search-btn {
-    width: 34px;
-    height: 34px;
-    font-size: 0.85rem;
   }
 
   .mobile-toggle {
@@ -4368,7 +4676,7 @@ button {
   }
 
   .hero-slide-title {
-    font-size: 1.95rem;
+    font-size: 2.3rem;
   }
 
   .hero-controls-widget {
@@ -4495,12 +4803,6 @@ button {
     box-shadow: 4px 4px 0px #000000;
   }
 
-  .f-brand-header,
-  .f-college-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .social-links-row {
     flex-wrap: wrap;
   }
@@ -4510,10 +4812,9 @@ button {
   }
 
   .site-footer {
-    width: calc(100% - 0.7rem);
     border-radius: 16px;
     padding: 1.8rem 1.1rem 1.4rem;
-    margin: 2rem 0.35rem 0.35rem 0.35rem;
+    margin: 1rem 15px 15px 15px;
   }
 }
 
@@ -4583,6 +4884,12 @@ button {
   overflow: hidden;
   padding-bottom: 0.06em;
   margin-bottom: -0.06em;
+  /* Same fix as .overview-title-line: the outline text's stroke overshoots
+     the glyph's normal box on the first/last character, and this wrapper's
+     overflow: hidden (needed for the scroll-reveal slide) crops it without
+     this bit of breathing room. */
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 .partners-title-line-inner {
@@ -4883,6 +5190,31 @@ button {
     --word-size: clamp(2rem, 10.5vw, 3rem);
   }
 
+  /* Same phone-size fix as the other homepage headings: the clamp() floor
+     is tuned for desktop, so below 768px it forces an oversized title.
+     Center the bar + title as a block; the words inside stay left-set. */
+  .partners-title {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+  }
+
+  /* The bar is an empty decorative span with no text to size to -
+     width: fit-content on an empty element collapses to 0 and it vanishes,
+     so it keeps its fixed 55px width and only gets centered via margins. */
+  .partners-title-bar {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .partners-title {
+    font-size: 2.6rem;
+  }
+
+  .partners-title-line:first-child {
+    font-size: 1.4rem;
+  }
+
   .partners-lede {
     font-size: 0.92rem;
   }
@@ -4895,6 +5227,21 @@ button {
 
   .partners-foot-stat--wide {
     flex-basis: 100%;
+  }
+
+  .partners-foot-link {
+    align-self: flex-end;
+    margin-top: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .partners-title {
+    font-size: 2.1rem;
+  }
+
+  .partners-title-line:first-child {
+    font-size: 1.15rem;
   }
 }
 
