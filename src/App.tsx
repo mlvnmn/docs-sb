@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 const FacultyDirectory = lazy(() => import('./pages/FacultyDirectory').then((m) => ({ default: m.FacultyDirectory })));
 const Timeline = lazy(() => import('./pages/Timeline').then((m) => ({ default: m.Timeline })));
 const About = lazy(() => import('./pages/About').then((m) => ({ default: m.About })));
+const Academics = lazy(() => import('./pages/Academics').then((m) => ({ default: m.Academics })));
 const Gallery = lazy(() => import('./pages/Gallery').then((m) => ({ default: m.Gallery })));
 const GalleryFolder = lazy(() => import('./pages/GalleryFolder').then((m) => ({ default: m.GalleryFolder })));
 const News = lazy(() => import('./pages/News').then((m) => ({ default: m.News })));
@@ -39,6 +40,32 @@ export function App() {
             <Route path="/faculty" element={<FacultyDirectory />} />
             <Route path="/timeline" element={<Timeline />} />
             <Route path="/about" element={<About />} />
+            <Route
+              path="/bcaacadamics"
+              element={
+                <Academics
+                  program="Bachelor of Computer Application"
+                  syllabusNote="The official 4-year BCA scheme and detailed course syllabus for all eight semesters is available for download."
+                  timetableBoxes={[
+                    'BCA 1st Yr A',
+                    'BCA 1st Yr B',
+                    'BCA 2nd Yr A',
+                    'BCA 2nd Yr B',
+                    'BCA 3rd Yr A',
+                    'BCA 3rd Yr B',
+                  ]}
+                />
+              }
+            />
+            <Route
+              path="/msccsacadamics"
+              element={
+                <Academics
+                  program="M.Sc Computer Science"
+                  syllabusNote="The official 2-year M.Sc Computer Science scheme and detailed course syllabus for all four semesters is available for download."
+                />
+              }
+            />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/gallery/:slug" element={<GalleryFolder />} />
             <Route path="/news" element={<News />} />

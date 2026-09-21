@@ -6,13 +6,12 @@ export function AboutHero() {
     <section className="about-hero">
       <div className="about-hero-container">
         <div className="about-hero-copy">
-          <span className="about-hero-badge">SINCE {aboutContent.since}</span>
           <h1 className="about-hero-title">{aboutContent.title}</h1>
           <span className="about-heading-underline about-heading-underline-left" />
           <p className="about-hero-intro">{aboutContent.intro}</p>
 
           <div className="about-hero-actions">
-            <SmartLink to="/about#courses" className="about-cta-btn">
+            <SmartLink to="/bcaacadamics" className="about-cta-btn">
               Academics
               <i className="fa-solid fa-arrow-right" />
             </SmartLink>

@@ -1,8 +1,7 @@
 import { useEffect, type RefObject } from 'react';
 
 /**
- * Fades/slides each photo tile up into place as it scrolls into view —
- * mirrors the reveal used on the Timeline page (see useMilestoneReveal),
+ * Fades/slides each photo tile up into place as it scrolls into view,
  * applied to the gallery folder's photo grid.
  */
 export function useGalleryReveal(containerRef: RefObject<HTMLElement | null>, itemCount: number) {

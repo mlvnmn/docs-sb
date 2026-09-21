@@ -1,19 +1,11 @@
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { TimelineHero } from '../components/timeline/TimelineHero';
-import { TimelineRoad } from '../components/timeline/TimelineRoad';
-import { Footer } from '../components/layout/Footer';
+import { TimelineArchive } from '../components/timeline/TimelineArchive';
 
 export function Timeline() {
   useDocumentMeta(
-    'Our Journey | Department of Computer Science | St Berchmans College Autonomous',
-    'Explore the milestones of the Department of Computer Science at St Berchmans College Autonomous, from its founding to its present-day academics, infrastructure, and achievements.',
+    'Timeline Archive | Department of Computer Science | St Berchmans College Autonomous',
+    'A chronicle of the Department of Computer Science at St Berchmans College Autonomous — milestones from our founding to the cutting edge.',
   );
 
-  return (
-    <div className="tl-page">
-      <TimelineHero />
-      <TimelineRoad />
-      <Footer />
-    </div>
-  );
+  return <TimelineArchive />;
 }

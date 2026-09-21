@@ -1,4 +1,5 @@
 import { aboutContent } from '../../data/about';
+import { SmartLink } from '../shared/SmartLink';
 
 export function AboutStory() {
   const { story } = aboutContent;
@@ -13,14 +14,20 @@ export function AboutStory() {
         </div>
 
         <div className="about-story-copy">
-          <span className="about-hero-badge">{story.eyebrow}</span>
           <h2 className="about-story-title">{story.title}</h2>
+          <span className="about-heading-underline about-heading-underline-left" />
           {story.paragraphs.map((paragraph) => (
             <p className="about-story-text" key={paragraph}>
               {paragraph}
             </p>
           ))}
-          <span className="about-heading-underline about-heading-underline-left" />
+
+          <div className="about-hero-actions">
+            <SmartLink to="/msccsacadamics" className="about-cta-btn">
+              Academics
+              <i className="fa-solid fa-arrow-right" />
+            </SmartLink>
+          </div>
         </div>
       </div>
     </section>

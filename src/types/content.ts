@@ -88,8 +88,27 @@ export interface AboutCourseGroup {
   items: string[];
 }
 
+export type TimelineAccent = 'blue' | 'pink' | 'yellow' | 'navy';
+
+export interface TimelineMilestone {
+  id: string;
+  year: string;
+  accent: TimelineAccent;
+  tag: string;
+  title: string;
+  description: string;
+  image: string;
+  footerLabel: string;
+  footerCode: string;
+  active?: boolean;
+}
+
+export interface TimelineIntro {
+  titleTop: string;
+  titleBottom: string;
+}
+
 export interface AboutStoryContent {
-  eyebrow: string;
   title: string;
   paragraphs: string[];
   image: string;
@@ -99,7 +118,6 @@ export interface AboutContent {
   title: string;
   intro: string;
   teaserIntro: string;
-  since: string;
   story: AboutStoryContent;
   highlights: AboutHighlight[];
   courses: AboutCourseGroup[];
@@ -167,5 +185,21 @@ export interface ProgramCard {
   poster: string;
   posterFallback: string;
   href: string;
+}
+
+export interface TimetablePeriod {
+  subject: string;
+  instructor: string;
+  isLab?: boolean;
+}
+
+export interface TimetableDayRow {
+  day: string;
+  periods: TimetablePeriod[];
+}
+
+export interface TimetableSchedule {
+  periodLabels: string[];
+  rows: TimetableDayRow[];
 }
 

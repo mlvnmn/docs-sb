@@ -1,15 +1,13 @@
 import type { AboutContent } from '../types/content';
 
 export const aboutContent: AboutContent = {
-  title: 'About Our Department',
-  since: '1992',
+  title: 'Bachelor of Computer Application',
   intro:
     'The Department of Computer Science at St. Berchmans College is at the forefront of innovation and academic excellence. The Department started functioning in 1992.',
   teaserIntro:
     'The Department of Computer Science at St. Berchmans College is at the forefront of innovation and academic excellence. The Department started functioning in 1992. Our highly regarded faculty, celebrated for their knowledge and commitment, is dedicated to supporting your journey toward success. We offer meticulously designed programs that not only grant you a prestigious qualification but also equip you with a comprehensive skill set and a competitive edge in the dynamic technology industry.',
   story: {
-    eyebrow: 'OUR STORY',
-    title: 'Building Computer Scientists Since 1992',
+    title: 'M.Sc Computer Science',
     paragraphs: [
       'Our highly regarded faculty, celebrated for their knowledge and commitment, is dedicated to supporting your journey toward success.',
       'We offer meticulously designed programs that not only grant you a prestigious qualification but also equip you with a comprehensive skill set and a competitive edge in the dynamic technology industry.',

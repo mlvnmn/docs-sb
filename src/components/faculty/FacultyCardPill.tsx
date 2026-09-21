@@ -18,7 +18,7 @@ export function FacultyCardPill({ member, eager }: { member: FacultyMember; eage
           <div className="fg-pill-photo" style={{ background: accentColor }}>
             <img {...imgProps} src={photo} alt={name} className="fg-photo-img" />
           </div>
-          <div className="fg-pill-badge" style={{ background: accentColor }}>
+          <div className="fg-pill-badge">
             <h3 className="fg-name">{name}</h3>
           </div>
         </div>

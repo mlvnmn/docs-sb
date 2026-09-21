@@ -12,8 +12,8 @@ export function Header() {
   const isActive = (label: string) => {
     if (label === 'Home') return pathname === '/';
     if (label === 'Faculty') return pathname.startsWith('/faculty');
-    if (label === 'Timeline') return pathname.startsWith('/timeline');
     if (label === 'About') return pathname.startsWith('/about');
+    if (label === 'Timeline') return pathname.startsWith('/timeline');
     if (label === 'Gallery') return pathname.startsWith('/gallery');
     if (label === 'News') return pathname.startsWith('/news');
     return false;

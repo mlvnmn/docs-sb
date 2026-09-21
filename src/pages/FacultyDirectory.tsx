@@ -3,6 +3,7 @@ import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { useFaculty } from '../hooks/useFaculty';
 import { useFacultyGalleryScroll } from '../hooks/useFacultyGalleryScroll';
 import { FacultyCluster } from '../components/faculty/FacultyCluster';
+import { FacultySecondaryNav } from '../components/faculty/FacultySecondaryNav';
 import { GalleryScrollBar } from '../components/faculty/GalleryScrollBar';
 
 const CLUSTER_SIZE = 6;
@@ -28,6 +29,8 @@ export function FacultyDirectory() {
 
   return (
     <div className="fg-page">
+      <FacultySecondaryNav />
+
       <main className="fg-scroll no-scrollbar" ref={containerRef}>
         <div className="fg-track">
           {groups.map((members, i) => (
