@@ -23,7 +23,7 @@ export function FacultyDirectory() {
   );
 
   const faculty = useFaculty();
-  const { containerRef, progress, scrollByStep } = useFacultyGalleryScroll();
+  const { containerRef, trackRef, progress, scale, scrollByStep } = useFacultyGalleryScroll();
 
   const groups = chunk(faculty, CLUSTER_SIZE);
 
@@ -31,8 +31,12 @@ export function FacultyDirectory() {
     <div className="fg-page">
       <FacultySecondaryNav />
 
-      <main className="fg-scroll no-scrollbar" ref={containerRef}>
-        <div className="fg-track">
+      <main
+        className="fg-scroll no-scrollbar"
+        ref={containerRef}
+        style={scale < 1 ? { alignItems: 'flex-start' } : undefined}
+      >
+        <div className="fg-track" ref={trackRef} style={scale < 1 ? { transform: `scale(${scale})` } : undefined}>
           {groups.map((members, i) => (
             <div className="fg-cluster-and-divider" key={`cluster-${i}`}>
               <FacultyCluster id={`cluster-${i}`} members={members} eager={i === 0} wideTallPhoto={i === 1} />
@@ -46,7 +50,12 @@ export function FacultyDirectory() {
         </div>
       </main>
 
-      <GalleryScrollBar progress={progress} onScrollLeft={() => scrollByStep(-1)} onScrollRight={() => scrollByStep(1)} />
+      <GalleryScrollBar
+        progress={progress}
+        onScrollLeft={() => scrollByStep(-1)}
+        onScrollRight={() => scrollByStep(1)}
+        style={scale < 1 ? { marginTop: 0 } : undefined}
+      />
     </div>
   );
 }

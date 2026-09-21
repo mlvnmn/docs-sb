@@ -4,7 +4,8 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
   background: #faf5f0;
   margin-top: var(--header-height, 72px);
-  min-height: calc(100dvh - var(--header-height, 72px));
+  height: calc(100dvh - var(--header-height, 72px));
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -90,6 +91,7 @@
 
 .fg-scroll {
   flex: 1;
+  min-height: 0;
   display: flex;
   align-items: center;
   overflow-x: auto;
@@ -124,7 +126,8 @@
   gap: 2rem;
   min-width: max-content;
   padding: 0.25rem 0 1rem;
-  margin-top: 5rem;
+  margin-top: 1.5rem;
+  transform-origin: top left;
 }
 
 .fg-cluster-and-divider {

@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState, type RefObject } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from 'react';
 
 interface TimelineScroll {
   containerRef: RefObject<HTMLDivElement | null>;
+  trackRef: RefObject<HTMLDivElement | null>;
   progress: number;
+  scale: number;
   scrollByStep: (direction: 1 | -1) => void;
 }
 
@@ -15,7 +17,9 @@ interface TimelineScroll {
  */
 export function useTimelineScroll(): TimelineScroll {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
+  const [scale, setScale] = useState(1);
   const stepRef = useRef(450);
 
   useEffect(() => {
@@ -27,9 +31,14 @@ export function useTimelineScroll(): TimelineScroll {
       setProgress(maxScroll <= 0 ? 0 : Math.round((el.scrollLeft / maxScroll) * 100));
 
       const firstCard = el.querySelector<HTMLElement>('[data-timeline-column]');
-      if (firstCard) {
-        const gap = parseFloat(getComputedStyle(el).columnGap || getComputedStyle(el).gap || '0');
-        stepRef.current = firstCard.offsetWidth + gap;
+      // The gap lives on .timeline-archive-row (firstCard's parent), which is
+      // the flex container the columns actually sit in — not on el itself
+      // (.timeline-archive-scroll), which only wraps that single row and so
+      // has no gap of its own to read.
+      if (firstCard && firstCard.parentElement) {
+        const rowStyle = getComputedStyle(firstCard.parentElement);
+        const gap = parseFloat(rowStyle.columnGap || rowStyle.gap || '0');
+        stepRef.current = firstCard.offsetWidth + (Number.isNaN(gap) ? 0 : gap);
       }
     };
 
@@ -105,9 +114,52 @@ export function useTimelineScroll(): TimelineScroll {
     };
   }, []);
 
+  // The timeline row's height is driven by its cards' intrinsic content
+  // (image aspect-ratio + description text), so on a short viewport (small
+  // laptop window, landscape phone, a tall header) it can exceed the space
+  // left after the title and footer. Rather than letting that overflow grow
+  // the page (forcing an unwanted vertical scrollbar) or clipping cards,
+  // shrink the row to whatever height is actually available — the page
+  // stays exactly one viewport tall and only the horizontal axis scrolls.
+  useLayoutEffect(() => {
+    const scrollEl = containerRef.current;
+    const trackEl = trackRef.current;
+    if (!scrollEl || !trackEl) return;
+
+    const recalc = () => {
+      // Measure with any existing scale removed first: getBoundingClientRect
+      // reflects the live transform, so reusing a stale scaled rect here
+      // would compound on every recalculation.
+      const prevTransform = trackEl.style.transform;
+      if (prevTransform) trackEl.style.transform = 'none';
+      const scrollRect = scrollEl.getBoundingClientRect();
+      const trackRect = trackEl.getBoundingClientRect();
+      if (prevTransform) trackEl.style.transform = prevTransform;
+
+      const naturalHeight = trackRect.height;
+      const availableHeight = scrollRect.bottom - trackRect.top;
+      if (naturalHeight <= 0 || availableHeight <= 0) return;
+      setScale(Math.min(1, availableHeight / naturalHeight));
+    };
+
+    recalc();
+
+    const ro = new ResizeObserver(recalc);
+    ro.observe(scrollEl);
+    ro.observe(trackEl);
+    window.addEventListener('resize', recalc);
+    window.addEventListener('orientationchange', recalc);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', recalc);
+      window.removeEventListener('orientationchange', recalc);
+    };
+  }, []);
+
   const scrollByStep = (direction: 1 | -1) => {
     containerRef.current?.scrollBy({ left: direction * stepRef.current, behavior: 'smooth' });
   };
 
-  return { containerRef, progress, scrollByStep };
+  return { containerRef, trackRef, progress, scale, scrollByStep };
 }

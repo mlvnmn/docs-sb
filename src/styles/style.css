@@ -1029,16 +1029,24 @@ button {
   }
 }
 
-@media (max-width: 768px) {
+/* Below 900px the pill card is swapped for the department's petal/leaf
+   shape card (built for phones, below) rather than squeezing the pill's
+   fixed-width flex-wrap layout through progressively narrower tablet
+   widths - this whole range uses the shape card instead. The heading
+   centering and section/watermark spacing that used to kick in separately
+   at 768px are folded into this same 900px breakpoint so the centered
+   heading and the centered shape card always appear together, never one
+   without the other. */
+@media (max-width: 900px) {
   .overview-section {
     padding: 4rem 1.25rem 4.5rem;
   }
 
   /* The desktop heading scales with vw, but its clamp() floor (2.75rem for
-     the outline title, 1.5rem for the kicker) is tuned for tablet/desktop
-     widths - on a phone that floor is still oversized relative to the
-     viewport, forcing "PRESENTING COMPUTER SCIENCE" and "DEPARTMENT OF THE
-     FUTURE" into a cramped 2-3 line wrap. Below 768px we drop to fixed,
+     the outline title, 1.5rem for the kicker) is tuned for desktop widths -
+     below 900px that floor is still oversized relative to the viewport,
+     forcing "PRESENTING COMPUTER SCIENCE" and "DEPARTMENT OF THE FUTURE"
+     into a cramped 2-3 line wrap. Below 900px we drop to fixed,
      phone-appropriate sizes instead, and fully center each line (bar,
      kicker, title) - both the block itself and the text inside it - instead
      of hugging the desktop-only 30px left offset. */
@@ -1083,39 +1091,86 @@ button {
     justify-content: center;
   }
 
-  .overview-stats {
-    flex-wrap: nowrap;
-    gap: 1.75rem;
-    padding: 1.25rem 1.75rem 1.25rem 7rem;
-    margin-left: 0;
+  /* The ring cluster is tuned for the desktop pill's height; it has no
+     place in the shape card's layout below, same as on phones. */
+  .overview-rings {
+    display: none;
   }
 
-  /* Below 900px the heading/pill/next-section spacing is too tight for the
-     desktop ring's full 356px sweep - it started punching into the heading
-     above and the section boundary below. Each breakpoint below sizes the
-     ring to what its own vertical gap can actually take (verified against
-     real layout measurements, not just guessed), scaling the same band
-     proportions (75% transparent core, four ~3.5%-wide colour rings) down
-     to the smaller radius instead of reusing the desktop pixel stops. */
-  .overview-rings {
-    width: 180px;
-    height: 180px;
-    left: -108px;
-    background: radial-gradient(circle at 50% 50%,
-        transparent 0 68px,
-        #34a853 68px 71px,
-        transparent 71px 74px,
-        #fbbf24 74px 77px,
-        transparent 77px 80px,
-        #3b82f6 80px 83px,
-        transparent 83px 86px,
-        #ff5e62 86px 90px,
-        transparent 90px 9999px);
-    opacity: 0.5;
+  /* The plain rounded-rect/pill card is swapped for the department's own
+     petal/leaf silhouette, painted via ::before instead of a
+     background-color so the shape's transparent notch and rounded corners
+     show through. The image is a square (1254x1254) canvas with generous
+     transparent margins on every side. Its opaque body was measured
+     pixel-by-pixel (not eyeballed): the two top lobes only fully clear
+     their V-notch right above centre (x=50%) at y=34% - column two's inner
+     edge sits at x~53%, which clears earlier, at y=26% - so padding-top
+     has real headroom to spare below that. Left/right stay a flat ~16%
+     margin until y=56%, then taper inward on both sides toward the
+     bottom point - the safe open band both stat rows must fit inside is
+     therefore roughly y 29%-56%. `align-content: start` is required so
+     the grid's two auto-height rows pack against that top edge instead of
+     stretching to fill the whole padded box (the default for an
+     aspect-ratio-constrained grid) and sliding row two down into the
+     taper. */
+  .overview-stats {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: start;
+    row-gap: 0.75rem;
+    column-gap: 1.4rem;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 7.3rem 4.8rem 1.5rem;
+    margin-left: 0;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 1 / 1;
+  }
+
+  .overview-stats::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: url('/assets/images/overview/stats-shape.png') no-repeat center / contain;
+  }
+
+  .overview-stat {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Data order (students, faculty, ai-labs, communities) stays untouched -
+     the desktop pill still reads left-to-right in that order - but the
+     shape card's bottom row visually swaps to communities-then-ai-labs to
+     match the reference layout, via `order` alone. */
+  .overview-stat:nth-child(3) {
+    order: 4;
+  }
+
+  .overview-stat:nth-child(4) {
+    order: 3;
+  }
+
+  .overview-stat-value {
+    font-size: 1.7rem;
+    gap: 0.3rem;
+  }
+
+  .overview-stat-arrow {
+    width: 18px;
+    height: 18px;
+  }
+
+  .overview-stat-label {
+    font-size: 0.9rem;
   }
 
   .overview-tagline {
-    font-size: 1.15rem;
+    font-size: 1rem;
   }
 }
 
@@ -1128,70 +1183,32 @@ button {
     font-size: 2.1rem;
     margin-bottom: 2rem;
   }
-
-  /* Below 480px the ring bleeds taller than the pill itself and starts
-     overlapping the heading above it, and a single cramped row leaves each
-     stat too small to read comfortably - a centered 2x2 grid with real
-     padding reads far better on a phone than shrinking one row forever. */
-  .overview-rings {
-    display: none;
-  }
-
-  .overview-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    /* The desktop pill's border-radius: 999px only reads as a stadium shape
-       because its width dwarfs its height; on this near-square 2x2 grid the
-       same radius clamps to half the box's shorter side, eating deep into
-       top and bottom and squeezing the two rows into a thin empty-looking
-       band. A fixed, modest radius keeps this a proper rounded card. */
-    border-radius: 28px;
-    row-gap: 1.25rem;
-    column-gap: 2rem;
-    padding: 1.5rem 1.75rem;
-    margin-left: 0;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .overview-stat-value {
-    font-size: 1.5rem;
-    gap: 0.3rem;
-  }
-
-  .overview-stat-arrow {
-    width: 16px;
-    height: 16px;
-  }
-
-  .overview-stat-label {
-    font-size: 0.85rem;
-    white-space: nowrap;
-  }
-
-  .overview-tagline {
-    font-size: 1rem;
-  }
 }
 
+/* Every value below is the ≤900px tier's value scaled by the same factor
+   (340/420 ~ 0.81) so the card's internal proportions - and therefore its
+   verified fit inside the shape's notch/taper - stay identical, just at a
+   smaller absolute size. Don't tune these independently of the block
+   above; rescale both together. */
 @media (max-width: 400px) {
   .overview-stats {
-    column-gap: 1.5rem;
-    padding: 1.25rem 1.5rem;
-    max-width: 280px;
+    row-gap: 0.6rem;
+    column-gap: 1.15rem;
+    padding: 5.9rem 3.9rem 1.2rem;
+    max-width: 340px;
   }
 
   .overview-stat-value {
-    font-size: 1.3rem;
+    font-size: 1.38rem;
   }
 
   .overview-stat-arrow {
-    width: 14px;
-    height: 14px;
+    width: 15px;
+    height: 15px;
   }
 
   .overview-stat-label {
-    font-size: 0.78rem;
+    font-size: 0.73rem;
   }
 }
 
@@ -1265,7 +1282,13 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top;
+  /* All four poster images anchor their title text to the left side, with
+     disposable decorative imagery (tower, gadgets) on the right. Anchoring
+     the crop left keeps that text visible when a sibling card expands and
+     this card's flex-basis narrows, instead of centered cropping eating
+     into the text from both edges. */
+  object-position: left top;
+  transform-origin: left top;
   display: block;
   will-change: transform;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1602,7 +1625,8 @@ button {
 @media (max-width: 900px) {
   .about-v2-frame {
     aspect-ratio: auto;
-    overflow: visible;
+    overflow: hidden;
+    position: relative;
   }
 
   .about-v2-watermark {
@@ -1616,7 +1640,7 @@ button {
     top: 0;
     width: 100%;
     max-width: none;
-    padding: 1.5rem 1.5rem 0;
+    padding: 1.5rem 1.5rem 2rem;
     transform: none;
   }
 
@@ -1637,31 +1661,32 @@ button {
     font-size: 1.4rem;
   }
 
+  /* On phones the tower moves behind the text as a faint watermark instead
+     of sitting in flow as its own block - matches the desktop frame's
+     layered feel now that there's no room to place it beside the copy. */
+  .about-v2-text {
+    opacity: 0.85;
+  }
+
   .about-v2-tower {
-    position: relative;
-    z-index: 2;
-    left: 0;
+    position: absolute;
+    z-index: 1;
+    left: auto;
+    right: 0;
     top: 0;
-    width: 42%;
+    bottom: auto;
+    width: 55%;
     height: auto;
     aspect-ratio: 441 / 699;
-    /* Shifted right (margin-left: auto, small right gap instead of
-       centering) and pulled closer to the text above/below it - less
-       top/bottom air means the section itself ends up shorter. */
-    margin: -1.75rem 8% 0.75rem auto;
-    /* The desktop rule's translateY(50px) nudges the tower down inside its
-       absolutely-positioned frame - harmless there since the frame has
-       fixed height to spare. Once the tower is back in normal flow here,
-       that same nudge doesn't move anything else out of the way, so it
-       just pushed the art 50px past the end of its own box and into
-       whatever section follows. Not needed once it's laid out in flow. */
+    margin: 0;
+    opacity: 0.07;
     transform: none;
   }
 }
 
 @media (max-width: 480px) {
   .about-v2-content {
-    padding: 1.25rem 1.25rem 0;
+    padding: 1.25rem 1.25rem 2rem;
   }
 
   .about-v2-title {
@@ -5770,7 +5795,8 @@ button {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1.5rem;
-  background: var(--color-primary-dark);
+  background: var(--color-bg-light);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 1.25rem;
   padding: 1.75rem 2rem;
   box-shadow: var(--shadow-lg);
@@ -5801,14 +5827,14 @@ button {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.15rem;
-  color: #ffffff;
+  color: var(--color-text-dark);
   margin-bottom: 0.35rem;
 }
 
 .syllabus-desc {
   font-size: 0.92rem;
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--color-text-light);
   max-width: 32rem;
 }
 
@@ -5840,19 +5866,19 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
+  background: rgba(15, 23, 42, 0.05);
+  color: var(--color-text-dark);
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 0.9rem;
   padding: 0.75rem 1.35rem;
   border-radius: 0.65rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(15, 23, 42, 0.14);
   transition: var(--transition);
 }
 
 .syllabus-btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(15, 23, 42, 0.1);
 }
 
 @media (max-width: 640px) {
@@ -7521,7 +7547,7 @@ html.lenis body {
 
   position: relative;
   margin-top: var(--header-height, 72px);
-  min-height: calc(100dvh - var(--header-height, 72px));
+  height: calc(100dvh - var(--header-height, 72px));
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -7619,6 +7645,7 @@ html.lenis body {
   position: relative;
   z-index: 2;
   flex: 1;
+  min-height: 0;
   display: flex;
   align-items: center;
   overflow-x: auto;
@@ -7654,6 +7681,7 @@ html.lenis body {
   gap: 3.5rem;
   padding: 0 1.25rem 0.5rem;
   min-width: max-content;
+  transform-origin: top left;
 }
 
 @media (min-width: 768px) {

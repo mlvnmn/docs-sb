@@ -3,7 +3,7 @@ import { useTimelineScroll } from '../../hooks/useTimelineScroll';
 import { TimelineCard } from './TimelineCard';
 
 export function TimelineArchive() {
-  const { containerRef, progress, scrollByStep } = useTimelineScroll();
+  const { containerRef, trackRef, progress, scale, scrollByStep } = useTimelineScroll();
 
   return (
     <div className="timeline-page">
@@ -24,8 +24,16 @@ export function TimelineArchive() {
         <span className="timeline-archive-title-outline">{timelineIntro.titleBottom}</span>
       </h2>
 
-      <main className="timeline-archive-scroll" ref={containerRef}>
-        <div className="timeline-archive-row">
+      <main
+        className="timeline-archive-scroll"
+        ref={containerRef}
+        style={scale < 1 ? { alignItems: 'flex-start' } : undefined}
+      >
+        <div
+          className="timeline-archive-row"
+          ref={trackRef}
+          style={scale < 1 ? { transform: `scale(${scale})` } : undefined}
+        >
           <div className="timeline-archive-line" aria-hidden="true" />
           {timelineMilestones.map((milestone, index) => (
             <div className="timeline-archive-column" data-timeline-column key={milestone.id}>

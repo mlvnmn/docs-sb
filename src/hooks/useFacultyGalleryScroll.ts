@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState, type RefObject } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from 'react';
 
 interface GalleryScroll {
   containerRef: RefObject<HTMLDivElement | null>;
+  trackRef: RefObject<HTMLDivElement | null>;
   progress: number;
+  scale: number;
   scrollByStep: (direction: 1 | -1) => void;
 }
 
@@ -15,7 +17,9 @@ const STEP = 450;
  */
 export function useFacultyGalleryScroll(): GalleryScroll {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
+  const [scale, setScale] = useState(1);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -112,9 +116,56 @@ export function useFacultyGalleryScroll(): GalleryScroll {
     };
   }, []);
 
+  // The card track has fixed pixel heights, so on a short viewport (small
+  // laptop window, landscape phone, a device with a tall header) it can be
+  // taller than the space left after the secondary nav and footer strip.
+  // Rather than letting that overflow grow the page (forcing an unwanted
+  // vertical scrollbar) or clipping cards, shrink the track to whatever
+  // height is actually available — the page stays exactly one viewport tall
+  // and only the horizontal axis ever scrolls.
+  useLayoutEffect(() => {
+    const scrollEl = containerRef.current;
+    const trackEl = trackRef.current;
+    if (!scrollEl || !trackEl) return;
+
+    const recalc = () => {
+      // Measure with any existing scale removed first: getBoundingClientRect
+      // reflects the live transform, so reusing a stale scaled rect here
+      // would compound on every recalculation. scrollHeight/ResizeObserver
+      // aren't affected by transform, but they also don't account for the
+      // track's own margin — which stays full-size regardless of scale — so
+      // rects (comparing the track's actual top edge to the scroll box's
+      // actual bottom edge) are the only measurement that can't drift.
+      const prevTransform = trackEl.style.transform;
+      if (prevTransform) trackEl.style.transform = 'none';
+      const scrollRect = scrollEl.getBoundingClientRect();
+      const trackRect = trackEl.getBoundingClientRect();
+      if (prevTransform) trackEl.style.transform = prevTransform;
+
+      const naturalHeight = trackRect.height;
+      const availableHeight = scrollRect.bottom - trackRect.top;
+      if (naturalHeight <= 0 || availableHeight <= 0) return;
+      setScale(Math.min(1, availableHeight / naturalHeight));
+    };
+
+    recalc();
+
+    const ro = new ResizeObserver(recalc);
+    ro.observe(scrollEl);
+    ro.observe(trackEl);
+    window.addEventListener('resize', recalc);
+    window.addEventListener('orientationchange', recalc);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', recalc);
+      window.removeEventListener('orientationchange', recalc);
+    };
+  }, []);
+
   const scrollByStep = (direction: 1 | -1) => {
     containerRef.current?.scrollBy({ left: direction * STEP, behavior: 'smooth' });
   };
 
-  return { containerRef, progress, scrollByStep };
+  return { containerRef, trackRef, progress, scale, scrollByStep };
 }

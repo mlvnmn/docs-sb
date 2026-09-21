@@ -1,12 +1,15 @@
+import type { CSSProperties } from 'react';
+
 interface GalleryScrollBarProps {
   progress: number;
   onScrollLeft: () => void;
   onScrollRight: () => void;
+  style?: CSSProperties;
 }
 
-export function GalleryScrollBar({ progress, onScrollLeft, onScrollRight }: GalleryScrollBarProps) {
+export function GalleryScrollBar({ progress, onScrollLeft, onScrollRight, style }: GalleryScrollBarProps) {
   return (
-    <footer className="fg-scrollbar-footer">
+    <footer className="fg-scrollbar-footer" style={style}>
       <h2 className="fg-footer-title">
         <span className="fg-footer-title-word">Faculty</span>{' '}
         <span className="fg-footer-title-word fg-footer-title-accent">Directory</span>
