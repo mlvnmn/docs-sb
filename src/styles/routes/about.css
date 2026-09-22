@@ -189,8 +189,14 @@
 
 /* -- Story -- */
 .about-story {
+  position: relative;
   background: #ffffff;
   padding: 5.5rem 2rem;
+  /* The pastel blobs are offset outside .about-story-media on purpose, so
+     without this they widen the page's scroll area by their overhang (a few
+     px at desktop, and enough to matter once the layout is narrow). The hero
+     clips them the same way. */
+  overflow: hidden;
 }
 
 .about-story-container {
@@ -286,8 +292,10 @@
 
 /* -- Highlights -- */
 .about-highlights {
+  position: relative;
   background: var(--color-bg-light);
   padding: 5.5rem 2rem;
+  overflow: hidden;
 }
 
 .about-highlights-container {
@@ -365,14 +373,26 @@
 
 /* -- Courses (same section-heading style as Highlights) -- */
 .about-courses {
+  position: relative;
   background: #ffffff;
   padding: 5.5rem 2rem;
+  overflow: hidden;
 }
 
 .about-courses-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* `min(100%, 300px)` rather than a bare 300px: a plain minmax(300px, 1fr)
+     track cannot shrink below its 300px floor, so the cards kept the grid
+     wider than a phone screen. The min() lets the last remaining track fall
+     back to the container's width once there is no room for 300px. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 1.75rem;
+  /* This grid is a flex item of .about-highlights-container, which centres its
+     children on the cross axis - so without an explicit width it is
+     shrink-to-fit and sizes to the cards' *max-content* (426px), ignoring the
+     viewport entirely and overflowing every phone. .about-highlights-grid
+     carries the same declaration for the same reason. */
+  width: 100%;
   max-width: 900px;
   margin: 0 auto;
 }
@@ -472,15 +492,94 @@
   }
 }
 
+@media (max-width: 900px) {
+  /* The arrow badge and the "Learn / Build / Grow" script are hung in the
+     gutter beside the photo, which only exists while the hero is two columns.
+     Once it stacks they land on top of the picture, so they go - both are
+     aria-hidden decoration and nothing depends on them. */
+  .about-hero-arrow,
+  .about-hero-script {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .about-hero {
-    padding-top: calc(4rem + var(--wave-bleed));
+    padding: calc(4rem + var(--wave-bleed)) 1.25rem 3rem;
   }
 
   .about-highlights,
   .about-courses,
   .about-story {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding: 4rem 1.25rem;
+  }
+
+  .about-hero-container,
+  .about-story-container {
+    gap: 2.5rem;
+  }
+
+  .about-section-heading {
+    margin-bottom: 2.25rem;
+  }
+
+  .about-courses-grid {
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero {
+    padding: calc(3.25rem + var(--wave-bleed)) 1rem 2.5rem;
+  }
+
+  .about-highlights,
+  .about-courses,
+  .about-story {
+    padding: 3rem 1rem;
+  }
+
+  /* Card padding is a big share of a 320px-wide screen — 2rem of it left the
+     course list barely 15 characters wide. */
+  .about-course-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .about-highlight-card {
+    padding: 1.25rem;
+    gap: 0.9rem;
+  }
+
+  .about-highlights-grid {
+    gap: 1rem;
+  }
+
+  .about-hero-intro,
+  .about-story-text {
+    font-size: 0.97rem;
+    line-height: 1.7;
+  }
+
+  .about-cta-btn {
+    padding: 0.8rem 1.4rem;
+    font-size: 0.92rem;
+  }
+
+  .about-course-heading {
+    font-size: 1.15rem;
+  }
+
+  /* The pastel blobs are sized in px, so at phone widths they stop reading as
+     a soft accent behind a corner and start covering the photo. */
+  .about-blob-hero-tl,
+  .about-blob-story-tl {
+    width: 84px;
+    height: 84px;
+  }
+
+  .about-blob-hero-br,
+  .about-blob-story-br {
+    width: 68px;
+    height: 68px;
   }
 }
