@@ -3,6 +3,7 @@ import { SmartLink } from '../shared/SmartLink';
 import { usePartners } from '../../hooks/usePartners';
 import { usePartnersKinetic } from '../../hooks/usePartnersKinetic';
 import type { Recruiter } from '../../types/content';
+import { Picture } from '../shared/Picture';
 
 /*
  * Homepage "OUR PARTNERS" — a kinetic type wall on a white ground:
@@ -68,7 +69,7 @@ export function PartnersSection() {
           >
             <sup className="partners-word-index">{pad(index + 1)}</sup>
             <span className="partners-word-text">{partner.short ?? partner.name}</span>
-            <img className="partners-word-logo" src={partner.logo} alt="" loading="lazy" decoding="async" />
+            <Picture className="partners-word-logo" src={partner.logo} alt="" loading="lazy" decoding="async" />
           </button>
           <span className="partners-word-sep" aria-hidden="true">
             ✦
@@ -126,7 +127,7 @@ export function PartnersSection() {
           {current && (
             <>
               <div className="partners-card-logo">
-                <img src={current.logo} alt="" />
+                <Picture src={current.logo} alt="" />
               </div>
               <div className="partners-card-foot">
                 <span className="partners-card-index">{pad(kinetic.hovered! + 1)}</span>

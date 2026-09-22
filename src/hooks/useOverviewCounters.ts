@@ -1,6 +1,6 @@
 import { useLayoutEffect, type RefObject } from 'react';
 import { gsap } from 'gsap';
-import { onEnterViewport } from './useEnterViewport';
+import { onEnterViewport } from '../lib/enterViewport';
 
 // Single knob for the odometer roll speed - tweak these to retime the
 // animation. Keep this constant even if it looks unused by a linter's

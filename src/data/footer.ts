@@ -5,18 +5,9 @@ import type {
   SocialLink,
 } from '../types/content';
 
-export const footerDeptBranding: FooterBrandingBlock = {
-  title: 'Department of Computer Science',
-  subText: 'St Berchmans College',
-  badge: 'Powering Generations',
-  tagline: 'Committed to excellence in education, research, and innovation since 1987.',
-};
-
 export const footerCollegeBranding: FooterBrandingBlock = {
   title: 'St Berchmans College',
   subText: 'Autonomous • Changanassery',
-  badge: 'NAAC A+ Grade (Cycle 5)',
-  tagline: 'College with Potential for Excellence • Affiliated to MG University, Kottayam.',
   url: 'https://sbcollege.ac.in/',
 };
 

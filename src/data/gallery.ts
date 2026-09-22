@@ -151,7 +151,7 @@ export const galleryPageCopy = {
   storyTitle: 'A Visual Record Of Every Milestone',
   storyText:
     'From the first day a batch walks into the Centenary Lab to the last presentation before graduation, we keep a camera close. These folders are the department\'s shared memory — built up one event, one lab session, one match at a time.',
-  storyImage: '/assets/images/sb_college_campus_mirrored.jpg',
+  storyImage: '/assets/images/campus/sb-college-campus.jpg',
 
   exploreEyebrow: 'WHAT\'S INSIDE',
   exploreTitle: 'Three Folders, One Archive',

@@ -1,0 +1,440 @@
+/* ==================== PARTNERS SECTION (Our Partners — kinetic type wall) ==================== */
+/*
+   White ground, navy ink, coral accent. Three full-bleed rows of partner
+   names in Space Grotesk slide in alternating directions (CSS marquee, paused
+   on hover); GSAP shears them with scroll velocity. Hovering a name turns
+   it coral and a logo card trails the cursor (src/hooks/usePartnersKinetic.ts).
+   Touch devices show a small inline logo after each name instead.
+*/
+.partners-section {
+  --p-ink: var(--color-primary-dark);
+  --p-ink-soft: #4a5170;
+  --p-paper: #f4f3ee;
+  --p-line: rgba(21, 28, 85, 0.16);
+  --p-accent: var(--color-accent-coral);
+  --p-ease: cubic-bezier(0.22, 0.61, 0.24, 1);
+  --p-speed: 320ms;
+  --word-size: clamp(2.6rem, 6.2vw, 5.6rem);
+
+  position: relative;
+  background: #ffffff;
+  color: var(--p-ink);
+  padding: clamp(6.5rem, 13vh, 10rem) 0 clamp(3rem, 7vh, 5rem);
+  overflow: hidden;
+}
+
+.partners-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ---- Heading ------------------------------------------------------------ */
+.partners-head {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  column-gap: 3rem;
+  align-items: end;
+  margin-bottom: clamp(2rem, 5vh, 3.5rem);
+}
+
+.partners-title-bar {
+  display: block;
+  width: 55px;
+  height: 4.5px;
+  background: #f43f5e;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  margin-left: 30px;
+}
+
+.partners-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: calc(clamp(2.75rem, 6.5vw, 5.5rem) + 10px);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  margin-left: 30px;
+}
+
+.partners-title-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+  /* Same fix as .overview-title-line: the outline text's stroke overshoots
+     the glyph's normal box on the first/last character, and this wrapper's
+     overflow: hidden (needed for the scroll-reveal slide) crops it without
+     this bit of breathing room. */
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.partners-title-line-inner {
+  display: block;
+  will-change: transform;
+}
+
+.partners-title-line:first-child {
+  font-size: calc(clamp(1.5rem, 3.5vw, 2.75rem) + 10px);
+}
+
+.partners-title-accent {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--p-ink);
+}
+
+.partners-lede {
+  max-width: 40ch;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--p-ink-soft);
+  padding-bottom: 0.4em;
+}
+
+/* ---- Kinetic rows -------------------------------------------------------- */
+.partners-wall {
+  border-top: 1px solid var(--p-line);
+  border-bottom: 1px solid var(--p-line);
+}
+
+.partners-row {
+  overflow: hidden;
+  padding: 0.18em 0;
+  font-size: var(--word-size);
+  border-bottom: 1px solid var(--p-line);
+  will-change: transform;
+}
+
+.partners-row:last-child {
+  border-bottom: 0;
+}
+
+.partners-marquee {
+  display: flex;
+  width: max-content;
+  animation: partners-slide var(--row-duration, 40s) linear infinite;
+  will-change: transform;
+}
+
+.partners-row--reverse .partners-marquee {
+  animation-direction: reverse;
+}
+
+.partners-row:hover .partners-marquee,
+.partners-row:focus-within .partners-marquee {
+  animation-play-state: paused;
+}
+
+@keyframes partners-slide {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.partners-track {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+.partners-word-wrap {
+  display: inline-flex;
+  align-items: center;
+}
+
+.partners-word {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.22em;
+  padding: 0.04em 0.12em;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: 1em;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.partners-word:focus-visible {
+  outline: 2px solid var(--p-accent);
+  outline-offset: 4px;
+}
+
+.partners-word-index {
+  align-self: flex-start;
+  margin-top: 0.32em;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.2em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  opacity: 0.5;
+  transition: color var(--p-speed) var(--p-ease), opacity var(--p-speed) var(--p-ease);
+}
+
+.partners-word-text {
+  transition: color var(--p-speed) var(--p-ease), -webkit-text-stroke-color var(--p-speed) var(--p-ease);
+}
+
+.partners-row--outline .partners-word-text {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--p-ink);
+}
+
+.partners-word.is-hot .partners-word-text {
+  color: var(--p-accent);
+  -webkit-text-stroke-color: var(--p-accent);
+}
+
+.partners-word.is-hot .partners-word-index {
+  color: var(--p-accent);
+  opacity: 1;
+}
+
+.partners-word-logo {
+  display: none; /* shown on touch devices, where there is no cursor card */
+}
+
+.partners-word-sep {
+  margin: 0 0.35em;
+  font-size: 0.22em;
+  color: var(--p-accent);
+}
+
+/* ---- Cursor card --------------------------------------------------------- */
+.partners-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 200px;
+  margin: 26px 0 0 -100px; /* centred under the pointer */
+  pointer-events: none;
+  will-change: transform;
+}
+
+.partners-card-inner {
+  padding: 0.6rem;
+  background: #ffffff;
+  border: 1px solid var(--p-line);
+  box-shadow: 0 18px 40px -24px rgba(10, 14, 42, 0.35);
+  opacity: 0;
+  transform: scale(0.88);
+  transform-origin: top center;
+  transition: opacity 240ms var(--p-ease), transform 320ms var(--p-ease);
+}
+
+.partners-card-inner.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.partners-card-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 104px;
+  background: var(--p-paper);
+}
+
+.partners-card-logo img {
+  display: block;
+  max-width: 68%;
+  max-height: 58%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.partners-card-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.55rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--p-ink-soft);
+}
+
+.partners-card-index {
+  color: var(--p-accent);
+  font-weight: 600;
+}
+
+/* ---- Foot --------------------------------------------------------------- */
+.partners-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: clamp(1.5rem, 4vh, 2.25rem);
+}
+
+.partners-foot-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 2rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--p-ink-soft);
+}
+
+.partners-foot-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--p-ink);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.2rem;
+  transition: color var(--p-speed) var(--p-ease);
+}
+
+.partners-foot-link span {
+  display: inline-block;
+  transition: transform var(--p-speed) var(--p-ease);
+}
+
+.partners-foot-link:hover,
+.partners-foot-link:focus-visible {
+  color: var(--p-accent);
+}
+
+.partners-foot-link:hover span,
+.partners-foot-link:focus-visible span {
+  transform: translateX(4px);
+}
+
+/* ---- Touch: inline logos, no cursor card --------------------------------- */
+@media (hover: none) {
+  .partners-card {
+    display: none;
+  }
+
+  .partners-word-logo {
+    display: block;
+    align-self: center;
+    height: 0.5em;
+    width: auto;
+    max-width: 2.2em;
+    margin-left: 0.1em;
+    object-fit: contain;
+  }
+}
+
+/* ---- Responsive --------------------------------------------------------- */
+@media (max-width: 1023px) {
+  .partners-head {
+    grid-template-columns: 1fr;
+    row-gap: 1.25rem;
+  }
+
+  .partners-lede {
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .partners-container {
+    padding: 0 1.25rem;
+  }
+
+  .partners-section {
+    --word-size: clamp(2rem, 10.5vw, 3rem);
+  }
+
+  /* Same phone-size fix as the other homepage headings: the clamp() floor
+     is tuned for desktop, so below 768px it forces an oversized title.
+     Center the bar + title as a block; the words inside stay left-set. */
+  .partners-title {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+  }
+
+  /* The bar is an empty decorative span with no text to size to -
+     width: fit-content on an empty element collapses to 0 and it vanishes,
+     so it keeps its fixed 55px width and only gets centered via margins. */
+  .partners-title-bar {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .partners-title {
+    font-size: 2.6rem;
+  }
+
+  .partners-title-line:first-child {
+    font-size: 1.4rem;
+  }
+
+  .partners-lede {
+    font-size: 0.92rem;
+  }
+
+  .partners-foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .partners-foot-stat--wide {
+    flex-basis: 100%;
+  }
+
+  .partners-foot-link {
+    align-self: flex-end;
+    margin-top: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .partners-title {
+    font-size: 2.1rem;
+  }
+
+  .partners-title-line:first-child {
+    font-size: 1.15rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partners-marquee {
+    animation: none;
+  }
+
+  .partners-track.is-clone {
+    display: none;
+  }
+
+  .partners-row {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .partners-card-inner,
+  .partners-word-index,
+  .partners-word-text,
+  .partners-foot-link,
+  .partners-foot-link span {
+    transition: none;
+  }
+}

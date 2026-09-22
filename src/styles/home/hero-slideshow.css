@@ -1,0 +1,339 @@
+/* ==================== HERO BANNER SLIDESHOW ==================== */
+.hero-slider-card {
+  position: relative;
+  width: 100%;
+  /* The card's top padding (live header height + 15px gap) plus its 15px bottom
+     padding, so the hero still fills exactly one viewport - no upper cap, so it
+     keeps filling the viewport on tall windows/monitors instead of leaving a
+     gap of unframed white space below once the old 1000px ceiling was hit. */
+  height: max(520px, calc(100vh - var(--header-height, 75px) - 30px));
+  border-radius: 24px;
+  overflow: hidden;
+  /* No box-shadow: its dark blue-grey tint was showing through as a pale band
+     right under the card, separate from and cutting across the blob-green/
+     blob-yellow colour bleed into the Overview section below. */
+  background: #0d1322;
+  color: #ffffff;
+}
+
+.hero-slides-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.045);
+  transition: opacity 1.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.hero-slide-img {
+  /* How far the framing is nudged up inside the card (see hero-slider-card's
+     height). Scaled down per breakpoint below so it stays a small fraction of
+     the card's height instead of over-cropping on shorter mobile cards. */
+  --hero-shift: 100px;
+  width: 100%;
+  height: calc(100% + var(--hero-shift));
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform-origin: center;
+  animation: heroKenBurns 5s ease-out forwards;
+  animation-play-state: paused;
+}
+
+/* Per-slide horizontal framing so each photo's featured person stays
+   centered in the crop on every breakpoint, not just where the default
+   center crop happens to land them. */
+.hero-slide[data-index="0"] .hero-slide-img {
+  object-position: 58% center;
+}
+
+.hero-slide[data-index="1"] .hero-slide-img {
+  object-position: 54% center;
+}
+
+.hero-slide[data-index="2"] .hero-slide-img {
+  object-position: 29% center;
+}
+
+.hero-slide.active .hero-slide-img {
+  animation-play-state: running;
+}
+
+.hero-slider-card.paused .hero-slide.active .hero-slide-img {
+  animation-play-state: paused;
+}
+
+@keyframes heroKenBurns {
+  from {
+    transform: translateY(calc(var(--hero-shift) * -1)) scale(1);
+  }
+  to {
+    transform: translateY(calc(var(--hero-shift) * -1)) scale(1.08);
+  }
+}
+
+.hero-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    /* Subtle top shadow gradient */
+    linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(0, 0, 0, 0.18) 12%,
+      rgba(0, 0, 0, 0.04) 22%,
+      transparent 32%),
+    /* Bottom shadow gradient for depth and tab readability */
+    linear-gradient(to top,
+      rgba(0, 0, 0, 0.82) 0%,
+      rgba(0, 0, 0, 0.5) 18%,
+      rgba(0, 0, 0, 0.18) 34%,
+      transparent 52%),
+    /* Left-side gradient for title text contrast */
+    linear-gradient(to right,
+      rgba(0, 0, 0, 0.68) 0%,
+      rgba(0, 0, 0, 0.32) 32%,
+      rgba(0, 0, 0, 0.05) 52%,
+      transparent 68%),
+    /* Right-side gradient for control widget and balance */
+    linear-gradient(to left,
+      rgba(0, 0, 0, 0.68) 0%,
+      rgba(0, 0, 0, 0.32) 32%,
+      rgba(0, 0, 0, 0.05) 52%,
+      transparent 68%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-slide-content {
+  position: absolute;
+  bottom: 95px;
+  left: 8.5%;
+  z-index: 3;
+  max-width: 720px;
+  pointer-events: none;
+}
+
+/* Per-slide placement so the headline never sits over a face in that slide's
+   photo — each slide picks whichever corner is clear in its own image. */
+.hero-slide-content.pos-top-left {
+  bottom: auto;
+  top: 16%;
+}
+
+.hero-slide-content.pos-bottom-right {
+  /* Clears the counter/dots widget in this same corner (right:5%, bottom:115px,
+     ~75px tall), not just the photo's faces. */
+  bottom: 100px;
+  left: auto;
+  right: 20%;
+  text-align: right;
+}
+
+.hero-slide-title {
+  font-family: var(--font-heading);
+  font-size: clamp(3.2rem, 5vw, 5.25rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Each line rises up out of its own overflow-hidden mask, staggered slightly -
+   the same "lines rise from below" reveal used by the Overview heading
+   (useOverviewReveal). Re-triggered every slide change by remounting the
+   <h1> on a `key={currentSlide}` change, so it plays every time, including
+   every time the slideshow loops back to slide 1. */
+.hero-slide-title-line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-slide-title-line-inner {
+  display: block;
+  animation: heroTitleRise 0.85s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes heroTitleRise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide-title-line-inner {
+    animation: none;
+  }
+}
+
+/* Right-side Counter & Control Dots Widget */
+.hero-controls-widget {
+  position: absolute;
+  right: 5%;
+  bottom: 115px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+  pointer-events: auto;
+}
+
+.hero-counter {
+  /* Deliberately the platform sans, not one of the --font-* tokens: the
+     counter is meant to read as plain UI chrome against the display faces
+     around it. (It previously named Outfit/Montserrat, neither of which the
+     site ever loaded, so this is what it has always rendered as.) */
+  font-family: sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+.hero-counter .total-num {
+  font-size: 1.5rem;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.hero-dots-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hero-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-dot.active {
+  background: #ffffff;
+  transform: scale(1.15);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.hero-play-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.hero-play-btn:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* Bottom Navigation Progress Tabs Bar */
+.hero-tabs-bar {
+  position: absolute;
+  bottom: 25px;
+  left: calc(8.5% + 80px);
+  width: 76%;
+  max-width: 880px;
+  z-index: 4;
+  display: flex;
+  background: transparent;
+  padding: 0;
+  gap: 1.2rem;
+  pointer-events: auto;
+}
+
+.hero-tab-item {
+  flex: 1;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0;
+  outline: none;
+}
+
+.tab-progress-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.tab-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 2px;
+}
+
+.hero-tab-item.past .tab-progress-fill {
+  width: 100% !important;
+  transition: none !important;
+}
+
+.hero-tab-item.animating .tab-progress-fill {
+  width: 100% !important;
+  transition: width 5s linear !important;
+}
+
+.tab-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.3s ease;
+  white-space: nowrap;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.hero-tab-item.active .tab-label,
+.hero-tab-item:hover .tab-label {
+  color: #ffffff;
+}
+
+/* Wraps Overview through Recruitment so the amber/green tint glow (and its
+   fade to white) runs continuously behind all four sections instead of
+   cutting off at the Overview section's own bottom edge - it only needs to
+   be fully white again by the time Contact/"Talk To Us" begins. */
+.home-gradient-band {
+  position: relative;
+  background:
+    linear-gradient(100deg, rgba(251, 191, 36, 0.14) 0%, rgba(255, 255, 255, 0) 65%),
+    linear-gradient(260deg, rgba(52, 168, 83, 0.14) 0%, rgba(255, 255, 255, 0) 65%),
+    #ffffff;
+}

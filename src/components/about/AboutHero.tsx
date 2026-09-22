@@ -1,5 +1,6 @@
 import { aboutContent } from '../../data/about';
 import { SmartLink } from '../shared/SmartLink';
+import { Picture } from '../shared/Picture';
 
 export function AboutHero() {
   return (
@@ -21,9 +22,9 @@ export function AboutHero() {
         <div className="about-hero-media">
           <span className="about-blob about-blob-blue about-blob-hero-tl" aria-hidden="true" />
           <span className="about-blob about-blob-pink about-blob-hero-br" aria-hidden="true" />
-          <img
+          <Picture
             className="about-hero-photo"
-            src="/assets/images/about/computer-lab.jpg"
+            src="/assets/images/campus/computer-lab.jpg"
             alt="Students working in the department's computer lab"
             loading="eager"
           />

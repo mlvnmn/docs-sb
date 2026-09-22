@@ -1,5 +1,6 @@
 import type { FacultyMember } from '../../types/content';
 import { WireframeGlobe, FoldedCorner, PlusMarks } from './decorations';
+import { Picture } from '../shared/Picture';
 
 export function FacultyCardArch({ member, eager }: { member: FacultyMember; eager?: boolean }) {
   const { name, role, email, photo, accentColor } = member;
@@ -12,7 +13,7 @@ export function FacultyCardArch({ member, eager }: { member: FacultyMember; eage
         <WireframeGlobe style={{ right: '-12px', top: '64px' }} />
         <div className="fg-arch-photo-wrap">
           <div className="fg-arch-photo" style={{ background: accentColor }}>
-            <img {...imgProps} src={photo} alt={name} className="fg-photo-img" />
+            <Picture {...imgProps} src={photo} alt={name} className="fg-photo-img" />
           </div>
         </div>
         <div>

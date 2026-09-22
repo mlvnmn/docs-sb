@@ -1,4 +1,5 @@
 import { galleryPageCopy } from '../../data/gallery';
+import { Picture } from '../shared/Picture';
 
 export function GalleryHero() {
   return (
@@ -26,13 +27,13 @@ export function GalleryHero() {
 
         <div className="gallery-hero-images">
           <div className="gallery-hero-img-main">
-            <img src={galleryPageCopy.heroMainImage} alt="Department activity" />
+            <Picture src={galleryPageCopy.heroMainImage} alt="Department activity" />
           </div>
           <div className="gallery-hero-img-sub-a">
-            <img src={galleryPageCopy.heroSubImageA} alt="Computer lab" />
+            <Picture src={galleryPageCopy.heroSubImageA} alt="Computer lab" />
           </div>
           <div className="gallery-hero-img-sub-b">
-            <img src={galleryPageCopy.heroSubImageB} alt="Campus moment" />
+            <Picture src={galleryPageCopy.heroSubImageB} alt="Campus moment" />
           </div>
         </div>
       </div>

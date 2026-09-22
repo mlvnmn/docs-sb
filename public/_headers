@@ -1,0 +1,6 @@
+# Netlify. Image filenames are stable (not content-hashed), so they get a long
+# max-age rather than `immutable`, and stale-while-revalidate lets a repeat
+# visit paint from cache while any replacement downloads in the background.
+# Vite's own hashed /assets/*.js|css are handled by the host's defaults.
+/assets/images/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400

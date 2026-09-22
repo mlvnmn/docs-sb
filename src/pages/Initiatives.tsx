@@ -1,3 +1,4 @@
+import '../styles/routes/coming-soon.css';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { SmartLink } from '../components/shared/SmartLink';
 import { Footer } from '../components/layout/Footer';

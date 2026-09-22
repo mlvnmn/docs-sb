@@ -1,7 +1,6 @@
 export interface NavItem {
   label: string;
   href: string;
-  isRoute?: boolean;
 }
 
 export interface HeroSlide {
@@ -12,8 +11,6 @@ export interface HeroSlide {
   position?: 'top-left' | 'bottom-right';
 }
 
-export type FacultyArchetype = 'a' | 'b' | 'c' | 'd';
-
 export interface FacultyMember {
   id: string;
   name: string;
@@ -21,7 +18,6 @@ export interface FacultyMember {
   email: string;
   photo: string;
   accentColor: string;
-  archetype: FacultyArchetype;
 }
 
 export interface Recruiter {
@@ -45,8 +41,6 @@ export interface FooterColumn {
 }
 
 export interface SiteInfo {
-  departmentName: string;
-  collegeName: string;
   phone: string;
   phoneHref: string;
   email: string;
@@ -65,9 +59,7 @@ export interface FooterContactInfo {
 export interface FooterBrandingBlock {
   title: string;
   subText: string;
-  badge: string;
-  tagline: string;
-  url?: string;
+  url: string;
 }
 
 export interface SocialLink {
@@ -143,7 +135,6 @@ export interface NewsArticle {
   body: string;
   author?: string;
   readTime?: string;
-  featured?: boolean;
   tags?: string[];
 }
 
@@ -151,8 +142,6 @@ export interface GazetteTopic {
   title: string;
   image: string;
   alt: string;
-  category?: string;
-  date?: string;
 }
 
 export interface OverviewStat {
@@ -172,8 +161,6 @@ export interface OverviewContent {
   kicker: string;
   headingLead: string;
   headingTrail: string;
-  taglineLead: string;
-  taglineEmphasis: string;
 }
 
 export interface ProgramCard {
@@ -183,7 +170,6 @@ export interface ProgramCard {
   description: string;
   color: string;
   poster: string;
-  posterFallback: string;
   href: string;
 }
 

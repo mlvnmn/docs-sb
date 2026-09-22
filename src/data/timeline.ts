@@ -14,7 +14,7 @@ export const timelineMilestones: TimelineMilestone[] = [
     title: 'Department Established',
     description:
       'The Department of Computer Science was established in 1992 with a vision to foster innovation, modern computation, and academic excellence.',
-    image: '/assets/images/cs lab 1.jpg',
+    image: '/assets/images/campus/cs-lab-1.jpg',
     footerLabel: 'YEAR 01',
     footerCode: '#EST-92',
   },
@@ -39,7 +39,7 @@ export const timelineMilestones: TimelineMilestone[] = [
     title: 'M.Sc. Program Launched',
     description:
       'Introduced advanced M.Sc. in Computer Science to expand higher research opportunities, advanced algorithms, and academic depth.',
-    image: '/assets/images/cs lab 2.jpg',
+    image: '/assets/images/campus/cs-lab-2.jpg',
     footerLabel: 'ACADEMICS',
     footerCode: '#PG-LAUNCH',
   },

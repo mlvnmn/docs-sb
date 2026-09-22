@@ -1,5 +1,6 @@
 import type { FacultyMember } from '../../types/content';
 import { WireframeGlobe, PlusMarks } from './decorations';
+import { Picture } from '../shared/Picture';
 
 export function FacultyCardCenterSplit({ member, eager }: { member: FacultyMember; eager?: boolean }) {
   const { name, role, email, photo, accentColor } = member;
@@ -26,7 +27,7 @@ export function FacultyCardCenterSplit({ member, eager }: { member: FacultyMembe
             <WireframeGlobe size={16} style={{ position: 'static' }} />
           </div>
           <div className="fg-split-avatar" style={{ borderColor: accentColor }}>
-            <img {...imgProps} src={photo} alt={name} className="fg-photo-img" style={{ borderRadius: '9999px' }} />
+            <Picture {...imgProps} src={photo} alt={name} className="fg-photo-img" style={{ borderRadius: '9999px' }} />
           </div>
         </div>
         <div className="fg-center">

@@ -1,0 +1,521 @@
+/* Route-scoped stylesheet: imported from the page component, so it ships
+   in that route's own chunk instead of the global bundle. Nothing here
+   shares a class with the global stylesheets (src/styles/index.css). */
+
+/* ==================== TIMELINE ARCHIVE ==================== */
+
+.timeline-page {
+  --ta-cream: #f2eee1;
+  --ta-ink: #15130d;
+  --ta-blue: #4a86f7;
+  --ta-pink: #ea2e8c;
+  --ta-yellow: #f2c230;
+  --ta-navy: #16295a;
+
+  position: relative;
+  margin-top: var(--header-height, 72px);
+  height: calc(100dvh - var(--header-height, 72px));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ta-cream);
+  background-image: radial-gradient(circle, rgba(21, 19, 13, 0.14) 1px, transparent 1.6px);
+  background-size: 20px 20px;
+}
+
+.timeline-page-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.timeline-archive-tower {
+  position: absolute;
+  top: 40px;
+  right: 4%;
+  width: min(420px, 32vw);
+  height: auto;
+  opacity: 0.16;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 90%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 90%);
+}
+
+.timeline-star {
+  position: absolute;
+  font-size: 1.1rem;
+  color: var(--ta-ink);
+}
+
+.timeline-star-1 {
+  top: 9%;
+  left: 30%;
+  font-size: 0.9rem;
+}
+
+.timeline-star-2 {
+  top: 7%;
+  right: 34%;
+  color: var(--ta-pink);
+  font-size: 1.3rem;
+}
+
+.timeline-star-3 {
+  top: 17%;
+  right: 24%;
+  font-size: 0.8rem;
+}
+
+.timeline-page-title {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 1.25rem;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: 0.015em;
+  margin: 0;
+  padding: calc(clamp(1.25rem, 3vw, 2rem) + 50px) clamp(1.25rem, 4vw, 3rem) 0;
+}
+
+.timeline-archive-title-solid,
+.timeline-archive-title-outline {
+  display: inline-block;
+  flex-shrink: 1;
+  min-width: 0;
+  font-size: clamp(1.5rem, 5.2vw, 4.6rem);
+  white-space: nowrap;
+}
+
+.timeline-archive-title-solid {
+  color: var(--ta-ink);
+}
+
+.timeline-archive-title-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--ta-ink);
+}
+
+@supports not (-webkit-text-stroke: 1px black) {
+  .timeline-archive-title-outline {
+    color: var(--ta-ink);
+  }
+}
+
+.timeline-archive-scroll {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  /* Same fix as the Faculty gallery's .fg-scroll: `safe center` closes the
+     dead gutter that appears on wide screens when the milestone row is
+     narrower than the viewport, without breaking scroll-to-start once the
+     row actually overflows. */
+  justify-content: safe center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  cursor: grab;
+  padding: 0.5rem 0 1rem;
+  touch-action: none;
+  scrollbar-width: none;
+}
+
+.timeline-archive-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.timeline-archive-scroll.is-dragging {
+  cursor: grabbing;
+  /* Belt and braces with the preventDefault in useHorizontalScroll: if a
+     selection somehow survives into the drag, this stops it being extended
+     across the cards as the pointer moves. */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.timeline-archive-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 34px;
+  height: 2px;
+  background: var(--ta-ink);
+  opacity: 0.7;
+}
+
+.timeline-archive-row {
+  position: relative;
+  display: flex;
+  gap: 3.5rem;
+  padding: 0 1.25rem 0.5rem;
+  min-width: max-content;
+}
+
+@media (min-width: 768px) {
+  .timeline-archive-row {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+.timeline-archive-column {
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  flex-shrink: 0;
+}
+
+.timeline-archive-point {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 64px;
+}
+
+.timeline-archive-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 3px solid var(--ta-ink);
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.timeline-archive-dot-blue {
+  background: var(--ta-blue);
+}
+
+.timeline-archive-dot-pink {
+  background: var(--ta-pink);
+}
+
+.timeline-archive-dot-yellow {
+  background: var(--ta-yellow);
+}
+
+.timeline-archive-dot-navy {
+  background: var(--ta-navy);
+}
+
+.timeline-archive-dot-active {
+  width: 22px;
+  height: 22px;
+  box-shadow: 0 0 0 5px rgba(234, 46, 140, 0.22);
+}
+
+.timeline-archive-year-pill {
+  background: #fff;
+  border: 2px solid var(--ta-ink);
+  border-radius: 8px;
+  padding: 0.15rem 0.6rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow: 3px 3px 0 rgba(21, 19, 13, 0.12);
+}
+
+.timeline-archive-pointer {
+  position: absolute;
+  left: 6px;
+  top: 58px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 10px solid var(--ta-pink);
+  z-index: 3;
+}
+
+.timeline-card {
+  position: relative;
+  background: #fff;
+  border: 2px solid var(--ta-ink);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 5px 5px 0 rgba(21, 19, 13, 0.1);
+}
+
+.timeline-card-image-wrap {
+  position: relative;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  border-radius: 18px 18px 0 0;
+  border-bottom: 2px solid var(--ta-ink);
+}
+
+.timeline-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.timeline-card-flag {
+  position: absolute;
+  top: -16px;
+  left: 16px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 18px solid var(--ta-blue);
+  z-index: 3;
+}
+
+.timeline-card-expand {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(21, 19, 13, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--ta-ink);
+}
+
+.timeline-card-body {
+  padding: 0.9rem 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.timeline-card-tag {
+  align-self: flex-start;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.timeline-card-blue .timeline-card-tag {
+  background: var(--ta-blue);
+}
+
+.timeline-card-pink .timeline-card-tag {
+  background: var(--ta-pink);
+}
+
+.timeline-card-yellow .timeline-card-tag {
+  background: var(--ta-yellow);
+  color: var(--ta-ink);
+}
+
+.timeline-card-navy .timeline-card-tag {
+  background: var(--ta-navy);
+}
+
+.timeline-card-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ta-ink);
+  margin: 0.15rem 0 0;
+}
+
+.timeline-card-dots {
+  color: #cdc7b3;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  font-size: 0.7rem;
+}
+
+.timeline-card-desc {
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  color: #5f5a48;
+  line-height: 1.5;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.timeline-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(21, 19, 13, 0.12);
+  padding-top: 0.6rem;
+  margin-top: 0.4rem;
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+}
+
+.timeline-card-footer-label {
+  color: #948e77;
+  text-transform: uppercase;
+}
+
+.timeline-card-footer-code {
+  border: 1px solid rgba(21, 19, 13, 0.2);
+  border-radius: 6px;
+  padding: 0.1rem 0.5rem;
+  color: var(--ta-ink);
+}
+
+.timeline-archive-footer {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 0.9rem clamp(1.25rem, 4vw, 3rem) 1.1rem;
+  border-top: 1px solid rgba(21, 19, 13, 0.15);
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ta-ink);
+}
+
+.timeline-archive-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.timeline-archive-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Matches the Faculty Directory gallery's scroll bar (.fg-progress-track-wrap
+   and friends in facultyGallery.css) exactly - same size, color and shape -
+   so the two full-bleed horizontal galleries share one scroll-progress look. */
+.timeline-archive-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 22rem;
+  min-width: 220px;
+}
+
+.timeline-archive-scroll-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #404040;
+  flex-shrink: 0;
+}
+
+.timeline-archive-progress-track {
+  position: relative;
+  width: 100%;
+  height: 0.85rem;
+  background: #e5e5e5;
+  border-radius: 9999px;
+  border: 2px solid #161616;
+  overflow: hidden;
+}
+
+.timeline-archive-progress-fill {
+  height: 100%;
+  background: #ff80bf;
+  transition: width 0.15s;
+}
+
+.timeline-archive-progress-pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #262626;
+  min-width: 2.4rem;
+  flex-shrink: 0;
+}
+
+.timeline-archive-nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fff;
+  padding: 0.35rem;
+  border-radius: 1rem;
+  border: 2px solid var(--ta-ink);
+  box-shadow: 2.5px 2.5px 0px var(--ta-ink);
+}
+
+.timeline-archive-nav-buttons button {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background: var(--ta-cream);
+  border: 2px solid var(--ta-ink);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--ta-ink);
+  cursor: pointer;
+  transition: transform 0.1s, background 0.15s;
+}
+
+.timeline-archive-nav-buttons button:hover {
+  background: var(--ta-pink);
+  color: #fff;
+}
+
+.timeline-archive-nav-buttons button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--ta-ink);
+}
+
+@media (max-width: 768px) {
+  .timeline-archive-column {
+    width: 340px;
+  }
+
+  .timeline-archive-row {
+    gap: 2.25rem;
+  }
+
+  .timeline-archive-footer {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-archive-column {
+    width: 290px;
+  }
+
+  .timeline-archive-row {
+    gap: 1.75rem;
+  }
+
+  .timeline-archive-progress-wrap {
+    min-width: 140px;
+  }
+}

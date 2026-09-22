@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useOverview } from '../../hooks/useOverview';
 import { useOverviewReveal } from '../../hooks/useOverviewReveal';
 import { useOverviewCounters } from '../../hooks/useOverviewCounters';
+import { Picture } from '../shared/Picture';
 
 export function OverviewSection() {
   const { content, stats } = useOverview();
@@ -12,9 +13,9 @@ export function OverviewSection() {
   return (
     <section className="overview-section" id="overview" ref={sectionRef}>
       <span className="overview-seam-fade" aria-hidden="true" />
-      <img
+      <Picture
         className="overview-watermark"
-        src="/assets/images/dept_logo.jpeg"
+        src="/assets/images/brand/dept-logo.jpg"
         alt=""
         aria-hidden="true"
         loading="lazy"
@@ -77,12 +78,6 @@ export function OverviewSection() {
             ))}
           </div>
         </div>
-
-        {content.taglineLead && (
-          <p className="overview-tagline">
-            {content.taglineLead} <strong>{content.taglineEmphasis}</strong>
-          </p>
-        )}
       </div>
     </section>
   );

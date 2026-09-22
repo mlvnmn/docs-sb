@@ -1,4 +1,5 @@
 import { useRef, type CSSProperties } from 'react';
+import { Picture } from '../shared/Picture';
 import { usePrograms } from '../../hooks/usePrograms';
 import { useProgramsReveal } from '../../hooks/useProgramsReveal';
 
@@ -26,10 +27,7 @@ export function ProgramsSection() {
               style={{ '--program-color': program.color } as CSSProperties}
             >
               <div className="program-poster">
-                <picture>
-                  <source srcSet={program.poster} type="image/webp" />
-                  <img src={program.posterFallback} alt={program.title} loading="lazy" decoding="async" />
-                </picture>
+                <Picture src={program.poster} alt={program.title} loading="lazy" decoding="async" />
               </div>
 
               <div className="program-overlay">

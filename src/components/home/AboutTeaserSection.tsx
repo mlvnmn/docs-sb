@@ -2,9 +2,10 @@ import { useRef } from 'react';
 import { aboutContent } from '../../data/about';
 import { SmartLink } from '../shared/SmartLink';
 import { useAboutTeaserReveal } from '../../hooks/useAboutTeaserReveal';
+import { Picture } from '../shared/Picture';
 
-const TOWER_SRC = '/assets/images/about/tower-lineart.png';
-const WATERMARK_SRC = '/assets/images/dcs-watermark.png';
+const TOWER_SRC = '/assets/images/brand/tower-lineart.png';
+const WATERMARK_SRC = '/assets/images/brand/dcs-watermark.png';
 
 // Figma frame is a fixed 1900x912 canvas; every absolutely-positioned layer
 // below is converted to a % of that canvas (left/width as % of 1900, top/
@@ -23,7 +24,7 @@ export function AboutTeaserSection() {
   return (
     <section className="about-v2-section" id="about" ref={sectionRef}>
       <div className="about-v2-frame">
-        <img className="about-v2-watermark" src={WATERMARK_SRC} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <Picture className="about-v2-watermark" src={WATERMARK_SRC} alt="" aria-hidden="true" loading="lazy" decoding="async" />
 
         <div className="about-v2-content">
           <span className="about-v2-title-bar" aria-hidden="true" />
@@ -43,7 +44,7 @@ export function AboutTeaserSection() {
           </SmartLink>
         </div>
 
-        <img className="about-v2-tower" src={TOWER_SRC} alt="St Berchmans College tower" loading="lazy" decoding="async" />
+        <Picture className="about-v2-tower" src={TOWER_SRC} alt="St Berchmans College tower" loading="lazy" decoding="async" />
       </div>
     </section>
   );

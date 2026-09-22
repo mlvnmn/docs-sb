@@ -8,7 +8,6 @@ export const faculty: FacultyMember[] = [
     email: 'sajimonabraham@mgu.ac.in',
     photo: '/assets/images/faculty/dr__sajimon_abraham.jpg',
     accentColor: '#3b82f6',
-    archetype: 'a',
   },
   {
     id: 'smitha-krishnan',
@@ -17,7 +16,6 @@ export const faculty: FacultyMember[] = [
     email: 'Ksmitha21@rediffmail.com',
     photo: '/assets/images/faculty/dr__smitha_krishnan.jpg',
     accentColor: '#ec4899',
-    archetype: 'b',
   },
   {
     id: 'bobby-joseph',
@@ -26,7 +24,6 @@ export const faculty: FacultyMember[] = [
     email: 'bobbyjoseph4u@gmail.Com',
     photo: '/assets/images/faculty/ms__bobby_joseph.jpg',
     accentColor: '#10b981',
-    archetype: 'c',
   },
   {
     id: 'dhanya-c-nair',
@@ -35,7 +32,6 @@ export const faculty: FacultyMember[] = [
     email: 'dhanyacn@sbcollege.ac.in',
     photo: '/assets/images/faculty/ms__dhanya_c_nair.jpg',
     accentColor: '#f59e0b',
-    archetype: 'd',
   },
   {
     id: 'rini-elizabeth-jacob',
@@ -44,7 +40,6 @@ export const faculty: FacultyMember[] = [
     email: 'riniarun84@gmail.com',
     photo: '/assets/images/faculty/ms__rini_elizabeth_jacob.jpg',
     accentColor: '#8b5cf6',
-    archetype: 'a',
   },
   {
     id: 'reenu-paul',
@@ -53,7 +48,6 @@ export const faculty: FacultyMember[] = [
     email: 'reenupaul@sbcollege.ac.in',
     photo: '/assets/images/faculty/ms__reenu_paul.jpg',
     accentColor: '#06b6d4',
-    archetype: 'b',
   },
   {
     id: 'sachin-varghese-biju',
@@ -62,7 +56,6 @@ export const faculty: FacultyMember[] = [
     email: 'sachinbiju746@gmail.com',
     photo: '/assets/images/faculty/mr__sachin_varghese_biju.jpg',
     accentColor: '#f97316',
-    archetype: 'c',
   },
   {
     id: 'divya-s',
@@ -71,7 +64,6 @@ export const faculty: FacultyMember[] = [
     email: 'divyapradeep@sbcollege.ac.in',
     photo: '/assets/images/faculty/ms__divya_s.jpg',
     accentColor: '#6366f1',
-    archetype: 'd',
   },
   {
     id: 'blessy-paul',
@@ -80,7 +72,6 @@ export const faculty: FacultyMember[] = [
     email: 'blessypaul@sbcollege.ac.in',
     photo: '/assets/images/faculty/ms__blessy_paul.jpg',
     accentColor: '#3b82f6',
-    archetype: 'a',
   },
   {
     id: 'aswathy-manoharan',
@@ -89,7 +80,6 @@ export const faculty: FacultyMember[] = [
     email: 'aswathymn@sbcollege.ac.in',
     photo: '/assets/images/faculty/ms__aswathy_manoharan.jpg',
     accentColor: '#ec4899',
-    archetype: 'b',
   },
   {
     id: 'aswathy-s-nair',
@@ -98,7 +88,6 @@ export const faculty: FacultyMember[] = [
     email: 'aswathys@sbcollege.ac.in',
     photo: '/assets/images/faculty/ms__aswathy_s_nair.jpg',
     accentColor: '#10b981',
-    archetype: 'c',
   },
   {
     id: 'sharon-shaji',
@@ -107,7 +96,6 @@ export const faculty: FacultyMember[] = [
     email: 'sharon@sbcollege.ac.in',
     photo: '/assets/images/faculty/mr__sharon_shaji.jpg',
     accentColor: '#f59e0b',
-    archetype: 'd',
   },
   {
     id: 'aghil-k-p',
@@ -116,7 +104,6 @@ export const faculty: FacultyMember[] = [
     email: 'akhilsajeevan21@gmail.com',
     photo: '/assets/images/faculty/mr__aghil_k_p.jpg',
     accentColor: '#8b5cf6',
-    archetype: 'a',
   },
   {
     id: 'annu-bindhu-benoy',
@@ -125,7 +112,6 @@ export const faculty: FacultyMember[] = [
     email: 'annubindhubinoy@gmail.com',
     photo: '/assets/images/faculty/ms__annu_bindhu_benoy.jpg',
     accentColor: '#06b6d4',
-    archetype: 'b',
   },
   {
     id: 'p-vijayalakshmi',
@@ -134,7 +120,6 @@ export const faculty: FacultyMember[] = [
     email: 'ponniahvijayalakshmi@sbcollege.ac.in',
     photo: '/assets/images/faculty/dr__p_vijayalakshmi.jpg',
     accentColor: '#f97316',
-    archetype: 'c',
   },
   {
     id: 'snehamol-selvaraj',
@@ -143,7 +128,6 @@ export const faculty: FacultyMember[] = [
     email: 'snehamolselvaraj@gmail.com',
     photo: '/assets/images/faculty/ms__snehamol_selvaraj.jpg',
     accentColor: '#6366f1',
-    archetype: 'd',
   },
   {
     id: 'greeshma-muraly',
@@ -152,7 +136,6 @@ export const faculty: FacultyMember[] = [
     email: 'greeshmamuraly@sbcollege.ac.in',
     photo: '/assets/images/faculty/ms__greeshma_muraly.jpg',
     accentColor: '#3b82f6',
-    archetype: 'a',
   },
   {
     id: 'melbin-johnson',
@@ -161,6 +144,5 @@ export const faculty: FacultyMember[] = [
     email: 'melbin@sbcollege.ac.in',
     photo: '/assets/images/faculty/mr__melbin_johnson.jpg',
     accentColor: '#ec4899',
-    archetype: 'b',
   },
 ];

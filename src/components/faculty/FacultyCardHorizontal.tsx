@@ -1,5 +1,6 @@
 import type { FacultyMember } from '../../types/content';
 import { WireframeGlobe, SparkleDuo, FoldedCorner, PlusMarks } from './decorations';
+import { Picture } from '../shared/Picture';
 
 export function FacultyCardHorizontal({
   member,
@@ -16,7 +17,7 @@ export function FacultyCardHorizontal({
   const photoBlock = (
     <div className="fg-h-photo-wrap">
       <div className="fg-h-photo" style={{ background: accentColor }}>
-        <img {...imgProps} src={photo} alt={name} className="fg-photo-img" />
+        <Picture {...imgProps} src={photo} alt={name} className="fg-photo-img" />
       </div>
     </div>
   );

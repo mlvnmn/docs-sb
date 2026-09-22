@@ -1,5 +1,6 @@
 import type { FacultyMember } from '../../types/content';
 import { FoldedCorner, PlusMarks } from './decorations';
+import { Picture } from '../shared/Picture';
 
 export function FacultyCardPill({ member, eager }: { member: FacultyMember; eager?: boolean }) {
   const { name, role, email, photo, accentColor } = member;
@@ -16,7 +17,7 @@ export function FacultyCardPill({ member, eager }: { member: FacultyMember; eage
       <article className="fg-card fg-v-pill">
         <div className="fg-pill-photo-group">
           <div className="fg-pill-photo" style={{ background: accentColor }}>
-            <img {...imgProps} src={photo} alt={name} className="fg-photo-img" />
+            <Picture {...imgProps} src={photo} alt={name} className="fg-photo-img" />
           </div>
           <div className="fg-pill-badge">
             <h3 className="fg-name">{name}</h3>

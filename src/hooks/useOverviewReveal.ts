@@ -1,6 +1,6 @@
 import { useLayoutEffect, type RefObject } from 'react';
 import { gsap } from 'gsap';
-import { onEnterViewport } from './useEnterViewport';
+import { onEnterViewport } from '../lib/enterViewport';
 
 /**
  * Same "lines rise out of their overflow-hidden mask" entrance used by the

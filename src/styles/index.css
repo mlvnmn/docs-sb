@@ -1,0 +1,27 @@
+/* ===================================================================
+   DEPARTMENT OF COMPUTER SCIENCE - SB COLLEGE
+   Global stylesheet, imported once from src/main.tsx.
+
+   Only what every route needs lives here: the tokens and reset, the
+   persistent header and footer, and the homepage sections. Each other
+   route imports its own stylesheet from src/styles/routes/ so those
+   rules ship in that route's chunk rather than in this bundle.
+
+   These are plain global rules with no scoping, so order is load-bearing
+   - a later import overrides an earlier one. responsive.css in
+   particular holds the cross-section breakpoint overrides for everything
+   imported above it and must stay in place; partners.css deliberately
+   sits after it.
+   =================================================================== */
+
+@import './base.css';
+@import './layout/header.css';
+@import './home/hero.css';
+@import './home/hero-slideshow.css';
+@import './home/overview.css';
+@import './home/programs.css';
+@import './home/about-teaser.css';
+@import './home/contact.css';
+@import './layout/footer.css';
+@import './responsive.css';
+@import './home/partners.css';

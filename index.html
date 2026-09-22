@@ -5,18 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Department of Computer Science | St Berchmans College Autonomous</title>
   <meta name="description" content="Department of Computer Science, St Berchmans College Autonomous. Where Ideas Become Impact. Committed to excellence in education, research, and innovation.">
+  <meta name="theme-color" content="#151c55">
 
-  <!-- Google Fonts -->
+  <!-- Warm up the two CDNs every page pulls from before the parser reaches them. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Fredoka:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Press+Start+2P&family=Space+Grotesk:wght@500;600;700;900&family=Overlock:wght@400;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
-  <!-- FontAwesome Icons -->
+  <!--
+    One request for every family the stylesheet names - see the token block at
+    the top of src/styles/base.css. Weight lists are deliberately tight: the
+    body/heading faces keep a range because rules inherit weights down through
+    them, while the single-use display faces (Fredoka, Caveat, Overlock,
+    UnifrakturMaguntia) ask only for the weight their one rule sets.
+
+    Space Grotesk stops at 700 upstream - `wght@900` was silently dropped by
+    the API, so the 800/900 headings have always rendered from 700 and asking
+    for those weights only made the request invalid. Every weight listed here
+    really exists, so nothing is requested that can't be served.
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Fredoka:wght@700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Overlock&family=Playfair+Display:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+  <!-- Icons. Kept render-blocking on purpose: an <i> with no glyph yet has no
+       width, so deferring this would shift every button it sits in. -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Favicon -->
-  <link rel="icon" href="/assets/images/dept_logo.jpeg">
+  <!-- The first hero slide is the largest element on the landing page, and the
+       slideshow markup only reaches the browser after the JS bundle runs. The
+       `type` here means browsers without WebP skip the hint and just fetch the
+       JPEG fallback normally. -->
+  <link rel="preload" as="image" href="/assets/images/hero/banner-1.webp" type="image/webp" fetchpriority="high">
+
+  <link rel="icon" href="/assets/images/brand/dept-logo.jpg">
 </head>
 <body>
   <div id="root"></div>

@@ -1,16 +1,19 @@
 import { timelineIntro, timelineMilestones } from '../../data/timeline';
-import { useTimelineScroll } from '../../hooks/useTimelineScroll';
+import { useHorizontalScroll } from '../../hooks/useHorizontalScroll';
 import { TimelineCard } from './TimelineCard';
+import { Picture } from '../shared/Picture';
 
 export function TimelineArchive() {
-  const { containerRef, trackRef, progress, scale, scrollByStep } = useTimelineScroll();
+  const { containerRef, trackRef, progress, scale, scrollByStep } = useHorizontalScroll({
+    stepSelector: '[data-timeline-column]',
+  });
 
   return (
     <div className="timeline-page">
       <div className="timeline-page-decor" aria-hidden="true">
-        <img
+        <Picture
           className="timeline-archive-tower"
-          src="/assets/images/about/tower-lineart.png"
+          src="/assets/images/brand/tower-lineart.png"
           alt=""
           loading="lazy"
         />
@@ -32,7 +35,7 @@ export function TimelineArchive() {
         <div
           className="timeline-archive-row"
           ref={trackRef}
-          style={scale < 1 ? { transform: `scale(${scale})` } : undefined}
+          style={scale < 1 ? { zoom: scale } : undefined}
         >
           <div className="timeline-archive-line" aria-hidden="true" />
           {timelineMilestones.map((milestone, index) => (
@@ -66,11 +69,13 @@ export function TimelineArchive() {
         </div>
 
         <div className="timeline-archive-footer-right">
-          <span className="timeline-archive-scroll-label">SCROLL ARCHIVE</span>
-          <div className="timeline-archive-progress-track">
-            <span className="timeline-archive-progress-handle" style={{ left: `${progress}%` }} />
+          <div className="timeline-archive-progress-wrap">
+            <span className="timeline-archive-scroll-label">SCROLL ARCHIVE</span>
+            <div className="timeline-archive-progress-track">
+              <div className="timeline-archive-progress-fill" style={{ width: `${Math.max(progress, 8)}%` }} />
+            </div>
+            <span className="timeline-archive-progress-pct">{progress}%</span>
           </div>
-          <span className="timeline-archive-progress-pct">{progress}%</span>
           <div className="timeline-archive-nav-buttons">
             <button type="button" onClick={() => scrollByStep(-1)} aria-label="Previous milestone">
               &larr;

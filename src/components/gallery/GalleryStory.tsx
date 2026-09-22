@@ -1,11 +1,12 @@
 import { galleryPageCopy } from '../../data/gallery';
+import { Picture } from '../shared/Picture';
 
 export function GalleryStory() {
   return (
     <section className="gallery-story">
       <div className="gallery-story-image-wrap">
         <div className="gallery-story-accent" aria-hidden="true" />
-        <img
+        <Picture
           src={galleryPageCopy.storyImage}
           alt="Campus"
           className="gallery-story-image"

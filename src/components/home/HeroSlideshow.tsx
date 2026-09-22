@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { heroSlides } from '../../data/heroSlides';
 import { useHeroSlideshow } from '../../hooks/useHeroSlideshow';
+import { Picture } from '../shared/Picture';
 
 export function HeroSlideshow() {
   const { currentSlide, isPlaying, goToSlide, togglePlay } = useHeroSlideshow(heroSlides.length);
@@ -29,7 +30,7 @@ export function HeroSlideshow() {
   // heroKenBurns is a `forwards`-filled CSS animation, so once it finishes,
   // flipping play-state back to "running" on a later loop just resumes it
   // sitting at the already-reached end frame — no visible zoom. Restarting it
-  // used to remount the <img> (new key each activation), but that forced the
+  // used to remount the <Picture> (new key each activation), but that forced the
   // browser to re-decode the image at the exact moment the crossfade began,
   // which is what made the transition look like it paused before jumping to
   // the next slide. Toggling the inline `animation` off/on with a forced
@@ -49,13 +50,21 @@ export function HeroSlideshow() {
       <div className="hero-slides-wrapper">
         {heroSlides.map((slide, i) => (
           <div className={`hero-slide${i === currentSlide ? ' active' : ''}`} data-index={i} key={slide.image}>
-            <img
+            <Picture
               ref={(el) => {
                 imgRefs.current[i] = el;
               }}
               src={slide.image}
               alt={slide.alt}
               className="hero-slide-img"
+              /* All four layers are in the viewport from the start, so
+                 loading="lazy" would not defer any of them. Priority is the
+                 lever that works instead: slide 1 is the page's LCP element
+                 (and is preloaded in index.html), while the other three are
+                 not needed for at least 5s and are told to queue behind
+                 everything else. */
+              fetchPriority={i === 0 ? 'high' : 'low'}
+              decoding={i === 0 ? 'sync' : 'async'}
             />
             <div className="hero-slide-overlay" />
           </div>

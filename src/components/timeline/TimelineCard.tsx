@@ -1,4 +1,5 @@
 import type { TimelineMilestone } from '../../types/content';
+import { Picture } from '../shared/Picture';
 
 interface TimelineCardProps {
   milestone: TimelineMilestone;
@@ -11,7 +12,7 @@ export function TimelineCard({ milestone, isFirst, eager }: TimelineCardProps) {
     <article className={`timeline-card timeline-card-${milestone.accent}`}>
       <div className="timeline-card-image-wrap">
         {isFirst && <span className="timeline-card-flag" aria-hidden="true" />}
-        <img
+        <Picture
           className="timeline-card-image"
           src={milestone.image}
           alt={milestone.title}

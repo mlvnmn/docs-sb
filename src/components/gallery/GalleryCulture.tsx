@@ -1,4 +1,5 @@
 import { galleryPageCopy } from '../../data/gallery';
+import { Picture } from '../shared/Picture';
 
 export function GalleryCulture() {
   return (
@@ -10,14 +11,14 @@ export function GalleryCulture() {
       </div>
 
       <div className="gallery-culture-images">
-        <img
+        <Picture
           src={galleryPageCopy.cultureImageA}
           alt="Lab session"
           className="gallery-culture-img-a"
           loading="lazy"
           decoding="async"
         />
-        <img
+        <Picture
           src={galleryPageCopy.cultureImageB}
           alt="Department event"
           className="gallery-culture-img-b"

@@ -12,7 +12,7 @@ export const aboutContent: AboutContent = {
       'Our highly regarded faculty, celebrated for their knowledge and commitment, is dedicated to supporting your journey toward success.',
       'We offer meticulously designed programs that not only grant you a prestigious qualification but also equip you with a comprehensive skill set and a competitive edge in the dynamic technology industry.',
     ],
-    image: '/assets/images/sb_college_campus_mirrored.jpg',
+    image: '/assets/images/campus/sb-college-campus.jpg',
   },
   highlights: [
     { id: 'placement', text: 'Placement With Top Companies', icon: 'fa-solid fa-briefcase' },

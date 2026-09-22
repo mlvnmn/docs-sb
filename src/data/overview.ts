@@ -4,8 +4,6 @@ export const overviewContent: OverviewContent = {
   kicker: 'Presenting Computer Science',
   headingLead: 'Department',
   headingTrail: 'of the Future',
-  taglineLead: '',
-  taglineEmphasis: '',
 };
 
 export const overviewStats: OverviewStat[] = [

@@ -1,3 +1,4 @@
+import '../styles/routes/gallery.css';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { galleryFolders } from '../data/gallery';
 import { GalleryHero } from '../components/gallery/GalleryHero';

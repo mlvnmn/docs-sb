@@ -1,5 +1,6 @@
 import { aboutContent } from '../../data/about';
 import { SmartLink } from '../shared/SmartLink';
+import { Picture } from '../shared/Picture';
 
 export function AboutStory() {
   const { story } = aboutContent;
@@ -10,7 +11,7 @@ export function AboutStory() {
         <div className="about-story-media">
           <span className="about-blob about-blob-blue about-blob-story-tl" aria-hidden="true" />
           <span className="about-blob about-blob-pink about-blob-story-br" aria-hidden="true" />
-          <img src={story.image} alt="St Berchmans College campus" loading="lazy" decoding="async" />
+          <Picture src={story.image} alt="St Berchmans College campus" loading="lazy" decoding="async" />
         </div>
 
         <div className="about-story-copy">

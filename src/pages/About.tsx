@@ -1,3 +1,4 @@
+import '../styles/routes/about.css';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { AboutHero } from '../components/about/AboutHero';
 import { AboutStory } from '../components/about/AboutStory';

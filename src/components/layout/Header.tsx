@@ -3,6 +3,7 @@ import { navLinks } from '../../data/navLinks';
 import { useHeaderScroll } from '../../hooks/useHeaderScroll';
 import { useMobileMenu } from '../../hooks/useMobileMenu';
 import { SmartLink } from '../shared/SmartLink';
+import { Picture } from '../shared/Picture';
 
 export function Header() {
   const isScrolled = useHeaderScroll();
@@ -41,8 +42,8 @@ export function Header() {
       <div className="header-container">
         <SmartLink to="/" className="brand-logo" onClick={goHome}>
           <div className="logo-mark">
-            <img
-              src="/assets/images/dept_logo.jpeg"
+            <Picture
+              src="/assets/images/brand/dept-logo.jpg"
               alt="Department of Computer Science Logo"
               className="dept-logo-img"
             />

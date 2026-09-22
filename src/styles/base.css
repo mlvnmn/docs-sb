@@ -1,0 +1,121 @@
+/* ===================================================================
+   DEPARTMENT OF COMPUTER SCIENCE - SB COLLEGE
+   Main Stylesheet
+   =================================================================== */
+
+:root {
+  /* Every family here is requested in index.html's one Google Fonts link -
+     add a token and you must add it there too, or it silently falls back. */
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Space Grotesk', var(--font-main);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-old-english: 'UnifrakturMaguntia', 'Cinzel', serif;
+  --font-overlock: 'Overlock', Georgia, serif;
+  --font-script: 'Caveat', cursive;
+
+  --color-primary: #151c55;
+  --color-primary-dark: #0a0e2a;
+  --color-accent-magenta: #db2777;
+  --color-accent-coral: #ff5e62;
+
+  --color-text-dark: #0f172a;
+  --color-text-muted: #64748b;
+  --color-text-light: #94a3b8;
+  --color-bg-light: #f8fafc;
+
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.12);
+
+  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Top-padding inset shared by every page's first section, so they all clear
+     the fixed header by the same amount and scale together on narrow screens
+     (6.25vw = 90/1440, capped at 85px so desktop is unchanged). */
+  --wave-bleed: min(6.25vw, 85px);
+}
+
+/* Lenis' required base styles. Global on purpose: both the homepage
+   (useSmoothScroll) and the gallery folder (useGalleryParallax) start a
+   Lenis instance, and these are inert until one is alive, since Lenis
+   toggles the classes onto <html> itself. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Reset & Base Setup */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: #ffffff;
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Every local <img> is wrapped in a <picture> (see components/shared/Picture)
+   to offer a WebP alongside the JPEG/PNG fallback. `display: contents` takes
+   that wrapper out of layout entirely, so the <img> stays the flex/grid item
+   of whatever contained it before and percentage heights keep resolving
+   against the same ancestor - no rule below has to know the wrapper exists. */
+picture {
+  display: contents;
+}
+
+/* ...but `display: contents` promotes *all* of <picture>'s children into the
+   real container, and <source> is not in the UA stylesheet's display:none
+   list. Left alone it takes a grid cell / flex slot of its own, which pushed
+   the image and its caption a column out of place in the news sidebar. It is
+   never meant to render, so take it out of flow explicitly. */
+picture > source {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  transition: var(--transition);
+}

@@ -1,0 +1,417 @@
+/* ==================== OVERVIEW OF DEPARTMENT SECTION ==================== */
+.overview-section {
+  position: relative;
+  width: 100%;
+  padding: 5rem 2rem 6rem;
+  /* Visible (not hidden): the hero section's blob-green/blob-yellow glows sit
+     on top of this section's top edge (see .hero-section z-index) - keeping
+     this visible lets this section's own content still lay out normally while
+     that overlap paints through. */
+  overflow: visible;
+}
+
+/* Smooths the hand-off from the hero section's fading glow into this section's
+   own amber/green tint gradient. Both are independently-tuned gradients that
+   don't land on the same colour value right at the shared DOM edge, which reads
+   as a thin, hard line at that exact boundary; fading this section's own tint
+   in from white over the first ~110px erases that mismatch instead of trying
+   to hand-tune two unrelated gradients to match at one pixel row. */
+.overview-seam-fade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 110px;
+  background: linear-gradient(to bottom, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* One full ring cluster bleeding off the left edge, vertically centered on
+   the stats pill - a single continuous circle behind the pill, not two
+   small fragments. */
+.overview-stats-row {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  margin-bottom: 3.5rem;
+  box-sizing: border-box;
+}
+
+.overview-rings {
+  position: absolute;
+  top: 50%;
+  left: -228px;
+  transform: translateY(-50%);
+  width: 356px;
+  height: 356px;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 50%,
+      transparent 0 133px,
+      #34a853 133px 139px,
+      transparent 139px 146px,
+      #fbbf24 146px 152px,
+      transparent 152px 159px,
+      #3b82f6 159px 165px,
+      transparent 165px 172px,
+      #ff5e62 172px 178px,
+      transparent 178px 9999px);
+  opacity: 0.6;
+}
+
+.overview-watermark {
+  position: absolute;
+  top: 50%;
+  /* right:0 + sizes trimmed by the old -6% overhang reproduces the same visible
+     watermark (the overhang was always invisible, clipped by body's
+     overflow-x: hidden) without adding real horizontal scroll-width. */
+  right: 0;
+  transform: translateY(-50%);
+  width: 580px;
+  max-width: 51vw;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.09;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask-image: radial-gradient(circle, #000 55%, transparent 100%);
+  mask-image: radial-gradient(circle, #000 55%, transparent 100%);
+}
+
+.overview-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+/* Same treatment as the "Our Partners" wall heading (.partners-title): Space
+   Grotesk, tight tracking, one word solid and the other stroked-outline. */
+.overview-title-bar {
+  display: block;
+  width: 55px;
+  height: 4.5px;
+  background: #f43f5e;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  margin-left: 30px;
+}
+
+.overview-kicker-line {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 0.1em;
+  margin-left: 30px;
+  /* The outline title's -webkit-text-stroke renders outside the glyph's
+     normal metrics box, so the stroke on the very first character can spill
+     a pixel or two left of x:0 - this wrapper's own overflow: hidden (needed
+     to clip the scroll-reveal slide) then crops that overshoot off. A
+     couple pixels of padding gives it room without shifting the text
+     noticeably. */
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.overview-kicker {
+  display: block;
+  text-align: left;
+  font-family: var(--font-heading);
+  font-size: calc(clamp(1.5rem, 3.5vw, 2.75rem) + 5px);
+  line-height: 0.9;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: var(--color-primary-dark);
+}
+
+.overview-kicker-line-inner {
+  will-change: transform;
+}
+
+.overview-title {
+  text-align: left;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: calc(clamp(2.75rem, 6.5vw, 5.5rem) + 5px);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-primary-dark);
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+  margin-left: 30px;
+}
+
+.overview-title-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.overview-title-line-inner {
+  display: block;
+  will-change: transform;
+}
+
+.overview-stats {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6.5rem;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 1.5rem 8rem 1.5rem 9rem;
+  box-shadow: var(--shadow-lg);
+  flex-wrap: wrap;
+  margin-left: -100px;
+}
+
+.overview-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.overview-stat-value {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-heading);
+  font-size: 2.3rem;
+  font-weight: 900;
+  color: var(--color-text-dark);
+}
+
+.overview-stat-num {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+.overview-digit-reel {
+  display: inline-block;
+  overflow: hidden;
+  height: 1em;
+  line-height: 1;
+  vertical-align: text-bottom;
+}
+
+.overview-digit-track {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.overview-digit-cell {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}
+
+.overview-stat-arrow {
+  width: 20px;
+  height: 20px;
+  color: #3b82f6;
+}
+
+.overview-stat-label {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 1200px) {
+  .overview-watermark {
+    opacity: 0.07;
+  }
+}
+
+/* Below 900px the pill card is swapped for the department's petal/leaf
+   shape card (built for phones, below) rather than squeezing the pill's
+   fixed-width flex-wrap layout through progressively narrower tablet
+   widths - this whole range uses the shape card instead. The heading
+   centering and section/watermark spacing that used to kick in separately
+   at 768px are folded into this same 900px breakpoint so the centered
+   heading and the centered shape card always appear together, never one
+   without the other. */
+@media (max-width: 900px) {
+  .overview-section {
+    padding: 4rem 1.25rem 4.5rem;
+  }
+
+  /* The desktop heading scales with vw, but its clamp() floor (2.75rem for
+     the outline title, 1.5rem for the kicker) is tuned for desktop widths -
+     below 900px that floor is still oversized relative to the viewport,
+     forcing "PRESENTING COMPUTER SCIENCE" and "DEPARTMENT OF THE FUTURE"
+     into a cramped 2-3 line wrap. Below 900px we drop to fixed,
+     phone-appropriate sizes instead, and fully center each line (bar,
+     kicker, title) - both the block itself and the text inside it - instead
+     of hugging the desktop-only 30px left offset. */
+  .overview-kicker-line,
+  .overview-title {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+  }
+
+  /* Same centering, but the bar is an empty decorative span with no text of
+     its own to size to - `width: fit-content` on an empty element collapses
+     to 0 (making it vanish entirely), so it keeps its fixed 55px width and
+     only gets centered via the margins. */
+  .overview-title-bar {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .overview-kicker {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .overview-title {
+    font-size: 2.6rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  /* Below 900px the shape card fills this space instead, so the faint
+     background logo has nothing to sit behind and just reads as clutter -
+     hide it rather than repositioning it. */
+  .overview-watermark {
+    display: none;
+  }
+
+  /* Desktop's full-bleed trick (left:50%/-50vw/100vw, used to let the ring
+     cluster overhang the viewport edge) no longer applies once the shape
+     card replaces the pill - the row is undone back to a normal centered
+     block so its own width (capped at 420px, same as the card) can serve
+     as the container query reference every measurement below scales off
+     of. That keeps the card's proportions identical at every width from
+     900px down to a phone instead of jumping between two hand-tuned
+     breakpoints with a mismatched zone in between. */
+  .overview-stats-row {
+    position: static;
+    left: auto;
+    width: 100%;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    container-type: inline-size;
+  }
+
+  /* The ring cluster is tuned for the desktop pill's height; it has no
+     place in the shape card's layout below, same as on phones. */
+  .overview-rings {
+    display: none;
+  }
+
+  /* The plain rounded-rect/pill card is swapped for the department's own
+     petal/leaf silhouette, painted via ::before instead of a
+     background-color so the shape's transparent notch and rounded corners
+     show through. The image is a square (1254x1254) canvas with generous
+     transparent margins on every side. Its opaque body was measured
+     pixel-by-pixel (not eyeballed): the two top lobes only fully clear
+     their V-notch right above centre (x=50%) at y=34% - column two's inner
+     edge sits at x~53%, which clears earlier, at y=26% - so padding-top
+     has real headroom to spare below that. Left/right stay a flat ~16%
+     margin until y=56%, then taper inward on both sides toward the
+     bottom point - the safe open band both stat rows must fit inside is
+     therefore roughly y 29%-56%. `align-content: start` is required so
+     the grid's two auto-height rows pack against that top edge instead of
+     stretching to fill the whole padded box (the default for an
+     aspect-ratio-constrained grid) and sliding row two down into the
+     taper.
+
+     Every offset is a `cqw` percentage of `.overview-stats-row`'s own
+     width (not `vw`/`rem`) so it scales continuously with the card - which
+     shrinks 1:1 with the viewport below ~460px - instead of holding a
+     fixed pixel value tuned for one card size and looking cramped or
+     off-center at every other size in the 900px-to-phone range. */
+  .overview-stats {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: start;
+    justify-items: start;
+    row-gap: 10.38cqw;
+    column-gap: 8cqw;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding-top: 28.52cqw;
+    padding-right: 11.63cqw;
+    padding-bottom: 5.71cqw;
+    padding-left: 24.95cqw;
+    margin-left: 0;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+
+  .overview-stats::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    /* The one image the site loads through CSS rather than <Picture>, so it
+       gets the same WebP-with-fallback treatment by hand. The shorthand names
+       the PNG, then image-set() upgrades browsers that understand it (the
+       WebP is a fifth of the size); the rest simply ignore the second
+       declaration and keep the PNG. */
+    background: url('/assets/images/overview/stats-shape.png') no-repeat center / contain;
+    background-image: image-set(
+      url('/assets/images/overview/stats-shape.webp') type('image/webp'),
+      url('/assets/images/overview/stats-shape.png') type('image/png')
+    );
+  }
+
+  .overview-stat {
+    position: relative;
+    z-index: 1;
+    text-align: left;
+  }
+
+  /* Data order (students, faculty, ai-labs, communities) stays untouched -
+     the desktop pill still reads left-to-right in that order - but the
+     shape card's bottom row visually swaps to communities-then-ai-labs to
+     match the reference layout, via `order` alone. */
+  .overview-stat:nth-child(3) {
+    order: 4;
+  }
+
+  .overview-stat:nth-child(4) {
+    order: 3;
+  }
+
+  .overview-stat-value {
+    font-size: 6.48cqw;
+    gap: 0.3rem;
+  }
+
+  .overview-stat-arrow {
+    width: 4.29cqw;
+    height: 4.29cqw;
+  }
+
+  .overview-stat-label {
+    font-size: 3.43cqw;
+  }
+}
+
+@media (max-width: 480px) {
+  .overview-kicker {
+    font-size: 1.15rem;
+  }
+
+  .overview-title {
+    font-size: 2.1rem;
+    margin-bottom: 2rem;
+  }
+}

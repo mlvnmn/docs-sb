@@ -1,3 +1,4 @@
+import '../styles/routes/gallery.css';
 import { useRef } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
@@ -6,6 +7,7 @@ import { useGalleryParallax } from '../hooks/useGalleryParallax';
 import { galleryFolders } from '../data/gallery';
 import { SmartLink } from '../components/shared/SmartLink';
 import { Footer } from '../components/layout/Footer';
+import { Picture } from '../components/shared/Picture';
 
 // Repeating rhythm of tile sizes so the grid reads as a hand-built photo
 // collage (mixed big/tall/wide tiles) rather than a uniform camera-roll.
@@ -60,7 +62,7 @@ export function GalleryFolder() {
                 style={{ transitionDelay: `${delay}ms` }}
                 key={photo + index}
               >
-                <img src={photo} alt={`${folder.title} ${index + 1}`} loading={index === 0 ? undefined : 'lazy'} />
+                <Picture src={photo} alt={`${folder.title} ${index + 1}`} loading={index === 0 ? undefined : 'lazy'} />
                 <div className="gallery-photo-overlay" />
               </div>
             );

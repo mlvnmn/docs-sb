@@ -1,4 +1,5 @@
 import { galleryFolders, galleryPageCopy } from '../../data/gallery';
+import { Picture } from '../shared/Picture';
 
 export function GalleryExplore() {
   return (
@@ -24,7 +25,7 @@ export function GalleryExplore() {
       </div>
 
       <div className="gallery-explore-image-wrap">
-        <img
+        <Picture
           src={galleryPageCopy.exploreImage}
           alt="Campus moment"
           className="gallery-explore-image"

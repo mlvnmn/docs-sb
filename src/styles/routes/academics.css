@@ -1,0 +1,415 @@
+/* Route-scoped stylesheet: imported from the page component, so it ships
+   in that route's own chunk instead of the global bundle. Nothing here
+   shares a class with the global stylesheets (src/styles/index.css). */
+
+/* ==================== SYLLABUS / TIMETABLES (Academics pages) ====================
+   Restyled to match the bolder, hand-built look established by the newer
+   sections of the site (timeline archive, faculty gallery, overview stats):
+   thick ink borders, hard offset shadows instead of soft blur, Space Grotesk
+   solid/outline heading pairs, and a pink accent bar - rather than the
+   generic soft-shadow rounded-card look this page originally shipped with. */
+.academics-page {
+  --ac-ink: #14121c;
+  --ac-pink: #ff4d94;
+  --ac-cream: #faf5e9;
+  background-color: var(--ac-cream);
+  background-image: radial-gradient(circle, rgba(20, 18, 28, 0.12) 1px, transparent 1.6px);
+  background-size: 20px 20px;
+}
+
+.syllabus-section {
+  padding: calc(6rem + var(--wave-bleed)) 2rem 4rem;
+}
+
+.timetable-section {
+  padding: 2rem 2rem 6rem;
+}
+
+.academics-heading-row {
+  max-width: 1100px;
+  margin: 0 auto 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+.academics-heading-bar {
+  display: block;
+  width: 44px;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--ac-pink);
+  flex-shrink: 0;
+}
+
+.syllabus-heading {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(1.85rem, 4vw, 3rem);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--ac-ink);
+  text-align: center;
+}
+
+.academics-heading-solid {
+  color: var(--ac-ink);
+}
+
+.academics-heading-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ac-ink);
+}
+
+@supports not (-webkit-text-stroke: 1px black) {
+  .academics-heading-outline {
+    color: var(--ac-ink);
+  }
+}
+
+.syllabus-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  background: #ffffff;
+  border: 2px solid var(--ac-ink);
+  border-radius: 1.5rem;
+  padding: 1.75rem 2rem;
+  box-shadow: 6px 6px 0 var(--ac-ink);
+  transition: var(--transition);
+}
+
+.syllabus-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 var(--ac-ink);
+}
+
+.syllabus-card-info {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+.syllabus-icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ac-pink);
+  border: 2px solid var(--ac-ink);
+  color: #ffffff;
+  font-size: 1.4rem;
+}
+
+.syllabus-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ac-ink);
+  margin-bottom: 0.35rem;
+}
+
+.syllabus-desc {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--color-text-light);
+  max-width: 32rem;
+}
+
+.syllabus-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.syllabus-btn-primary,
+.syllabus-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: 0.75rem;
+  border: 2px solid var(--ac-ink);
+  box-shadow: 3px 3px 0 var(--ac-ink);
+  transition: var(--transition);
+}
+
+.syllabus-btn-primary:hover,
+.syllabus-btn-secondary:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ac-ink);
+}
+
+.syllabus-btn-primary:active,
+.syllabus-btn-secondary:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ac-ink);
+}
+
+.syllabus-btn-primary {
+  background: var(--ac-pink);
+  color: #ffffff;
+}
+
+.syllabus-btn-secondary {
+  background: #ffffff;
+  color: var(--ac-ink);
+}
+
+@media (max-width: 640px) {
+  .syllabus-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .syllabus-actions {
+    width: 100%;
+  }
+
+  .syllabus-btn-primary,
+  .syllabus-btn-secondary {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+.timetable-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .timetable-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .timetable-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.timetable-box {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  background: #ffffff;
+  border: 2px solid var(--ac-ink);
+  border-radius: 1.25rem;
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  box-shadow: 5px 5px 0 var(--ac-ink);
+  transition: var(--transition);
+}
+
+.timetable-box:hover {
+  transform: translate(-2px, -3px);
+  box-shadow: 7px 8px 0 var(--ac-ink);
+}
+
+.timetable-box:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ac-ink);
+}
+
+.timetable-box-plus {
+  position: absolute;
+  top: 0.85rem;
+  right: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: rgba(20, 18, 28, 0.25);
+}
+
+.timetable-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ac-pink);
+  border: 2px solid var(--ac-ink);
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+
+.timetable-label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  color: var(--ac-ink);
+}
+
+/* -- Timetable modal (opened from a .timetable-box) -- */
+.timetable-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(20, 18, 28, 0.62);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+}
+
+.timetable-modal-container {
+  position: relative;
+  width: 100%;
+  max-width: 1050px;
+  max-height: 85vh;
+  background: #faf5e9;
+  border: 2px solid #14121c;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 8px 8px 0 #14121c;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.timetable-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 2px solid #14121c;
+  color: #14121c;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.timetable-modal-close:hover {
+  background: #ff4d94;
+  color: #ffffff;
+}
+
+.timetable-modal-close:active {
+  transform: translate(2px, 2px);
+}
+
+.timetable-modal-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.35rem;
+  text-transform: uppercase;
+  color: #14121c;
+  padding-right: 2.5rem;
+}
+
+.timetable-modal-scroll {
+  overflow: auto;
+  border-radius: 1rem;
+  border: 2px solid #14121c;
+}
+
+.timetable-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.timetable-table thead th {
+  background: #14121c;
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.9rem 0.75rem;
+  white-space: nowrap;
+}
+
+.timetable-table thead th:first-child {
+  text-align: left;
+  padding-left: 1.25rem;
+}
+
+.timetable-table tbody td {
+  text-align: center;
+  padding: 0.85rem 0.75rem;
+  font-size: 0.85rem;
+  color: #14121c;
+  border-bottom: 1px solid rgba(20, 18, 28, 0.1);
+}
+
+.timetable-table tbody tr:nth-child(even) {
+  background: rgba(255, 77, 148, 0.06);
+}
+
+.timetable-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.timetable-day-cell {
+  text-align: left !important;
+  padding-left: 1.25rem !important;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.timetable-subject {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.timetable-instructor {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.timetable-lab-cell {
+  background: rgba(255, 77, 148, 0.12);
+}
+
+.timetable-lab-badge {
+  display: inline-block;
+  background: #ff4d94;
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.72rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1.5px solid #14121c;
+}
+
+@media (max-width: 640px) {
+  .timetable-modal-container {
+    padding: 1.5rem 1.25rem;
+    max-height: 90vh;
+  }
+}

@@ -1,10 +1,10 @@
-import '../styles/facultyGallery.css';
+import '../styles/routes/faculty.css';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { useFaculty } from '../hooks/useFaculty';
-import { useFacultyGalleryScroll } from '../hooks/useFacultyGalleryScroll';
+import { useHorizontalScroll } from '../hooks/useHorizontalScroll';
 import { FacultyCluster } from '../components/faculty/FacultyCluster';
 import { FacultySecondaryNav } from '../components/faculty/FacultySecondaryNav';
-import { GalleryScrollBar } from '../components/faculty/GalleryScrollBar';
+import { FacultyScrollBar } from '../components/faculty/FacultyScrollBar';
 
 const CLUSTER_SIZE = 6;
 
@@ -23,7 +23,9 @@ export function FacultyDirectory() {
   );
 
   const faculty = useFaculty();
-  const { containerRef, trackRef, progress, scale, scrollByStep } = useFacultyGalleryScroll();
+  const { containerRef, trackRef, progress, scale, scrollByStep } = useHorizontalScroll({
+    progressWhenUnscrollable: 100,
+  });
 
   const groups = chunk(faculty, CLUSTER_SIZE);
 
@@ -36,7 +38,7 @@ export function FacultyDirectory() {
         ref={containerRef}
         style={scale < 1 ? { alignItems: 'flex-start' } : undefined}
       >
-        <div className="fg-track" ref={trackRef} style={scale < 1 ? { transform: `scale(${scale})` } : undefined}>
+        <div className="fg-track" ref={trackRef} style={scale < 1 ? { zoom: scale } : undefined}>
           {groups.map((members, i) => (
             <div className="fg-cluster-and-divider" key={`cluster-${i}`}>
               <FacultyCluster id={`cluster-${i}`} members={members} eager={i === 0} wideTallPhoto={i === 1} />
@@ -50,7 +52,7 @@ export function FacultyDirectory() {
         </div>
       </main>
 
-      <GalleryScrollBar
+      <FacultyScrollBar
         progress={progress}
         onScrollLeft={() => scrollByStep(-1)}
         onScrollRight={() => scrollByStep(1)}

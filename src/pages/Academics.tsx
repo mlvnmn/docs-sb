@@ -1,3 +1,4 @@
+import '../styles/routes/academics.css';
 import { useState } from 'react';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { Footer } from '../components/layout/Footer';
@@ -19,9 +20,14 @@ export function Academics({ program, syllabusNote, timetableBoxes }: AcademicsPr
   const [activeTimetable, setActiveTimetable] = useState<string | null>(null);
 
   return (
-    <>
+    <div className="academics-page">
       <section className="syllabus-section">
-        <h2 className="syllabus-heading">Our Syllabus</h2>
+        <div className="academics-heading-row">
+          <span className="academics-heading-bar" aria-hidden="true" />
+          <h2 className="syllabus-heading">
+            <span className="academics-heading-solid">Our</span> <span className="academics-heading-outline">Syllabus</span>
+          </h2>
+        </div>
         <div className="syllabus-card">
           <div className="syllabus-card-info">
             <span className="syllabus-icon" aria-hidden="true">
@@ -47,10 +53,16 @@ export function Academics({ program, syllabusNote, timetableBoxes }: AcademicsPr
 
       {timetableBoxes && timetableBoxes.length > 0 && (
         <section className="timetable-section">
-          <h2 className="syllabus-heading">Timetables</h2>
+          <div className="academics-heading-row">
+            <span className="academics-heading-bar" aria-hidden="true" />
+            <h2 className="syllabus-heading academics-heading-solid">Timetables</h2>
+          </div>
           <div className="timetable-grid">
             {timetableBoxes.map((label) => (
               <button type="button" className="timetable-box" key={label} onClick={() => setActiveTimetable(label)}>
+                <span className="timetable-box-plus" aria-hidden="true">
+                  + + + +
+                </span>
                 <span className="timetable-icon" aria-hidden="true">
                   <i className="fa-solid fa-calendar-days" />
                 </span>
@@ -68,6 +80,6 @@ export function Academics({ program, syllabusNote, timetableBoxes }: AcademicsPr
       />
 
       <Footer />
-    </>
+    </div>
   );
 }

@@ -1,3 +1,4 @@
+import '../styles/routes/timeline.css';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { TimelineArchive } from '../components/timeline/TimelineArchive';
 

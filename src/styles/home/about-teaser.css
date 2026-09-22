@@ -1,0 +1,225 @@
+/* ==================== ABOUT TEASER (HOME) ====================
+   Ported 1:1 from a Figma frame (1900x912). Every absolutely-positioned
+   layer's left/top/width/height is expressed as a % of that canvas (x
+   values ÷1900, y values ÷912) so .about-v2-frame's fixed aspect-ratio
+   keeps them all in the same relative spot at any viewport width; blur
+   radii are in vw for the same reason (a % filter value doesn't exist). */
+.about-v2-section {
+  position: relative;
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.about-v2-frame {
+  position: relative;
+  width: 100%;
+  max-width: 1900px;
+  margin: 0 auto;
+  aspect-ratio: 1900 / 912;
+  overflow: hidden;
+}
+
+.about-v2-watermark {
+  position: absolute;
+  z-index: 1;
+  left: 4.16%;
+  bottom: -30px;
+  width: 75%;
+  height: auto;
+  object-fit: contain;
+  object-position: left bottom;
+  opacity: 0.6;
+  /* The source art's letterforms end on a hard flat baseline right at the
+     bottom of the file - at low opacity over the gradient background that
+     reads as a stray straight line. Fading the last slice out (same trick
+     as .about-v2-tower's mask below) dissolves it instead of leaving a
+     crisp cut edge. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 94%, transparent 100%);
+  pointer-events: none;
+}
+
+.about-v2-content {
+  position: absolute;
+  z-index: 2;
+  left: 4.16%;
+  top: 11%;
+  width: 70.79%;
+  max-width: 1300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+  transform: translate(62px, 5px);
+}
+
+.about-v2-title-bar {
+  display: block;
+  width: 55px;
+  height: 4.5px;
+  background: #f43f5e;
+  border-radius: 4px;
+}
+
+.about-v2-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: calc(clamp(2.75rem, 6.5vw, 5.5rem) + 5px);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: var(--color-primary-dark);
+}
+
+.about-v2-title-line {
+  display: block;
+  padding-bottom: 0.06em;
+}
+
+.about-v2-title-line-inner {
+  display: block;
+}
+
+.about-v2-title-line:first-child {
+  font-size: calc(clamp(1.5rem, 3.5vw, 2.75rem) + 5px);
+}
+
+.about-v2-title-accent {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-primary-dark);
+}
+
+.about-v2-text {
+  font-family: var(--font-overlock);
+  font-weight: 400;
+  font-size: clamp(1.05rem, 2.1vw, 2.5rem);
+  line-height: 1.225;
+  color: #000000;
+  opacity: 0.7;
+  margin-top: 0.5rem;
+}
+
+.about-v2-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  margin-top: 2.1rem;
+  margin-left: 4px;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary-dark);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.2rem;
+  transition: color 320ms cubic-bezier(0.22, 0.61, 0.24, 1);
+}
+
+.about-v2-link i {
+  transition: transform 320ms cubic-bezier(0.22, 0.61, 0.24, 1);
+}
+
+.about-v2-link:hover {
+  color: var(--color-accent-coral);
+}
+
+.about-v2-link:hover i {
+  transform: translateX(4px);
+}
+
+.about-v2-tower {
+  position: absolute;
+  z-index: 2;
+  left: 76.26%;
+  top: 14.47%;
+  bottom: 0;
+  width: 23.21%;
+  object-fit: contain;
+  object-position: bottom center;
+  pointer-events: none;
+  transform: translateY(50px);
+  /* The source line-art canvas ends mid-building, so its bottom edge is a
+     hard rectangular cutoff against the section background. Fade the last
+     slice of the artwork to transparent so it dissolves into the page
+     instead of showing that cut line. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%);
+}
+
+@media (max-width: 900px) {
+  .about-v2-frame {
+    aspect-ratio: auto;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .about-v2-watermark {
+    display: none;
+  }
+
+  .about-v2-content {
+    position: relative;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: none;
+    padding: 1.5rem 1.5rem 2rem;
+    transform: none;
+  }
+
+  /* Center just the heading block on phones - the bar and outline title sit
+     as a unit in the middle of the frame, while their own text (and the
+     paragraph/link below) stays left-aligned, matching the same treatment
+     given to the other homepage section headings. */
+  .about-v2-title-bar,
+  .about-v2-title {
+    align-self: center;
+  }
+
+  .about-v2-title {
+    font-size: 2.6rem;
+  }
+
+  .about-v2-title-line:first-child {
+    font-size: 1.4rem;
+  }
+
+  /* On phones the tower moves behind the text as a faint watermark instead
+     of sitting in flow as its own block - matches the desktop frame's
+     layered feel now that there's no room to place it beside the copy. */
+  .about-v2-text {
+    opacity: 0.85;
+  }
+
+  .about-v2-tower {
+    position: absolute;
+    z-index: 1;
+    left: auto;
+    right: 0;
+    top: 0;
+    bottom: auto;
+    width: 55%;
+    height: auto;
+    aspect-ratio: 441 / 699;
+    margin: 0;
+    opacity: 0.07;
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-v2-content {
+    padding: 1.25rem 1.25rem 2rem;
+  }
+
+  .about-v2-title {
+    font-size: 2.1rem;
+  }
+
+  .about-v2-title-line:first-child {
+    font-size: 1.15rem;
+  }
+}

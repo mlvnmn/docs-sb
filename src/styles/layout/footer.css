@@ -1,0 +1,276 @@
+/* ==================== FOOTER ==================== */
+.site-footer {
+  margin: 2rem 15px 15px 15px;
+  background: linear-gradient(135deg, #fdf1f6 0%, #ffffff 42%, #eef4fd 100%);
+  color: var(--color-text-muted);
+  padding: 3.8rem 3.2rem 2.6rem;
+  border-radius: 32px;
+  border: 1px solid #eef1f7;
+  position: relative;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+/* Decorative squiggle flourishes, corner-anchored */
+.site-footer::before,
+.site-footer::after {
+  content: "";
+  position: absolute;
+  width: 130px;
+  height: 150px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+.site-footer::before {
+  bottom: -8px;
+  left: -18px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 160' fill='none'%3E%3Cpath d='M14 12 C48 38 14 66 44 86 C70 104 96 90 100 116 C103 136 82 146 68 134' stroke='%23f472b6' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='68' cy='134' r='6' stroke='%23f472b6' stroke-width='2.5'/%3E%3C/svg%3E");
+}
+
+.site-footer::after {
+  top: -8px;
+  right: -18px;
+  transform: rotate(180deg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 160' fill='none'%3E%3Cpath d='M14 12 C48 38 14 66 44 86 C70 104 96 90 100 116 C103 136 82 146 68 134' stroke='%23f472b6' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='68' cy='134' r='6' stroke='%23f472b6' stroke-width='2.5'/%3E%3C/svg%3E");
+}
+
+.footer-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Institutional banner - crest, name and a "Visit Website" CTA, styled with
+   the footer's own white-card + navy/magenta palette rather than a one-off
+   color scheme, so it reads as part of this footer, not a bolted-on widget.
+   Sits inside the "Follow Us" column (not spanning the full row), so it's
+   sized to that column's width - stacked rather than a wide left-to-right
+   bar, with its own breathing room before the "FOLLOW US" heading below. */
+.footer-college-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+  margin-bottom: 1.75rem;
+  cursor: pointer;
+}
+
+.footer-college-banner:hover .f-title {
+  color: var(--color-accent-magenta);
+}
+
+.footer-college-banner:hover .f-crest-icon {
+  transform: translateY(-2px);
+}
+
+.f-crest-icon {
+  width: 52px;
+  height: 52px;
+  background: #ffffff;
+  border: 1px solid #eef1f7;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.05);
+  transition: transform 0.25s ease;
+}
+
+.dept-logo-img-sm {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.f-title {
+  color: var(--color-primary);
+  font-size: 1.12rem;
+  font-weight: 700;
+  line-height: 1.25;
+  transition: color 0.25s ease;
+}
+
+.f-sub-plain {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+}
+
+.footer-visit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+  color: var(--color-accent-magenta);
+  font-weight: 700;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.footer-visit-btn i {
+  font-size: 0.72rem;
+  transition: transform 0.2s ease;
+}
+
+.footer-college-banner:hover .footer-visit-btn {
+  color: #be185d;
+}
+
+.footer-college-banner:hover .footer-visit-btn i {
+  transform: translateX(3px);
+}
+
+/* Columns */
+.footer-columns-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1.3fr;
+  gap: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.col-heading {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--color-accent-magenta);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.7rem;
+  text-transform: uppercase;
+}
+
+.col-heading-underline {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: var(--color-accent-magenta);
+  border-radius: 2px;
+  margin-bottom: 1.3rem;
+}
+
+.footer-identity-divider {
+  height: 1px;
+  background: #e7ebf1;
+  margin: 1.5rem 0;
+}
+
+.col-text {
+  font-size: 0.84rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin-bottom: 1.2rem;
+}
+
+.social-links-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.social-icon {
+  width: 34px;
+  height: 34px;
+  background: #f1f2f8;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  transition: var(--transition);
+}
+
+.social-icon:hover {
+  background: var(--color-accent-magenta);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.col-links li {
+  margin-bottom: 0.65rem;
+}
+
+.col-links a {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: var(--transition);
+}
+
+.col-links a:hover {
+  color: var(--color-accent-magenta);
+}
+
+.link-bullet {
+  color: var(--color-accent-magenta);
+}
+
+.ext-icon {
+  font-size: 0.75rem;
+  opacity: 0.75;
+  color: var(--color-accent-magenta);
+}
+
+.contact-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.contact-item {
+  display: flex;
+  gap: 0.8rem;
+  font-size: 0.84rem;
+  color: var(--color-primary);
+  line-height: 1.5;
+}
+
+.sub-contact-text {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+}
+
+.contact-icon {
+  color: var(--color-accent-magenta);
+  font-size: 0.95rem;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+/* Footer Bottom */
+.footer-bottom-row {
+  padding-top: 1.5rem;
+  border-top: 1px solid #e7ebf1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.credit-athlogix {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-accent-magenta);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  display: inline-block;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.credit-athlogix:hover {
+  color: #be185d;
+  transform: translateY(-1px);
+}

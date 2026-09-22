@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import type { NewsArticle } from '../../types/content';
+import { Picture } from '../shared/Picture';
 
 interface ArticleModalProps {
   article: NewsArticle | null;
@@ -45,7 +46,7 @@ export function ArticleModal({ article, onClose }: ArticleModalProps) {
 
         {article.image && (
           <div className="article-modal-image-wrapper">
-            <img src={article.image} alt={article.title} className="article-modal-img" />
+            <Picture src={article.image} alt={article.title} className="article-modal-img" />
           </div>
         )}
 

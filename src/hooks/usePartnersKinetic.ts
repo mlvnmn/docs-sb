@@ -1,7 +1,7 @@
 import { useCallback, useLayoutEffect, useRef, useState, type FocusEvent, type MouseEvent, type RefObject } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { onEnterViewport } from './useEnterViewport';
+import { onEnterViewport } from '../lib/enterViewport';
 
 gsap.registerPlugin(ScrollTrigger);
 

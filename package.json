@@ -7,12 +7,14 @@
     "dev": "node ./node_modules/vite/bin/vite.js",
     "build": "node ./node_modules/typescript/bin/tsc -b && node ./node_modules/vite/bin/vite.js build",
     "preview": "node ./node_modules/vite/bin/vite.js preview",
-    "typecheck": "node ./node_modules/typescript/bin/tsc -b"
+    "typecheck": "node ./node_modules/typescript/bin/tsc -b",
+    "images": "node ./scripts/optimize-images.mjs"
   },
   "devDependencies": {
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^4.7.0",
+    "sharp": "^0.35.4",
     "typescript": "^7.0.2",
     "vite": "^6.2.0"
   },

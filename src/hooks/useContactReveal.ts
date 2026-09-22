@@ -1,6 +1,6 @@
 import { useLayoutEffect, type RefObject } from 'react';
 import { gsap } from 'gsap';
-import { onEnterViewport } from './useEnterViewport';
+import { onEnterViewport } from '../lib/enterViewport';
 
 /**
  * Same "rises up out of the bottom of the viewport + fades in" entrance used

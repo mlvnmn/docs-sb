@@ -1,9 +1,11 @@
+import '../styles/routes/news.css';
 import { useState } from 'react';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { GazetteSection } from '../components/home/GazetteSection';
+import { GazetteSection } from '../components/news/GazetteSection';
 import { useNews } from '../hooks/useNews';
 import { ArticleModal } from '../components/news/ArticleModal';
 import { Footer } from '../components/layout/Footer';
+import { Picture } from '../components/shared/Picture';
 
 export function News() {
   useDocumentMeta(
@@ -71,7 +73,7 @@ export function News() {
               </div>
 
               <div className="lead-media-box">
-                <img src={leadStory.image} alt={leadStory.title} className="lead-img" />
+                <Picture src={leadStory.image} alt={leadStory.title} className="lead-img" />
                 <span className="image-caption">
                   Fig 1. Research laboratory & experimental apparatus at SB Department of Computer Science.
                 </span>
@@ -102,7 +104,7 @@ export function News() {
                     <span>{story.comments} COMMENTS</span>
                   </div>
                   <div className="secondary-story-grid">
-                    <img
+                    <Picture
                       src={story.image}
                       alt={story.title}
                       className="secondary-thumb"
@@ -169,7 +171,7 @@ export function News() {
                   onClick={() => openArticle(article)}
                 >
                   <div className="grid-item-media">
-                    <img
+                    <Picture
                       src={article.image}
                       alt={article.title}
                       className="grid-item-img"

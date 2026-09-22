@@ -1,5 +1,6 @@
 import type { FacultyMember } from '../../types/content';
 import { PlusMarks } from './decorations';
+import { Picture } from '../shared/Picture';
 
 export function FacultyCardTallPhoto({
   member,
@@ -22,7 +23,7 @@ export function FacultyCardTallPhoto({
       </div>
       <article className="fg-card fg-v-tall-photo">
         <div className={wide ? 'fg-tall-photo fg-tall-photo-wide' : 'fg-tall-photo'} style={{ background: accentColor }}>
-          <img {...imgProps} src={photo} alt={name} className="fg-photo-img" />
+          <Picture {...imgProps} src={photo} alt={name} className="fg-photo-img" />
         </div>
         <div className="fg-center">
           <p className="fg-para">{role}</p>
