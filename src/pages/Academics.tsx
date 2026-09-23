@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { Footer } from '../components/layout/Footer';
 import { TimetableModal } from '../components/academics/TimetableModal';
+import { SmartLink } from '../components/shared/SmartLink';
 import { timetables } from '../data/timetables';
 
 interface AcademicsProps {
@@ -22,6 +23,11 @@ export function Academics({ program, syllabusNote, timetableBoxes }: AcademicsPr
   return (
     <div className="academics-page">
       <section className="syllabus-section">
+        <SmartLink to="/about" className="academics-back-link">
+          <i className="fa-solid fa-arrow-left" />
+          Back
+        </SmartLink>
+
         <div className="academics-heading-row">
           <span className="academics-heading-bar" aria-hidden="true" />
           <h2 className="syllabus-heading">

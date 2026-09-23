@@ -15,9 +15,7 @@ export function GazetteNav({ onSelectCategory, selectedCategory }: GazetteNavPro
   const handleCategoryClick = (label: string, index: number) => {
     setInternalActive(index);
 
-    if (label === 'Initiatives') {
-      navigate('/initiatives');
-    } else if (pathname !== '/news') {
+    if (pathname !== '/news') {
       const targetCategory = label.toLowerCase();
       const targetUrl = label === 'All' ? '/news#newsFeed' : `/news?category=${encodeURIComponent(targetCategory)}#newsFeed`;
       navigate(targetUrl);

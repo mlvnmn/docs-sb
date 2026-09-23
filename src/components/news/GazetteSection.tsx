@@ -43,9 +43,6 @@ export function GazetteSection({
                 <h4 className="article-title">{featuredArticle.title}</h4>
                 <div className="article-meta">
                   <span className="meta-date">{featuredArticle.date}</span>
-                  <span className="meta-comments">
-                    <i className="fa-regular fa-comment" /> {featuredArticle.comments}
-                  </span>
                 </div>
                 <p className="article-excerpt">{featuredArticle.excerpt}</p>
               </div>
@@ -87,30 +84,6 @@ export function GazetteSection({
                   </div>
                 </article>
               ))}
-
-              <div className="topic-magazine-spread">
-                <div className="magazine-stack">
-                  <div className="mag-page p1">
-                    <div className="mag-mini-header">The Day - News Magazine</div>
-                    <div className="mag-mini-body">
-                      <div className="mini-lines" />
-                      <div className="mini-lines" />
-                      <div className="mini-box" />
-                    </div>
-                  </div>
-                  <div className="mag-page p2">
-                    <div className="mini-pic" />
-                    <div className="mini-lines" />
-                  </div>
-                  <div className="mag-page p3">
-                    <div className="mag-mini-headline">THE DAILY CHRONICLE</div>
-                    <div className="mini-cols">
-                      <div />
-                      <div />
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </aside>
         </div>

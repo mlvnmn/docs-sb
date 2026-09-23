@@ -727,6 +727,13 @@
   margin: 1.5rem 0;
 }
 
+.empty-icon {
+  display: block;
+  font-size: 2rem;
+  color: #94a3b8;
+  margin-bottom: 1rem;
+}
+
 .empty-title {
   font-family: var(--font-serif);
   font-size: 1.4rem;
@@ -873,6 +880,168 @@
   font-size: 0.8rem;
   font-weight: 700;
   color: #0284c7;
+}
+
+/* Article Reading Modal */
+.article-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+}
+
+.article-modal-container {
+  position: relative;
+  width: 100%;
+  max-width: 780px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 2px solid #0f172a;
+  border-radius: 0.75rem;
+  padding: 2.5rem;
+}
+
+.article-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+  border: 1px solid #0f172a;
+  color: #0f172a;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.article-modal-close:hover {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.article-modal-header {
+  padding-right: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.article-modal-title {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #0f172a;
+  margin: 0.4rem 0 0.85rem;
+}
+
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.article-meta i {
+  margin-right: 0.35rem;
+}
+
+.article-modal-image-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.article-modal-img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  display: block;
+}
+
+.article-modal-content {
+  margin-bottom: 1.5rem;
+}
+
+.article-modal-paragraph {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.article-modal-footer {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tags-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-right: 0.25rem;
+}
+
+.tag-pill {
+  font-size: 0.75rem;
+  color: #0284c7;
+  background: #f0f9ff;
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+}
+
+.article-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.btn-article-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0f172a;
+  background: #ffffff;
+  border: 1px solid #0f172a;
+  border-radius: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-article-action:hover {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .article-modal-container {
+    padding: 1.5rem;
+    max-height: 90vh;
+  }
+
+  .article-modal-title {
+    font-size: 1.4rem;
+  }
 }
 
 /* Colophon */

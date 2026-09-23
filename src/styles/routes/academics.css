@@ -21,6 +21,36 @@
   padding: calc(6rem + var(--wave-bleed)) 2rem 4rem;
 }
 
+.academics-back-link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.75rem;
+  border: 2px solid var(--ac-ink);
+  background: #ffffff;
+  box-shadow: 3px 3px 0 var(--ac-ink);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--ac-ink);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.academics-back-link:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ac-ink);
+  color: var(--ac-pink);
+}
+
+.academics-back-link:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ac-ink);
+}
+
 .timetable-section {
   padding: 2rem 2rem 6rem;
 }

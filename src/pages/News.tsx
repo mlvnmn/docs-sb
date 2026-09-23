@@ -17,12 +17,9 @@ export function News() {
     filteredArticles,
     selectedCategory,
     setSelectedCategory,
-    searchQuery,
-    setSearchQuery,
     activeArticle,
     openArticle,
     closeArticle,
-    allArticles,
   } = useNews();
 
   const [subscribeEmail, setSubscribeEmail] = useState('');
@@ -36,11 +33,6 @@ export function News() {
     setTimeout(() => setSubscribeStatus(null), 5000);
   };
 
-  // Dedicated sections for broadsheet layout
-  const leadStory = allArticles[1] || allArticles[0];
-  const secondaryStories = allArticles.slice(2, 4);
-  const editorialArticles = allArticles.slice(4, 7);
-
   return (
     <div className="broadsheet-page-wrapper">
       {/* Front Page Glimpse Section (Same as Home Page) */}
@@ -53,111 +45,11 @@ export function News() {
       <div className="broadsheet-container" id="newsFeed">
 
 
-        {/* SECTION A: SPECIAL DISPATCH & LEAD ANALYSIS */}
-        <section className="broadsheet-section-a">
-          <div className="section-header-banner">
-            <span className="section-banner-title">PAGE II — SPECIAL DISPATCH & IN-DEPTH REPORTS</span>
-          </div>
-
-          <div className="broadsheet-two-col">
-            {/* Left Column: Lead Story */}
-            <article className="lead-broadsheet-story" onClick={() => openArticle(leadStory)}>
-              <span className="broadsheet-category-badge">{leadStory.category}</span>
-              <h2 className="lead-story-title">{leadStory.title}</h2>
-              <div className="broadsheet-byline">
-                <span>BY {leadStory.author ? leadStory.author.toUpperCase() : 'EDITORIAL DESK'}</span>
-                <span className="byline-sep">•</span>
-                <span>{leadStory.date.toUpperCase()}</span>
-                <span className="byline-sep">•</span>
-                <span>{leadStory.readTime || '5 MIN READ'}</span>
-              </div>
-
-              <div className="lead-media-box">
-                <Picture src={leadStory.image} alt={leadStory.title} className="lead-img" />
-                <span className="image-caption">
-                  Fig 1. Research laboratory & experimental apparatus at SB Department of Computer Science.
-                </span>
-              </div>
-
-              <p className="lead-paragraph drop-cap">{leadStory.excerpt}</p>
-              <p className="lead-body-preview">{leadStory.body.slice(0, 320)}...</p>
-
-              <div className="broadsheet-read-more">
-                <span>READ FULL DISPATCH</span> <i className="fa-solid fa-arrow-right-long" />
-              </div>
-            </article>
-
-            {/* Right Column: Stacked Secondary Stories */}
-            <aside className="broadsheet-secondary-col">
-              <h3 className="column-heading">FEATURED CHRONICLES</h3>
-              {secondaryStories.map((story) => (
-                <article
-                  className="secondary-broadsheet-card"
-                  key={story.id}
-                  onClick={() => openArticle(story)}
-                >
-                  <span className="broadsheet-category-badge">{story.category}</span>
-                  <h4 className="secondary-story-title">{story.title}</h4>
-                  <div className="broadsheet-byline small">
-                    <span>{story.date.toUpperCase()}</span>
-                    <span className="byline-sep">•</span>
-                    <span>{story.comments} COMMENTS</span>
-                  </div>
-                  <div className="secondary-story-grid">
-                    <Picture
-                      src={story.image}
-                      alt={story.title}
-                      className="secondary-thumb"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <p className="secondary-excerpt">{story.excerpt}</p>
-                  </div>
-                  <div className="broadsheet-read-more small">
-                    <span>READ STORY</span> <i className="fa-solid fa-angle-right" />
-                  </div>
-                </article>
-              ))}
-            </aside>
-          </div>
-        </section>
-
-        {/* SECTION B: EDITORIAL & PERSPECTIVE COLUMNS */}
-        <section className="broadsheet-section-b">
-          <div className="section-header-banner">
-            <span className="section-banner-title">PAGE III — EDITORIAL & FACULTY PERSPECTIVES</span>
-          </div>
-
-          <div className="broadsheet-three-col">
-            {editorialArticles.map((article, idx) => (
-              <article
-                className="editorial-col-card"
-                key={article.id}
-                onClick={() => openArticle(article)}
-              >
-                <div className="col-num-badge">COL. 0{idx + 1}</div>
-                <span className="broadsheet-category-badge">{article.category}</span>
-                <h3 className="editorial-title">{article.title}</h3>
-                <div className="broadsheet-byline small">
-                  <span>BY {article.author ? article.author.toUpperCase() : 'EDITORIAL DESK'}</span>
-                </div>
-                <blockquote className="editorial-quote">
-                  "{article.excerpt.slice(0, 110)}..."
-                </blockquote>
-                <p className="editorial-text">{article.body.slice(0, 180)}...</p>
-                <div className="broadsheet-read-more small">
-                  <span>CONTINUE READING</span> <i className="fa-solid fa-arrow-right" />
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
         {/* SECTION C: CONTINUOUS BROADSHEET GAZETTE GRID */}
         <section className="broadsheet-section-c">
           <div className="section-header-banner">
             <span className="section-banner-title">
-              PAGE IV — THE GAZETTE FEED ({selectedCategory.toUpperCase()})
+              THE GAZETTE FEED ({selectedCategory.toUpperCase()})
             </span>
             <span className="story-count-tag">{filteredArticles.length} ARTICLES IN ARCHIVE</span>
           </div>
@@ -198,15 +90,16 @@ export function News() {
           ) : (
             <div className="broadsheet-empty-state">
               <div className="empty-rule" />
-              <h4 className="empty-title">NO MATCHING DISPATCHES FOUND</h4>
+              <i className="fa-regular fa-newspaper empty-icon" aria-hidden="true" />
+              <h4 className="empty-title">NO NEWS YET</h4>
               <p className="empty-desc">
-                No newspaper articles match your search query "{searchQuery}" under {selectedCategory}.
+                There are no dispatches under {selectedCategory} yet. Check back soon.
               </p>
               <button
                 className="btn-broadsheet-reset"
                 onClick={() => {
                   setSelectedCategory('All');
-                  setSearchQuery('');
+                  document.getElementById('gazette')?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
                 RETURN TO FRONT PAGE
