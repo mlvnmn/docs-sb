@@ -46,6 +46,8 @@ export function App() {
                 <Academics
                   program="Bachelor of Computer Application"
                   syllabusNote="The official 4-year BCA scheme and detailed course syllabus for all eight semesters is available for download."
+                  syllabusUrl="https://www.aicte.gov.in/downloads/msyllabus/UG/BCA%20FINAL%2024.09.2024%20(2%20year)_latest.pdf"
+                  syllabusDownloadUrl="/assets/docs/bca-syllabus.pdf"
                   timetableBoxes={[
                     'BCA 1st Yr A',
                     'BCA 1st Yr B',

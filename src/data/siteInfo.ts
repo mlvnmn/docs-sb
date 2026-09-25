@@ -1,9 +1,9 @@
 import type { SiteInfo } from '../types/content';
 
 export const siteInfo: SiteInfo = {
-  phone: '0484 435 5555',
-  phoneHref: 'tel:04844355555',
-  email: 'enquiry.cs@sbcollege.ac.in',
+  phone: '9876543210',
+  phoneHref: 'tel:9876543210',
+  email: 'computerscience@sbcollege.ac.in',
   address: [
     'Department of Computer Science',
     'St Berchmans College, Changanassery',

@@ -18,6 +18,13 @@ export function ContactForm() {
         </>
       );
     }
+    if (status === 'error') {
+      return (
+        <>
+          <span>Failed — Try Again</span> <i className="fa-solid fa-triangle-exclamation" />
+        </>
+      );
+    }
     return (
       <>
         <span>Submit</span> <i className="fa-solid fa-arrow-up-right-from-square" />
@@ -93,27 +100,18 @@ export function ContactForm() {
           />
         </div>
 
-        <div className="form-consent-group">
-          <input type="checkbox" id="contactConsent" required className="consent-checkbox" />
-          <label htmlFor="contactConsent" className="consent-text">
-            By clicking submit, I agree to the{' '}
-            <a href="#" className="policy-link">
-              Terms &amp; Conditions
-            </a>{' '}
-            and{' '}
-            <a href="#" className="policy-link">
-              Privacy Policy
-            </a>{' '}
-            and give my consent to receive updates through SMS/Email.
-          </label>
-        </div>
-
         <div className="form-submit-group">
           <button
             type="submit"
             className="contact-submit-btn"
             disabled={status === 'sending'}
-            style={status === 'sent' ? { background: '#16a34a' } : undefined}
+            style={
+              status === 'sent'
+                ? { background: '#16a34a' }
+                : status === 'error'
+                  ? { background: '#dc2626' }
+                  : undefined
+            }
           >
             {buttonContent()}
           </button>

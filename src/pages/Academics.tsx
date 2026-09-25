@@ -9,10 +9,18 @@ import { timetables } from '../data/timetables';
 interface AcademicsProps {
   program: string;
   syllabusNote: string;
+  syllabusUrl?: string;
+  syllabusDownloadUrl?: string;
   timetableBoxes?: string[];
 }
 
-export function Academics({ program, syllabusNote, timetableBoxes }: AcademicsProps) {
+export function Academics({
+  program,
+  syllabusNote,
+  syllabusUrl,
+  syllabusDownloadUrl,
+  timetableBoxes,
+}: AcademicsProps) {
   useDocumentMeta(
     `${program} Academics | Department of Computer Science | St Berchmans College Autonomous`,
     `Syllabus and academics page for ${program}.`,
@@ -45,11 +53,20 @@ export function Academics({ program, syllabusNote, timetableBoxes }: AcademicsPr
             </div>
           </div>
           <div className="syllabus-actions">
-            <a href="#" className="syllabus-btn-primary">
+            <a
+              href={syllabusDownloadUrl ?? '#'}
+              className="syllabus-btn-primary"
+              download={syllabusDownloadUrl ? `${program} Syllabus.pdf` : undefined}
+            >
               <i className="fa-solid fa-download" />
               Download Syllabus
             </a>
-            <a href="#" className="syllabus-btn-secondary">
+            <a
+              href={syllabusUrl ?? '#'}
+              className="syllabus-btn-secondary"
+              target={syllabusUrl ? '_blank' : undefined}
+              rel={syllabusUrl ? 'noopener noreferrer' : undefined}
+            >
               <i className="fa-solid fa-arrow-up-right-from-square" />
               View Online
             </a>
